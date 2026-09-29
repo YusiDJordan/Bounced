@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Bounced: Bureau of Cheque Fraud, 1962</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Bounced: Bureau of Cheque Fraud, 1962</title>
 <style>
 :root{box-sizing:border-box;--bg:#15171a;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
 html,body{margin:0;height:100%;background:var(--bg)}
@@ -24,6 +25,35 @@ function WR(t,x,y,w,c,lh=10,ctx=g){for(const l of wrap(t,w)){T(l,x,y,c,1,ctx);y+
 function RC(x,y,w,h,c,ctx=g){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
 function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function hash(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0}
+const SIGF={"16":{"h":22,"base":17,"sp":4,"g":{"!":[4,2,3,["","","","","","","","","1","1","1","2","2","2","","4","4","","","","",""]],"\"":[4,3,2,["","","","","","","","","3","3","","","","","","","","","","","",""]],"#":[7,1,8,["","","","","","","","","09","0a","12","7f","14","7f","a4","28","48","","","","",""]],"$":[7,1,6,["","","","","","","","02","03","0c","08","08","0e","02","02","02","24","18","10","","",""]],"%":[11,3,8,["","","","","","","","","f2","94","a8","a8","b7","69","29","49","4e","","","","",""]],"&":[12,2,12,["","","","","","","","","020","021","342","4be","b48","c10","810","c20","7c0","","","","",""]],"'":[3,3,1,["","","","","","","","","1","1","","","","","","","","","","","",""]],"(":[4,2,4,["","","","","","","1","2","2","4","4","4","8","8","8","8","8","8","8","8","",""]],")":[4,0,5,["","","","","","","03","01","01","01","01","01","01","02","02","02","04","04","08","10","",""]],"*":[7,4,4,["","","","","","","2","d","6","e","4","","","","","","","","","","",""]],"+":[8,2,7,["","","","","","","","","","08","08","08","7f","08","08","08","08","","","","",""]],",":[4,0,3,["","","","","","","","","","","","","","","1","1","1","2","4","","",""]],"-":[4,2,2,["","","","","","","","","","","","","","3","","","","","","","",""]],".":[4,2,1,["","","","","","","","","","","","","","","","1","1","","","","",""]],"/":[5,-1,8,["","","","","","","","01","02","02","04","08","08","10","10","20","20","40","80","80","",""]],"0":[7,1,7,["","","","","","","","","0e","13","13","23","23","22","62","24","38","","","","",""]],"1":[7,2,5,["","","","","","","","","01","06","02","02","02","04","04","04","1e","","","","",""]],"2":[7,2,5,["","","","","","","","","07","09","09","01","02","04","08","11","0e","","","","",""]],"3":[7,1,6,["","","","","","","","","03","05","01","06","0b","01","01","02","3c","","","","",""]],"4":[7,1,6,["","","","","","","","","01","03","05","0a","12","12","3f","06","04","04","","","",""]],"5":[7,1,8,["","","","","","","","01","1e","20","20","38","0c","04","04","08","f0","","","","",""]],"6":[7,2,6,["","","","","","","","03","0c","10","10","20","2e","32","22","22","3c","","","","",""]],"7":[7,3,5,["","","","","","","","","1f","01","02","04","08","08","10","10","10","","","","",""]],"8":[7,1,7,["","","","","","","","","07","09","12","1c","0c","36","62","64","38","","","","",""]],"9":[7,1,7,["","","","","","","","","0e","13","23","23","1e","02","04","04","78","","","","",""]],":":[4,2,2,["","","","","","","","","","","1","1","","","","2","2","","","","",""]],";":[4,0,4,["","","","","","","","","","","1","1","","","","2","2","4","8","","",""]],"<":[8,2,6,["","","","","","","","","","","01","0e","38","38","0e","01","","","","","",""]],"=":[8,2,7,["","","","","","","","","","","","7f","","","7f","","","","","","",""]],">":[8,2,6,["","","","","","","","","","","20","1c","07","07","1c","20","","","","","",""]],"?":[6,2,6,["","","","","","","","","0f","01","03","1e","10","10","","30","20","","","","",""]],"@":[11,2,10,["","","","","","","","","07f","19d","169","249","24a","29a","2fc","210","208","1f0","","","",""]],"A":[10,1,10,["","","","","","","","03e","0ca","08e","094","0a4","03c","044","084","307","","","","","",""]],"B":[10,1,9,["","","","","","","","008","03f","0c9","091","112","19e","011","021","042","0fc","","","","",""]],"C":[8,1,9,["","","","","","","","006","019","020","040","080","080","080","180","180","084","0f8","","","",""]],"D":[11,1,11,["","","","","","","","020","0fc","123","221","641","641","043","042","084","3f8","","","","",""]],"E":[10,1,10,["","","","","","","","","0ff","130","320","120","078","020","040","041","1fe","","","","",""]],"F":[9,1,11,["","","","","","","","001","0fe","110","130","320","320","038","040","040","040","080","700","","",""]],"G":[10,2,9,["","","","","","","","004","03b","042","080","080","10c","104","104","18c","0f8","008","008","010","0e0",""]],"H":[11,1,13,["","","","","","","0001","0006","0384","0c8c","0888","0908","01f8","0110","0210","0410","181c","","","","",""]],"I":[6,2,5,["","","","","","","","","07","02","06","04","04","04","0c","08","1c","","","","",""]],"J":[6,0,7,["","","","","","","","","03","0d","09","0b","02","02","02","06","04","08","70","","",""]],"K":[11,2,12,["","","","","","","","","3c6","4c8","cb0","cc0","0c0","160","120","220","f30","010","00f","","",""]],"L":[9,1,9,["","","","","","","","","00c","010","020","020","020","060","040","041","1fe","","","","",""]],"M":[13,1,15,["","","","","","","0003","0004","0e04","3308","2518","2528","2558","0990","0990","0910","703c","","","","",""]],"N":[11,1,13,["","","","","","","0001","0002","0784","0884","1188","1948","0148","0248","0270","0430","1830","0010","000f","","",""]],"O":[10,2,8,["","","","","","","","06","3b","41","c1","81","81","81","82","c4","78","","","","",""]],"P":[9,1,9,["","","","","","","","008","07f","091","111","112","114","028","020","020","1f8","","","","",""]],"Q":[10,2,11,["","","","","","","","030","1d8","208","608","408","408","408","410","620","3c0","060","039","00e","",""]],"R":[10,1,12,["","","","","","","","040","3f8","488","498","4a0","0c0","160","120","220","f30","010","019","006","",""]],"S":[7,0,8,["","","","","","","","03","0d","10","10","18","0c","06","02","02","c4","78","","","",""]],"T":[8,1,10,["","","","","","","","0ff","118","210","210","210","030","020","020","0f0","","","","","",""]],"U":[12,2,10,["","","","","","","","0e3","321","241","242","282","082","082","086","0ff","","","","","",""]],"V":[10,2,11,["","","","","","","003","003","1c1","6c2","484","484","088","090","0a0","0c0","180","","","","",""]],"W":[14,2,15,["","","","","","","0002","0003","1c42","6c42","4cc2","4944","0a48","0a50","0c60","1860","1040","","","","",""]],"X":[9,0,10,["","","","","","","","073","014","018","018","018","028","048","088","30e","","","","","",""]],"Y":[9,1,11,["","","","","","","","1c3","264","428","428","430","020","020","040","040","080","700","","","",""]],"Z":[10,1,10,["","","","","","","","","07e","084","088","010","021","043","081","102","3fe","","","","",""]],"[":[4,1,4,["","","","","","","1","1","1","2","2","2","2","4","4","4","4","8","8","8","",""]],"\\":[8,3,5,["","","","","","","","","10","08","08","08","04","04","02","02","01","","","","",""]],"]":[5,1,5,["","","","","","","01","01","02","02","02","02","04","04","04","04","08","08","08","18","",""]],"^":[8,3,4,["","","","","","","2","6","5","9","","","","","","","","","","","",""]],"_":[8,0,8,["","","","","","","","","","","","","","","","","","","ff","","",""]],"`":[5,3,2,["","","","","","","3","1","1","1","","","","","","","","","","","",""]],"a":[7,1,6,["","","","","","","","","","","07","19","13","12","32","36","1b","","","","",""]],"b":[7,2,5,["","","","","","","01","06","0c","08","0b","0d","19","11","11","12","1c","","","","",""]],"c":[5,1,5,["","","","","","","","","","","03","0d","08","08","18","19","0e","","","","",""]],"d":[7,1,9,["","","","","","","003","004","008","008","038","058","090","090","090","1f0","098","","","","",""]],"e":[5,1,5,["","","","","","","","","","","03","0d","0a","0c","18","19","0e","","","","",""]],"f":[5,-1,9,["","","","","","","003","004","008","008","008","03e","010","010","010","010","020","020","020","040","180",""]],"g":[6,-2,8,["","","","","","","","","","07","19","12","12","16","3a","12","64","84","84","f8","",""]],"h":[7,1,7,["","","","","","","06","08","10","10","12","3e","22","24","24","65","46","","","","",""]],"i":[4,1,4,["","","","","","","","1","1","","2","e","6","4","4","6","4","","","","",""]],"j":[4,-3,7,["","","","","","","","01","01","","02","0e","06","04","04","04","04","08","08","10","60",""]],"k":[7,2,8,["","","","","","","18","20","60","40","4c","50","e0","e0","a0","b0","90","18","09","06","",""]],"l":[4,1,6,["","","","","","","03","04","08","08","08","10","10","10","10","30","38","","","","",""]],"m":[10,1,10,["","","","","","","","","","","092","3fe","092","122","124","125","126","","","","",""]],"n":[7,1,7,["","","","","","","","","","","12","7e","12","22","24","25","46","","","","",""]],"o":[6,1,6,["","","","","","","","","","","07","09","11","11","32","32","1c","","","","",""]],"p":[7,-1,8,["","","","","","","","","","","13","7f","11","12","22","24","38","20","40","40","e0",""]],"q":[6,1,6,["","","","","","","","","","01","07","19","11","12","12","36","1a","04","04","04","1c",""]],"r":[5,1,5,["","","","","","","","","","","05","1e","04","08","08","08","08","","","","",""]],"s":[5,1,5,["","","","","","","","","","","03","0c","0c","06","02","12","1c","","","","",""]],"t":[5,2,4,["","","","","","","","","","2","4","7","c","4","8","c","e","","","","",""]],"u":[7,1,7,["","","","","","","","","","","10","72","12","22","24","2d","36","","","","",""]],"v":[7,2,6,["","","","","","","","","","01","39","11","12","22","24","38","","","","","",""]],"w":[11,1,11,["","","","","","","","","","001","3d1","491","112","124","364","3b8","","","","","",""]],"x":[7,1,8,["","","","","","","","","","","32","54","18","10","70","d0","98","08","0f","","",""]],"y":[6,0,8,["","","","","","","","","","","11","72","22","22","24","2c","34","04","08","08","f0",""]],"z":[7,1,6,["","","","","","","","","","0f","12","04","08","11","39","0e","","","","","",""]],"{":[4,2,4,["","","","","","","1","2","2","2","2","4","4","4","4","8","8","8","8","8","",""]],"|":[8,5,1,["","","","","","","1","1","1","1","1","1","1","1","1","1","1","1","1","1","",""]],"}":[4,1,4,["","","","","","","1","1","1","2","2","2","2","2","4","4","4","8","8","8","",""]],"~":[8,2,6,["","","","","","","","","","","","","38","27","","","","","","","",""]],"\u0131":[4,1,3,["","","","","","","","","","","1","7","3","2","2","3","2","","","","",""]]}},"18":{"h":25,"base":19,"sp":4,"g":{"!":[5,2,4,["","","","","","","","","1","3","2","2","2","6","4","4","","c","8","","","","","",""]],"\"":[4,3,3,["","","","","","","","","3","5","6","6","","","","","","","","","","","","",""]],"#":[8,1,9,["","","","","","","","","","009","012","012","07f","024","024","1fe","048","048","090","","","","","",""]],"$":[8,1,7,["","","","","","","","02","03","0d","10","10","18","0e","06","02","02","04","78","10","10","","","",""]],"%":[12,3,10,["","","","","","","","","040","1c4","248","250","252","2af","3a9","052","092","092","11c","","","","","",""]],"&":[14,2,13,["","","","","","","","","","0020","0020","0345","05bf","0a48","0c48","1808","1810","1820","0fc0","","","","","",""]],"'":[3,3,2,["","","","","","","","","1","2","2","2","","","","","","","","","","","","",""]],"(":[5,2,5,["","","","","","","","01","02","04","04","04","08","08","08","10","10","10","10","10","18","08","","",""]],")":[4,0,6,["","","","","","","","02","02","03","03","03","02","02","02","02","04","04","08","08","10","20","","",""]],"*":[8,4,5,["","","","","","","","02","0d","06","1e","08","","","","","","","","","","","","",""]],"+":[9,2,8,["","","","","","","","","","","","10","10","10","ff","10","10","10","","","","","","",""]],",":[4,1,3,["","","","","","","","","","","","","","","","","1","3","2","2","4","","","",""]],"-":[5,2,3,["","","","","","","","","","","","","","","","7","","","","","","","","",""]],".":[4,2,2,["","","","","","","","","","","","","","","","","","1","3","","","","","",""]],"/":[6,-1,9,["","","","","","","","","001","002","004","004","008","008","010","010","020","040","040","080","080","100","","",""]],"0":[8,2,7,["","","","","","","","","","0e","13","23","63","63","42","42","46","64","78","","","","","",""]],"1":[8,2,5,["","","","","","","","","","01","07","01","03","02","02","02","06","06","1f","","","","","",""]],"2":[8,2,6,["","","","","","","","","","07","19","11","01","02","04","08","10","39","0e","","","","","",""]],"3":[8,1,7,["","","","","","","","","","07","01","01","02","07","09","01","02","04","78","","","","","",""]],"4":[8,1,7,["","","","","","","","","01","03","07","0a","12","12","26","7f","04","04","0c","","","","","",""]],"5":[8,1,9,["","","","","","","","","003","01e","020","020","078","00c","00c","004","008","010","1e0","","","","","",""]],"6":[8,2,8,["","","","","","","","","07","18","20","40","40","bc","cc","84","84","88","f0","","","","","",""]],"7":[8,3,6,["","","","","","","","","10","1f","01","02","04","08","08","10","30","30","30","","","","","",""]],"8":[8,1,8,["","","","","","","","","","0f","13","13","14","18","2e","46","c6","c4","78","","","","","",""]],"9":[8,1,8,["","","","","","","","","","0e","32","23","63","62","3e","02","04","08","f0","","","","","",""]],":":[5,2,3,["","","","","","","","","","","","1","3","","","","","6","4","","","","","",""]],";":[4,1,4,["","","","","","","","","","","","2","3","","","","2","4","4","8","8","","","",""]],"<":[9,2,7,["","","","","","","","","","","","01","06","38","60","38","06","01","","","","","","",""]],"=":[9,2,8,["","","","","","","","","","","","","ff","","ff","","","","","","","","","",""]],">":[9,2,7,["","","","","","","","","","","","40","38","0e","03","0e","38","40","","","","","","",""]],"?":[7,2,7,["","","","","","","","","04","1b","03","03","06","18","20","20","","60","20","","","","","",""]],"@":[13,2,12,["","","","","","","","","01c","1e3","239","4d1","492","912","914","934","9f8","800","c10","7e0","","","","",""]],"A":[11,1,11,["","","","","","","","","","03e","0c6","08e","196","0a4","024","07c","084","104","60f","","","","","",""]],"B":[11,1,11,["","","","","","","","","010","0fe","333","222","624","67c","066","042","046","084","3f8","","","","","",""]],"C":[9,2,9,["","","","","","","","","007","019","061","040","080","180","100","100","100","100","184","0f8","","","","",""]],"D":[13,2,12,["","","","","","","","","040","1fc","646","8c3","883","882","082","186","104","208","ff0","","","","","",""]],"E":[11,2,10,["","","","","","","","","010","1ff","220","220","220","07c","060","040","041","081","1fe","","","","","",""]],"F":[10,1,12,["","","","","","","","","03f","1d0","230","220","220","220","078","040","040","040","080","100","e00","","","",""]],"G":[11,2,10,["","","","","","","","","01e","063","080","080","100","100","31e","304","304","30c","1f8","008","008","010","1e0","",""]],"H":[12,1,15,["","","","","","","","0003","0004","0708","1908","1318","3210","03f0","0610","0430","0420","0820","7038","","","","","",""]],"I":[7,2,6,["","","","","","","","","","07","06","04","04","0c","0c","08","08","18","38","","","","","",""]],"J":[7,0,8,["","","","","","","","","","07","09","1b","1a","12","02","06","04","04","08","10","e0","","","",""]],"K":[12,2,13,["","","","","","","","","","03c3","0ccc","0890","08a0","09c0","0140","0160","0220","0430","1e30","0018","0009","0006","","",""]],"L":[10,1,10,["","","","","","","","","00c","010","020","020","060","040","040","040","081","3fe","","","","","","",""]],"M":[15,1,17,["","","","","","","","00003","00004","03c08","04618","08e28","08e58","0ca50","01290","01330","01330","02220","1c038","","","","","",""]],"N":[13,1,15,["","","","","","","","0001","0006","0f04","3308","2308","2388","2490","0490","04d0","08d0","0860","7060","0020","0031","000f","","",""]],"O":[11,2,10,["","","","","","","","","03e","046","183","103","303","203","202","202","304","308","1f0","","","","","",""]],"P":[10,1,11,["","","","","","","","","018","0e6","323","222","662","664","078","040","0c0","0c0","7f0","","","","","",""]],"Q":[11,2,13,["","","","","","","","","01f0","0210","0418","0818","1818","1018","1010","1010","1820","1840","0f80","00c1","0071","001e","","",""]],"R":[11,1,13,["","","","","","","","0060","03d8","0488","0888","0890","09e0","0140","0160","0220","0420","1f30","0010","0019","000f","","","",""]],"S":[8,0,9,["","","","","","","","","007","009","010","010","018","01c","006","006","002","104","184","0f8","","","","",""]],"T":[9,1,12,["","","","","","","","001","1fe","630","820","820","c20","060","040","040","080","3e0","","","","","","",""]],"U":[13,2,12,["","","","","","","","","3c7","443","882","882","d06","106","304","304","30c","1fe","","","","","","",""]],"V":[12,2,13,["","","","","","","","0002","0003","0782","0902","1104","1108","1110","0120","0340","0380","0300","0200","","","","","",""]],"W":[16,2,17,["","","","","","","","00002","00003","07843","198c2","119c2","112c4","112c8","014d0","038d0","030a0","030c0","02080","","","","","",""]],"X":[10,0,12,["","","","","","","","","1e7","068","030","030","020","070","0b0","110","310","e1c","","","","","","",""]],"Y":[10,1,12,["","","","","","","","","1c3","664","428","c28","c30","830","020","020","040","040","080","100","e00","","","",""]],"Z":[11,1,11,["","","","","","","","","001","0fe","084","108","010","020","041","081","101","3e2","47c","","","","","",""]],"[":[4,1,5,["","","","","","","","01","02","02","02","02","04","04","04","04","08","08","08","08","10","18","","",""]],"\\":[9,4,4,["","","","","","","","","","8","8","8","4","4","2","2","1","1","1","","","","","",""]],"]":[6,1,6,["","","","","","","","03","02","02","02","02","04","04","04","04","08","08","08","18","10","30","","",""]],"^":[9,4,4,["","","","","","","","6","6","9","9","","","","","","","","","","","","","",""]],"_":[9,0,9,["","","","","","","","","","","","","","","","","","","","","","1ff","","",""]],"`":[5,4,2,["","","","","","","","2","2","2","1","","","","","","","","","","","","","",""]],"a":[8,2,6,["","","","","","","","","","","","0f","13","32","22","22","26","2f","36","","","","","",""]],"b":[8,2,6,["","","","","","","","03","04","08","18","1b","1d","11","11","33","22","24","38","","","","","",""]],"c":[6,2,5,["","","","","","","","","","","","06","0b","10","10","10","10","12","1c","","","","","",""]],"d":[8,2,9,["","","","","","","","003","004","008","008","038","0d8","090","110","110","130","178","1b0","","","","","",""]],"e":[6,2,5,["","","","","","","","","","","","06","0b","12","14","18","10","12","1c","","","","","",""]],"f":[6,-1,10,["","","","","","","","003","004","008","008","018","010","07c","010","030","020","020","020","040","040","080","300","",""]],"g":[7,-2,9,["","","","","","","","","","","00f","011","032","022","022","02e","034","044","084","104","108","1f0","","",""]],"h":[8,2,6,["","","","","","","","03","0c","08","18","11","17","1b","32","22","22","23","06","","","","","",""]],"i":[4,2,4,["","","","","","","","2","2","","","4","c","4","4","c","9","e","8","","","","","",""]],"j":[4,-3,7,["","","","","","","","01","01","","","03","06","02","02","06","04","04","04","0c","08","10","60","",""]],"k":[8,2,10,["","","","","","","","030","040","080","080","180","118","160","180","380","2c0","240","260","020","011","00e","","",""]],"l":[4,2,5,["","","","","","","","01","06","04","0c","08","08","08","18","10","10","14","18","","","","","",""]],"m":[11,2,10,["","","","","","","","","","","","193","37e","1b2","122","126","224","267","244","","","","","",""]],"n":[8,2,7,["","","","","","","","","","","","32","6e","32","26","64","44","47","04","","","","","",""]],"o":[7,2,6,["","","","","","","","","","","","07","1b","11","21","23","22","24","38","","","","","",""]],"p":[8,-1,9,["","","","","","","","","","","","016","07b","033","022","022","022","044","078","040","040","0c0","1c0","",""]],"q":[7,2,6,["","","","","","","","","","","01","0f","11","22","22","22","26","2e","34","04","04","0c","1c","",""]],"r":[5,1,6,["","","","","","","","","","","","0d","3f","08","08","08","10","10","10","","","","","",""]],"s":[6,1,6,["","","","","","","","","","","","07","08","08","0c","06","02","24","38","","","","","",""]],"t":[6,2,4,["","","","","","","","","","","2","2","2","f","4","4","4","d","6","","","","","",""]],"u":[8,1,8,["","","","","","","","","","","","30","e2","22","26","64","44","5d","66","","","","","",""]],"v":[8,2,7,["","","","","","","","","","","01","79","51","22","22","24","68","30","","","","","","",""]],"w":[12,2,12,["","","","","","","","","","","003","f23","a22","222","464","444","5c8","670","","","","","","",""]],"x":[8,1,9,["","","","","","","","","","","","062","0a4","038","010","070","090","090","110","010","018","00f","","",""]],"y":[7,0,8,["","","","","","","","","","","","10","71","11","13","32","22","2e","32","04","04","08","f0","",""]],"z":[8,1,7,["","","","","","","","","","","","","1f","12","04","08","11","71","1e","","","","","",""]],"{":[4,2,5,["","","","","","","","01","02","02","02","04","04","04","18","08","08","08","10","10","10","10","","",""]],"|":[9,5,1,["","","","","","","","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","","",""]],"}":[4,1,4,["","","","","","","","1","1","1","1","1","2","2","1","2","4","4","4","4","8","8","","",""]],"~":[9,2,8,["","","","","","","","","","","","","","61","ba","8c","","","","","","","","",""]],"\u0131":[4,2,4,["","","","","","","","","","","","4","c","4","4","c","9","e","8","","","","","",""]]}}};
+/* pixel signature font: TeX Gyre Chorus (GUST Font License), baked to 1-bit bitmaps at 16 and 18px.
+   A holder's style (slant, weight, flourish) is fixed per name; a forger copies the name but gets the style wrong. */
+function sigGlyph(z,ch){const G=SIGF[z].g[ch];if(!G)return null;if(!G.px){const[adv,x0,bw,rows]=G;G.px=[];rows.forEach((r,y)=>{if(!r)return;const v=parseInt(r,16);for(let i=0;i<bw;i++)if(v>>(bw-1-i)&1)G.px.push([x0+i,y])})}return G}
+function sigWidth(z,t){let w=0;for(const ch of t){const G=sigGlyph(z,ch);w+=G?G[0]:SIGF[z].sp}return w}
+function sigStyle(name,seed){const r=rng(seed),hasI=/[ij]/.test(name);const ex=['underline','double','dot','flourish','none','tick'];if(hasI)ex.push('heart','ring','heart');
+ return{sl:[0,.12,.24][r()*3|0],bold:r()<.35,ex:ex[r()*ex.length|0],per:r()<.7,hi:hasI}}
+function forgeStyle(s,seed){const r=rng(seed),f={...s},k=r()*3|0;
+ if(k==0)f.sl=[0,.12,.24].filter(v=>v!=s.sl)[r()*2|0];else if(k==1)f.bold=!s.bold;else f.per=!s.per;
+ const ex=['underline','double','dot','flourish','none','tick',...(s.hi?['heart','ring']:[])].filter(v=>v!=s.ex);f.ex=ex[r()*ex.length|0];return f}
+function sigText(name,st,col,W=100){const txt=st.per?name:name.replace('. ',' ');let z=18;if(sigWidth(18,txt)>W-10)z=16;
+ const S=SIGF[z],cv=document.createElement('canvas');cv.width=W;cv.height=30;const x=cv.getContext('2d');x.fillStyle=col;
+ const top=20-S.base,px=(X,Y)=>x.fillRect(Math.round(X),Y,st.bold?2:1,1),sh=Y=>(S.base-Y)*st.sl;
+ const dotI=st.ex=='heart'||st.ex=='ring',iG=sigGlyph(z,'i');let iDot=null;
+ if(iG){const ys=iG.px.map(p=>p[1]),y0=Math.min(...ys),dp=iG.px.filter(p=>p[1]<=y0+1);iDot=[dp.reduce((a,p)=>a+p[0],0)/dp.length,y0]}
+ let pen=3,end=3;const dots=[];
+ for(const ch of txt){const use=dotI&&(ch=='i')?'ı':ch,G=sigGlyph(z,use);if(!G){pen+=S.sp;continue}
+  for(const[a,b]of G.px){px(pen+a+sh(b),top+b);end=Math.max(end,pen+a+sh(b))}
+  if(use=='ı'&&iDot)dots.push([pen+iDot[0]+sh(iDot[1]),top+iDot[1]]);pen+=G[0]}
+ const base=top+S.base;
+ if(st.ex=='underline'||st.ex=='double'){for(let X=2;X<end+5;X++){const Y=base+5+Math.round(Math.sin(X*.12)*.8);x.fillRect(X,Y,1,1);if(st.ex=='double'&&X>6&&X<end-2)x.fillRect(X,Y+2,1,1)}x.fillRect(end+5,base+4,1,1);x.fillRect(end+6,base+3,1,1)}
+ if(st.ex=='dot')x.fillRect(end+3,base-2,2,2);
+ if(st.ex=='tick'){for(let i=0;i<6;i++)x.fillRect(end+2+i,base-1-Math.round(i*1.4),1,1)}
+ if(st.ex=='flourish'){for(let a=0;a<6.2;a+=.25)x.fillRect(Math.round(end+4+Math.cos(a)*3),Math.round(base-4+Math.sin(a)*3),1,1);for(let i=0;i<16;i++)x.fillRect(end+4-i,base+2+(i>11?1:0),1,1)}
+ for(const[dx,dy]of dots){const X=Math.round(dx),Y=Math.max(0,dy-1);
+  if(st.ex=='heart')['.#.#.','#####','.###.','..#..'].forEach((r,j)=>{for(let i=0;i<5;i++)if(r[i]=='#')x.fillRect(X-2+i,Y-2+j,1,1)});
+  else['.#.','#.#','.#.'].forEach((r,j)=>{for(let i=0;i<3;i++)if(r[i]=='#')x.fillRect(X-1+i,Y-1+j,1,1)})}
+ return cv}
+
 
 /* pixel-art handwritten signature: letter-shaped control points joined by a smooth pen stroke, plotted 1px at a time */
 function cr(a,b,c,d,t){const t2=t*t,t3=t2*t,f=i=>.5*(2*b[i]+(-a[i]+c[i])*t+(2*a[i]-5*b[i]+4*c[i]-d[i])*t2+(-a[i]+3*b[i]-3*c[i]+d[i])*t3);return[f(0),f(1)]}
@@ -95,32 +125,55 @@ function border(x,st,w,h,col,i=4){const r=j=>{RC(j,j,w-2*j,1,col,x);RC(j,h-j-1,w
 const UVW='#c3b4f4',UVH='#4f4280',UVF='#86c9d1',UVB='#8b9ce0',UVI='#d4ec9c';
 function logo(b,x0,y0,sz,col,ctx){ctx.fillStyle=col;b.l.split('|').forEach((row,y)=>{for(let i=0;i<13;i++)if(row[i]=='#')ctx.fillRect(x0+i*sz,y0+y*sz,sz,sz)})}
 const SH=[["White Plains",200,48],["Yonkers",95,72],["New Rochelle",250,102],["Mineola",55,165],["Garden City",135,135],["Levittown",230,190]];
+/* trace debris: what the particles look like under the microscope, and the place on the map that sheds them */
+const TRACE=[{n:'Coal dust',sh:'Chunks',co:'Black'},{n:'Sea salt',sh:'Cubes',co:'White'},{n:'Sawdust',sh:'Splinters',co:'Brown'},
+ {n:'Soot',sh:'Beads',co:'Black'},{n:'Cement',sh:'Chunks',co:'Grey'},{n:'Tobacco',sh:'Flakes',co:'Brown'}];
+const SHAPES=['Chunks','Cubes','Splinters','Flakes','Beads'],TCOLS=['Black','White','Brown','Grey'];
+const SITEN=['Rail yard','Salt pier','Lumber yard','Power station','Cement works','Tobacco barn'];
+/* site sprite top-left on screen */
+const SITES=[[84,186],[166,118],[118,44],[262,140],[30,88],[124,168]];
+/* ink works per shop town: factory top-left on screen */
+const INKW=[[244,32],[38,46],[204,74],[30,130],[200,150],[250,170]];
 const PB=["Eagle A","Harlow","Bluebird","Kestrel","Oakmont","Sterling"],IB=["Quill","Raven","Marlow","Pelican","Onyx","Rexall"];
 const ib=s=>IB[(s*5+1)%6];
 const MON=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],MONL=['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'],WD=['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
-let today=new Date(1963,0,14);
+let today=new Date(1963,0,14),dayNum=1;
+const SAVEKEY='bounced-save-v1';
+function readSave(){try{const v=JSON.parse(localStorage.getItem(SAVEKEY)||'null');return v&&v.date?v:null}catch(e){return null}}
+function writeSave(){try{localStorage.setItem(SAVEKEY,JSON.stringify({date:today.toISOString(),day:dayNum}))}catch(e){}}
+function startNew(){today=new Date(1963,0,14);dayNum=1;newDay()}
+function loadSave(){const v=readSave();if(!v)return;today=new Date(v.date);dayNum=v.day;newDay()}
+function endDay(){nextWorkday();dayNum++;writeSave()}
 const longDate=d=>WD[d.getDay()]+', '+MONL[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
 function chequeDate(){const d=new Date(today);d.setDate(d.getDate()-R(3,12));return MON[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()}
 function nextWorkday(){do{today.setDate(today.getDate()+1)}while(today.getDay()==0||today.getDay()==6)}
-const FN={tint:'wrong tint',bord:'wrong border',wm:'bad UV watermark',mag:'wrong ink',fib:'wrong paper',sig:'forged signature',code:'bad code'};
+const FN={name:'name misspelled',addr:'wrong address',chq:'cheque number altered',tint:'wrong tint',bord:'wrong border',wm:'bad UV watermark',mag:'wrong ink',fib:'wrong paper',sig:'forged signature',code:'bad code'};
 const TOOLS=['LIGHT','UV PEN','LOUPE'],TB=['MAGNT','LAMP','LOUPE','SNIFF','DUST','LEDGR'];
-const PAYEE=["J. Halloran","Dell's Auto Parts","M. Pruitt","Sunrise Dairy","R. Castellano","Fenwick Hardware","L. Okafor","Grace Tilley"];
-const PAYER=["Walter Bosch","E. Lindqvist","Frank Moretti","Alma Ridley","H. Vandermeer","Carl Nussbaum"];
+const SUR=['Bosch','Lindqvist','Moretti','Ridley','Vandermeer','Nussbaum','Halloran','Pruitt','Castellano','Okafor','Tilley','Kowalski','Brennan','Feldman','Marsh','Whitcombe','Delacroix','Hayes','Sorensen','Abernathy','Quinlan','Pellegrino','Novak','Fairbanks','Gallagher','Ostrowski','Rinaldi','Duval','Harker','Winslow','Mancuso','Lindgren','Petrakis','Callahan','Szabo','Holloway','Esposito','Brandt','Kessler','Doyle'];
+const INI='ABCDEFGHJKLMNPRSTW',person=()=>P([...INI])+'. '+P(SUR);
+const BIZ=["Dell's Auto Parts",'Sunrise Dairy','Fenwick Hardware','Kowalski Bakery','Rialto Theatre','Hanley & Sons','Lakeview Pharmacy',"Moran's Tavern",'Gold Star Laundry','Bristol Florist','Acme Radio Repair','Atlas Coal & Oil','Peerless Tailors','Olympia Diner','Westbury Lumber','Harbor Fish Market','Crown Typewriter Co','Paragon Shoes','Merritt Insurance','Dr. R. Feld, D.D.S.'];
 let st='title',day=[],ix=0,sc=0,tool=-1,mx=0,my=0,btns=[],sel=[],res=null;
 
 const PTYPE=['Linen','Plain','Linen','Plain','Plain','Linen'];
-const MEMOS={"Dell's Auto Parts":['Brake pads','Auto parts','Tire repair'],'Sunrise Dairy':['Milk delivery','Dairy account'],'Fenwick Hardware':['Hardware','Paint and nails','Lumber']};
-function mk(n){
- const fr=Math.random()<.6,f={};
+const MEMOS={'Kowalski Bakery':['Wedding cake','Bread account'],'Rialto Theatre':['Tickets'],'Hanley & Sons':['Roof repair','Gutters'],'Lakeview Pharmacy':['Prescriptions'],"Moran's Tavern":['Bar tab'],'Gold Star Laundry':['Laundry'],'Bristol Florist':['Funeral flowers','Roses'],'Acme Radio Repair':['Radio repair','TV repair'],'Atlas Coal & Oil':['Heating oil','Coal delivery'],'Peerless Tailors':['Alterations'],'Olympia Diner':['Catering'],'Westbury Lumber':['Lumber'],'Harbor Fish Market':['Fish order'],'Crown Typewriter Co':['Typewriter'],'Paragon Shoes':['Shoes'],'Merritt Insurance':['Premium'],'Dr. R. Feld, D.D.S.':['Dental work'],"Dell's Auto Parts":['Brake pads','Auto parts','Tire repair'],'Sunrise Dairy':['Milk delivery','Dairy account'],'Fenwick Hardware':['Hardware','Paint and nails','Lumber']};
+const STREETS=['ELM ST','OAK AVE','MAPLE DR','CEDAR LN','PARK PL','HILL RD','BROAD ST'];
+function misspell(n){const[a,s]=n.split('. ');let t=s;for(let k=0;k<20&&t==s;k++){const i=1+(Math.random()*(s.length-1)|0),op=Math.random()*3|0;
+ if(op==0&&s.length>4)t=s.slice(0,i)+s.slice(i+1);else if(op==1)t=s.slice(0,i)+s[i]+s.slice(i);else if(i<s.length-1)t=s.slice(0,i)+s[i+1]+s[i]+s.slice(i+2)}return a+'. '+t}
+function altStreet(st,town){const[n,...r]=st.split(' '),rest=r.join(' ');if(Math.random()<.4){const t=n+' '+P(STREETS.filter(v=>v!=rest));if((t+', '+town).length<=23)return t}let m=n;while(m==n)m=String(Math.max(2,+n+R(-9,9)));return m+' '+rest}
+const bookOf=no=>Math.floor((no-1)/50)*50+1;
+function altNo(no){const b=bookOf(no);let n;do{n=no+R(-400,400)}while((n>=b&&n<b+50)||n<1000||n>9999);return n}
+function mk(n,forceFr){
+ const fr=forceFr!==undefined?forceFr:Math.random()<.6,f={};
  if(fr){const a=Object.keys(FN);let k=R(1,3);while(k--)f[a.splice(R(0,a.length-1),1)[0]]=1}
  const ps=R(0,5);let is=R(0,5);if(is==ps)is=(is+1)%6;
  const q=(p,v)=>Math.random()<p?v:null;
- const c={n,fr,f,ps,is,bank:P(BANKS),acct:R(1000000,9999999),no:R(1000,4999),payee:P(PAYEE),payer:P(PAYER),amt:R(12,480)+'.00',street:R(2,98)+' '+P(['ELM ST','OAK AVE','MAPLE DR','CEDAR LN','PARK PL','HILL RD','BROAD ST']),date:chequeDate(),
+ const c={n,fr,f,ps,is,bank:P(BANKS),acct:R(1000000,9999999),no:R(1000,4999),payee:Math.random()<.55?P(BIZ):person(),payer:person(),amt:R(12,480)+'.00',street:R(2,98)+' '+P(['ELM ST','OAK AVE','MAPLE DR','CEDAR LN','PARK PL','HILL RD','BROAD ST']),date:chequeDate(),
  area:P(['routing no.','account no.','check digit']),why:P(['Teller posted it twice.','Deposit credited a day early.','Clerk keyed the wrong account.']),
  s:{tob:q(.35,P(["Lucky Strike","Chesterfield","Pall Mall","Camel"])),gas:q(.3,P(["regular","ethyl","diesel"])),lip:q(.3,P(["cherry red, greasy","coral pink, waxy","plum, matte"])),
  perf:q(.3,P(["Chanel No. 5","Shalimar","Emeraude"])),col:q(.3,P(["Old Spice","Aqua Velva","English Leather"])),typ:q(.35,1),fp:q(.4,P(["usable ridges: CATCH","smudged: NO CATCH"]))},notes:{},used:{},marks:{}};
- c.town=c.bank.r.split(',')[0];do{c.street=R(2,98)+' '+P(['ELM ST','OAK AVE','MAPLE DR','CEDAR LN','PARK PL','HILL RD','BROAD ST'])}while((c.street+', '+c.town).length>23);
- c.memo=MEMOS[c.payee]?P(MEMOS[c.payee]):P(['Rent, March','Loan repayment','Piano lessons','Painting work','Birthday gift','Lawn service','Invoice '+R(100,999)]);
+ c.town=c.bank.r.split(',')[0];do{c.street=R(2,98)+' '+P(STREETS)}while((c.street+', '+c.town).length>23);
+ c.pname=f.name?misspell(c.payer):c.payer;c.pstreet=f.addr?altStreet(c.street,c.town):c.street;c.pno=f.chq?altNo(c.no):c.no;
+ c.inkBrand=ib(c.is);c.db=R(0,5);c.grime=P([[232,52],[160,122],[252,56],[214,122]]);c.memo=MEMOS[c.payee]?P(MEMOS[c.payee]):P(['Rent, March','Loan repayment','Piano lessons','Painting work','Birthday gift','Lawn service','Invoice '+R(100,999)]);
  const B=c.bank,oth=BANKS.filter(b=>b!=B);c.pc=B.p;c.bd=B.b;c.wmB=B;
  if(fr&&!f.tint&&Math.random()<.3)f.tint=1;
  if(f.tint)c.pc=P(oth.filter(b=>b.p!=B.p)).p;if(f.bord)c.bd=P(['line','dots','double'].filter(v=>v!=B.b));
@@ -130,10 +183,10 @@ function mk(n){
  if(f.wm)c.wmB=Math.random()<.5?null:P(oth);
  const alt=(v,i)=>v.slice(0,i)+((+v[i]+R(1,9))%10)+v.slice(i+1);c.mrt=c.bank.rt;c.mac=String(c.acct);
  if(f.code){if(c.area=='routing no.')c.mrt=alt(c.mrt,R(0,7));else if(c.area=='account no.')c.mac=alt(c.mac,R(0,6));else c.mrt=alt(c.mrt,8)}
- c.card=sig(c.payer,hash(c.payer)+7,false,K.ink);
+ c.sty=sigStyle(c.payer,hash(c.payer));c.fsty=forgeStyle(c.sty,c.no);c.card=sigText(c.payer,c.sty,K.ink);
  const doc=(k,img)=>({k,img,w:img.width,h:img.height,x:0,y:0,out:false});
  c.rows=checkRows(c);
- c.rec=doc('rec',renderRecord(c));c.rec.x=301;c.rec.y=23;c.cl=doc('notes',renderNotes(c));c.cl.x=301;c.cl.y=114;c.docs=[c.rec,c.cl];
+ c.rec=doc('rec',renderRecord(c));c.rec.x=118;c.rec.y=90;c.cl=doc('notes',renderNotes(c));c.cl.x=301;c.cl.y=27;c.docs=[c.rec,c.cl];
  c.chq=doc('cheque',renderCheque(c));c.chq.out=true;c.chq.x=10;c.chq.y=28;c.z=[];c.env=renderEnvelope(c);c.ph='arrive';c.t0=0;c.pad={open:false,t:-1e9};c.open=false;return c;
 }
 /* the cheque is drawn once per case; loupe-visible detail (fibers, edge, ink tint) comes from the actual flaws */
@@ -168,10 +221,10 @@ function renderEnvelope(c){const w=284,h=124,B=c.bank,[cv,x]=blank(w,h),rr=rng(c
  for(let i=0;i<50;i++)RC(sx+rr()*92|0,sy+rr()*18|0,1,1,pc,x);
  return cv}
 /* the closed notepad cover */
-let PADC=null;function padCover(){if(PADC)return PADC;const[cv,x]=blank(170,114),rr=rng(7);RC(0,0,170,114,'#15171a',x);RC(1,1,168,112,'#2c3446',x);
- for(let i=0;i<500;i++)RC(1+rr()*168|0,1+rr()*112|0,1,1,rr()<.5?'#323b4e':'#262e3e',x);RC(1,1,168,7,'#222938',x);
- RC(35,40,100,34,K.rule,x);RC(36,41,98,32,'#dddcd3',x);T('CHECKLIST',58,47,K.ink,1,x);RC(40,57,90,1,K.ruleL,x);T('CASE NOTES',55,61,K.label,1,x);return PADC=cv}
-function drawPad(c){const now=performance.now(),X=301,Y=114,H=114,p=Math.min(1,(now-c.pad.t)/280),e=1-(1-p)**3;
+let PADC=null;function padCover(){const Hh=day[ix].cl.h;if(PADC&&PADC.height==Hh)return PADC;const[cv,x]=blank(170,Hh),rr=rng(7);RC(0,0,170,Hh,'#15171a',x);RC(1,1,168,Hh-2,'#2c3446',x);
+ for(let i=0;i<500;i++)RC(1+rr()*168|0,1+rr()*(Hh-2)|0,1,1,rr()<.5?'#323b4e':'#262e3e',x);RC(1,1,168,7,'#222938',x);
+ const ly=(Hh>>1)-17;RC(35,ly,100,34,K.rule,x);RC(36,ly+1,98,32,'#dddcd3',x);T('CHECKLIST',58,ly+7,K.ink,1,x);RC(40,ly+17,90,1,K.ruleL,x);T('CASE NOTES',55,ly+21,K.label,1,x);return PADC=cv}
+function drawPad(c){const now=performance.now(),X=301,Y=27,H=c.cl.h,p=Math.min(1,(now-c.pad.t)/280),e=1-(1-p)**3;
  const cov=c.pad.open?Math.round(H*(1-e)):Math.round(H*e);
  RC(X+2,Y+2,170,H,'#1b1d20');if(c.pad.open||cov<H)g.drawImage(c.cl.img,X,Y);
  if(cov>0){g.drawImage(padCover(),0,0,170,cov,X,Y,170,cov);if(cov<H)RC(X,Y+cov-2,170,2,'#48546c')}
@@ -195,13 +248,13 @@ function renderCheque(c){const w=276,h=150,cv=document.createElement('canvas');c
  /* 12px margin on every side; right-hand items are right-aligned to w-12 */
  const M=12,RX=w-M,ra=t=>RX-(t.length*6-1);
  const printed=(cx,col)=>{const L=col||K.label;
-  logoS(c.bank,M,M,col||c.bank.c,cx);T(c.bank.n,M+11,M,col||c.bank.c,1,cx);T(c.payer.toUpperCase(),M,36,col||K.ink,1,cx);T(c.street+', '+c.town,M,46,L,1,cx);T('No. '+c.no,ra('No. '+c.no),130,L,1,cx);RC(ra('No. '+c.no)-1,139,('No. '+c.no).length*6+1,1,col||K.rule,cx);
+  logoS(c.bank,M,M,col||c.bank.c,cx);T(c.bank.n,M+11,M,col||c.bank.c,1,cx);T(c.pname.toUpperCase(),M,36,col||K.ink,1,cx);T(c.pstreet+', '+c.town,M,46,L,1,cx);T('No. '+c.pno,ra('No. '+c.pno),130,L,1,cx);RC(ra('No. '+c.pno)-1,139,('No. '+c.pno).length*6+1,1,col||K.rule,cx);
   T('DATE',RX-98,M,L,1,cx);
   T('PAY TO THE',M,70,L,1,cx);T('ORDER OF',M,80,L,1,cx);T('$',RX-60,73,col||K.ink,1,cx);
   T('MEMO',M,104,L,1,cx);T('SIGNATURE',RX-77,116,col||shade(pc,-50),1,cx);micr(mstr,M,130,col||'#2f343c',cx)};
  const amt=(cx,col)=>HW(c.amt,RX-52,73,col,cx,c.no+3);
- const hand=(cx,col)=>{HW(c.date,ra(c.date)-3,M,col,cx,c.no);HW(c.payee,76,75,col,cx,c.no+1);HW(c.memo,M+32,104,col,cx,c.no+2);cx.drawImage(sig(c.payer,f.sig?c.no*13:c.no,!!f.sig,col),RX-100,85)};
- const mstr='T'+c.mrt+'T '+c.mac.replace(/(\d{3})(\d{4})/,'$1D$2')+'U '+String(c.no).padStart(4,'0');
+ const hand=(cx,col)=>{HW(c.date,ra(c.date)-3,M,col,cx,c.no);HW(c.payee,76,75,col,cx,c.no+1);HW(c.memo,M+32,104,col,cx,c.no+2);cx.drawImage(sigText(c.payer,f.sig?c.fsty:c.sty,col),RX-100,85)};
+ const mstr='T'+c.mrt+'T '+c.mac.replace(/(\d{3})(\d{4})/,'$1D$2')+'U';
  RC(RX-70,21,70,1,K.rule,x);RC(74,84,118,1,K.rule,x);RC(RX-64,69,64,15,K.rule,x);RC(RX-63,70,62,13,pl,x);RC(M+30,113,96,1,K.rule,x);RC(RX-100,113,100,1,K.rule,x);
  printed(x,null);amt(x,ink);hand(x,ink);if(f.hue){hand(ux,UVI);amt(ux,UVI)}
  /* faint diagonal VOIDED stamp across the whole cheque */
@@ -217,9 +270,9 @@ const DOCNAME={sig:'SIGNATURE CARD',ledger:'ACCOUNT RECORD',notes:'CHECKLIST',ch
 function card(w,h,col=K.paper){const cv=document.createElement('canvas');cv.width=w;cv.height=h;const x=cv.getContext('2d');RC(0,0,w,h,K.rule,x);RC(1,1,w-2,h-2,col,x);
  const rr=rng(w*h);for(let i=0;i<w*h*.03;i++)RC(1+rr()*(w-2)|0,1+rr()*(h-2)|0,1,1,K.paperD,x);return[cv,x]}
 const fmtAcct=a=>String(a).replace(/(\d{3})(\d{4})/,'$1-$2');
-function renderRecord(c){const[cv,x]=card(170,88);logo(c.bank,4,2,1,c.bank.c,x);T(c.bank.n,21,5,c.bank.c,1,x);RC(3,17,164,1,K.ruleL,x);
- [['HOLDER',c.payer],['ADDRESS',c.street],['ROUTING',c.bank.rt],['ACCOUNT',fmtAcct(c.acct)]].forEach(([a,b],i)=>{T(a,5,21+i*9,K.label,1,x);T(b,54,21+i*9,K.ink,1,x)});
- T('SIGNATURE',5,70,K.label,1,x);x.drawImage(c.card,62,55);RC(62,84,100,1,K.rule,x);return cv}
+function renderRecord(c){const[cv,x]=card(170,96);const bk=bookOf(c.no);logo(c.bank,4,2,1,c.bank.c,x);T(c.bank.n,21,5,c.bank.c,1,x);RC(3,17,164,1,K.ruleL,x);
+ [['HOLDER',c.payer],['ADDRESS',c.street],['ROUTING',c.bank.rt],['ACCOUNT',fmtAcct(c.acct)],['CHEQUES',bk+'-'+(bk+49)]].forEach(([a,b],i)=>{T(a,5,21+i*9,K.label,1,x);T(b,54,21+i*9,K.ink,1,x)});
+ T('SIGNATURE',5,78,K.label,1,x);x.drawImage(c.card,62,63);RC(62,92,100,1,K.rule,x);return cv}
 /* checklist rows: what was observed, and the options the detective can pick for what it should be */
 const BN={line:'Single line',dots:'Dotted',double:'Double line'};
 /* each row lists every possible value; the observed one is preselected, picking another marks a flaw */
@@ -230,10 +283,13 @@ function checkRows(c){const f=c.f,B=c.bank,tn=b=>cap(b.pn.toLowerCase()),tint=BA
  {k:'pap',l:'PAPER',t:2,obs:c.paper,vals:['Cotton','Plain','Linen'],bad:c.paper!=B.paper,right:B.paper},
  {k:'tint',l:'TINT',t:-1,obs:tn(tint),vals:BANKS.map(tn),bad:c.pc!=B.p,right:tn(B)},
  {k:'bord',l:'BORDER',t:-1,obs:BN[c.bd],vals:['Single line','Dotted','Double line'],bad:c.bd!=B.b,right:BN[B.b]},
+ {k:'name',l:'NAME',t:-1,obs:c.pname,vals:[c.pname,'Altered'],bad:c.pname!=c.payer,right:'Altered'},
+ {k:'addr',l:'ADDRESS',t:-1,obs:c.pstreet,vals:[c.pstreet,'Altered'],bad:c.pstreet!=c.street,right:'Altered'},
  {k:'sig',l:'SIGNATURE',t:-1,obs:'Genuine',vals:['Genuine','Forged'],bad:!!f.sig,right:'Forged'},
- {k:'rt',l:'ROUTING',t:-1,obs:c.mrt,vals:uniq([c.mrt,B.rt]),bad:c.mrt!=B.rt,right:B.rt},
- {k:'ac',l:'ACCOUNT',t:-1,obs:fmtAcct(c.mac),vals:uniq([fmtAcct(c.mac),fmtAcct(c.acct)]),bad:c.mac!=String(c.acct),right:fmtAcct(c.acct)}]}
-const CL_Y=17,CL_H=12;
+ {k:'rt',l:'ROUTING',t:-1,obs:c.mrt,vals:[c.mrt,'Altered'],bad:c.mrt!=B.rt,right:'Altered'},
+ {k:'ac',l:'ACCOUNT',t:-1,obs:fmtAcct(c.mac),vals:[fmtAcct(c.mac),'Altered'],bad:c.mac!=String(c.acct),right:'Altered'},
+ {k:'cno',l:'CHEQUE NO.',t:-1,obs:String(c.pno),vals:[String(c.pno),'Altered'],bad:c.pno!=c.no,right:'Altered'}]}
+const CL_Y=17,CL_H=15;
 const revealed=(c,r)=>r.t<0||c.used[r.t];
 function renderNotes(c){const[cv,x]=card(170,CL_Y+CL_H*c.rows.length+1,'#d3d6cd');T('CHECKLIST',5,5,K.ink,1,x);RC(3,14,164,1,K.rule,x);
  c.rows.forEach((r,i)=>{const y=CL_Y+i*CL_H,m=c.marks[r.k],rv=revealed(c,r);if(i)RC(3,y-2,164,1,'#bec6c9',x);
@@ -273,6 +329,10 @@ function bookPage(x,i,x0){const L=K.label,I=K.ink;
  if(i==11){T('QUICK TABLE',x0+6,11,I,1,x);T('TINT PAPER   INK',x0+18,24,L,1,x);RC(x0+6,33,126,1,K.rule,x);
   BANKS.forEach((b,j)=>{const y=38+j*19;logoS(b,x0+6,y+1,b.c,x);const[sw,sx]=blank(16,10);RC(0,0,16,10,b.p,sx);border(sx,b.b,16,10,K.rule,1);x.drawImage(sw,x0+18,y);
    T(b.paper,x0+42,y+1,I,1,x);T(b.ink,x0+84,y+1,I,1,x)});return}
+ if(i==12){T('PAPER MILLS',x0+6,11,I,1,x);T('THE PUNCHED DISC',x0+6,21,L,1,x);RC(x0+6,30,126,1,K.rule,x);
+  PB.forEach((m,j)=>{const cx=x0+26+(j%2)*66,cy=50+(j/2|0)*40;millDisc(x,cx,cy,11,j);T(m.toUpperCase(),cx-m.length*3,cy+14,I,1,x)});return}
+ if(i==13){T('INK STRIPS',x0+6,11,I,1,x);T('THE TWO PADS',x0+6,21,L,1,x);RC(x0+6,30,126,1,K.rule,x);
+  IB.forEach((b,j)=>{const y=38+j*19;PADS[b].forEach((pc,k)=>{RC(x0+8+k*12,y,10,10,'#8e8f87',x);RC(x0+9+k*12,y+1,8,8,PADCOL[pc],x)});T(b.toUpperCase(),x0+36,y+1,I,1,x)});return}
  if(i==1){T('ISSUING BANKS',x0+6,11,I,1,x);RC(x0+6,21,126,1,K.rule,x);BANKS.forEach((b,j)=>{const y=27+j*21;logo(b,x0+6,y,1,b.c,x);T(b.sn,x0+24,y+3,I,1,x);T(j+3,x0+128,y+3,L,1,x)});return}
  const b=BANKS[i-2];logo(b,x0+6,10,2,b.c,x);WR(b.n,x0+38,12,98,b.c,9,x);T(b.r,x0+6,40,L,1,x);RC(x0+6,51,126,1,K.rule,x);
  T('PAPER',x0+6,56,L,1,x);T('UV MARK',x0+72,56,L,1,x);
@@ -284,10 +344,10 @@ function renderBook(){let cv,x;
   T('CHEQUE',16,13,K.oliveL,1,x);T('GUIDE',19,24,K.oliveL,1,x)}
  else{[cv,x]=blank(290,172);x.imageSmoothingEnabled=false;RC(0,0,290,172,'#15171a',x);RC(1,1,288,170,'#2c3446',x);const pg='#dddcd3';RC(5,5,139,162,pg,x);RC(146,5,139,162,pg,x);RC(142,5,2,162,'#c9c8bf',x);RC(146,5,2,162,'#c9c8bf',x);RC(144,3,2,166,'#1f2533',x);
   const sp=BOOK.page;bookPage(x,sp*2,5);bookPage(x,sp*2+1,146);
-  T(sp*2+1,72,156,K.label,1,x);T(sp*2+2,212,156,K.label,1,x);if(sp>0)T('<',10,156,K.navy,1,x);if(sp<5)T('>',274,156,K.navy,1,x);
+  T(sp*2+1,72,156,K.label,1,x);T(sp*2+2,212,156,K.label,1,x);if(!BOOK.lab&&sp>0)T('<',10,156,K.navy,1,x);if(!BOOK.lab&&sp<5)T('>',274,156,K.navy,1,x);
   RC(264,0,16,20,K.stamp,x);RC(264,20,8,3,K.stamp,x);RC(272,20,8,3,K.stamp,x);RC(264,22,2,1,'#15171a',x);T('X',269,7,K.paper,1,x)}
  BOOK.img=cv;BOOK.w=cv.width;BOOK.h=cv.height;BOOK.x=Math.max(2,Math.min(W-BOOK.w-2,BOOK.x));BOOK.y=Math.max(22,Math.min(226-BOOK.h,BOOK.y))}
-function setBook(o){const c=day[ix];BOOK.open=o;if(o){BOOK.x=188;BOOK.y=24}renderBook();if(c){const i=c.z.indexOf(BOOK);if(i>=0)c.z.splice(i,1);if(o)c.z.push(BOOK)}}
+function setBook(o){const c=day[ix];BOOK.open=o;BOOK.lab=st=='map'||st=='res';if(o){BOOK.x=188;BOOK.y=24;if(BOOK.lab)BOOK.page=6;else if(BOOK.page>5)BOOK.page=0}renderBook();if(c){const i=c.z.indexOf(BOOK);if(i>=0)c.z.splice(i,1);if(o)c.z.push(BOOK)}}
 /* ---------- tool icons, 16x16 ---------- */
 const IC={y:'#f3dc8c',v:'#a08cd8',a:'#15171a',b:'#8f9aae',c:'#d8d7ce',r:'#a9786c',n:'#48546c',l:'#b8c2cc',m:'#6f7176',h:'#6b5e52',o:'#a4a684'};
 function gen(f){const r=[];for(let y=0;y<16;y++){let s='';for(let x=0;x<16;x++)s+=f(x,y);r.push(s)}return r}
@@ -299,6 +359,12 @@ gen((x,y)=>{const d=Math.hypot(x-6,y-6),t=x-y;if(d<=3.6)return x+y<10?'c':'l';if
 ['................','...........aa...','..........arra..','.........arra...','........arra....','.......arra.....','......aaaa......','.....acccca.....','....acccccca....','....accccca.....','.....accca......','......aaa..o....','..o.......o..o..','....o..o.....o..','.o....o...o.....','................'],
 ['................','................','..aaaaaaaaaaa...','..aooooooooooa..','..aoocccccoooa..','..aooooooooooa..','..aoocccccoooa..','..aooooooooooa..','..aooooooooooa..','..aooooooooooa..','..aooooooooooa..','..aaaaaaaaaaaa..','..acccccccccca..','..aaaaaaaaaaaa..','................','................']];
 const GUIDEI=(()=>{const cv=document.createElement('canvas');cv.width=cv.height=16;const x=cv.getContext('2d');['................','..aaaaaaaaaaa...','..annnnnnnnnna..','..anccccccccna..','..annnnnnnnnna..','..annccccccnna..','..annnnnnnnnna..','..annnnnnnnnna..','..annnnnnnnnna..','..annnnnnnnnna..','..aaaaaaaaaaaa..','..acccccccccca..','..aaaaaaaaaaaa..','................','................','................'].forEach((r,y)=>{for(let i=0;i<16;i++)if(r[i]!='.'){x.fillStyle={a:'#15171a',n:'#48546c',c:'#d8d7ce'}[r[i]];x.fillRect(i,y+1,1,1)}});return cv})();
+const PACKETI=(()=>{const cv=document.createElement('canvas');cv.width=cv.height=16;const x=cv.getContext('2d'),C={a:'#15171a',w:'#eceade',p:'#b8b6a6',r:'#9a4a40',q:'#6d7078'};
+ ['................','.....a.a.a......','....awawawa.....','....awawawa.....','....awawawa.....','..aaaaaaaaaaaa..','..appppppppppa..','..arrrrrrrrrra..','..appppppppppa..','..apqqqqqqqppa..','..appppppppppa..','..apqqqqqppppa..','..appppppppppa..','..aaaaaaaaaaaa..','................','................']
+ .forEach((r,y)=>{for(let i=0;i<16;i++)if(r[i]!='.'){x.fillStyle=C[r[i]];x.fillRect(i,y,1,1)}});return cv})();
+const PUNCHI=(()=>{const cv=document.createElement('canvas');cv.width=cv.height=16;const x=cv.getContext('2d'),C={a:'#15171a',m:'#b4bcc2',n:'#7d858c',b:'#4a5058',h:'#2a2e33'};
+ ['................','.aaaaaaaaaaa....','.ammmmmmmmmma...','.annnnnnnnnnna..','..aaaaaannnnna..','.......aannnna..','........aaaaa...','.........ahha...','.........ahha...','..aaaaaaaaaaaaa.','..abbbbbbbbbbba.','..abbbbhbbbbbba.','..abbbbbbbbbbba.','..aaaaaaaaaaaaa.','................','................']
+ .forEach((r,y)=>{for(let i=0;i<16;i++)if(r[i]!='.'){x.fillStyle=C[r[i]];x.fillRect(i,y,1,1)}});return cv})();
 const ICONS=ICON_ROWS.map(rows=>{const cv=document.createElement('canvas');cv.width=cv.height=16;const x=cv.getContext('2d');rows.forEach((r,y)=>{for(let i=0;i<16;i++)if(r[i]!='.'){x.fillStyle=IC[r[i]];x.fillRect(i,y,1,1)}});return cv});
 
 const cap=v=>v[0].toUpperCase()+v.slice(1);
@@ -308,8 +374,44 @@ function use(t,c){const f=c.f,s=c.s;let L=[];
   }
  if(t==2)L=['Paper: '+c.paper+'.'];
  c.notes[t]=L;c.used[t]=1;c.cl.img=renderNotes(c);toast(L.join(' '))}
-let toastT='',toastEnd=0;function toast(t,ms=4500){toastT=t;toastEnd=performance.now()+ms}
-function newDay(){BOOK.open=false;renderBook();day=[1,2,3,4,5].map(mk);ix=0;st='desk';tool=-1;startCase(day[0])}
+function toast(){}
+/* two wire trays in the strip under the cheque: RETURN TO BANK (bank error) and EVIDENCE (fraud).
+   Each day's cheques pile up in them, top edges showing, with their clip and slip. */
+const TRAYS={ret:{x:8,y:183,w:138,h:43,wire:'#8d9294',wireD:'#5d6266',plate:'#8f8466',ink:'#23272b',label:'GENUINE'},
+ evi:{x:154,y:183,w:138,h:43,wire:'#4f555b',wireD:'#33373c',plate:'#7e4c46',ink:'#e1ddd0',label:'EVIDENCE'}};
+let PILE={ret:[],evi:[]};
+function slipImg(k){const w=k=='ret'?68:52,[cv,x]=blank(w,12);if(k=='ret'){RC(0,0,w,12,'#8e8f87',x);RC(1,1,w-2,10,'#e1e0d8',x);T('BANK ERROR',5,2,'#3d4a5c',1,x)}else{RC(0,0,w,12,'#4a2e2a',x);RC(1,1,w-2,10,'#9a4a40',x);RC(3,5,2,2,'#4a2e2a',x);T('EXHIBIT',8,2,'#ecd9c8',1,x)}return cv}
+const SLIP={ret:slipImg('ret'),evi:slipImg('evi')};
+function clip(X,Y){RC(X,Y,2,9,'#aeb3b6');RC(X+2,Y,1,1,'#aeb3b6');RC(X+3,Y,1,7,'#aeb3b6');RC(X+1,Y+8,1,1,'#6d7276');RC(X+3,Y+6,1,1,'#6d7276')}
+function trayBack(k,hot){const t=TRAYS[k],{x,y,w}=t;RC(x+6,y+2,w-12,24,'#17191b');RC(x+6,y+1,w-12,1,t.wire);
+ for(let i=0;i<22;i++){RC(x+6-Math.round(i*6/22),y+2+i,1,1,t.wire);RC(x+w-7+Math.round(i*6/22),y+2+i,1,1,t.wire)}
+ PILE[k].forEach((it,i)=>{const px=x+12+((i*7)%11)-3,py=y+14-Math.min(i,6)*2;RC(px,py,w-24,12,'#1f2226');RC(px,py,w-26,11,it.pc);RC(px,py,w-26,1,shade(it.pc,-30));RC(px+10,py+1,18,6,k=='ret'?'#e1e0d8':'#9a4a40');RC(px+10,py+6,18,1,'#1f2226');clip(px+8,py-3)})}
+function trayFront(k,hot){const t=TRAYS[k],{x,y,w,h}=t,fy=y+24,fh=h-24;RC(x,fy,w,fh,t.wireD);RC(x,fy,w,1,hot?K.oliveL:t.wire);RC(x,fy+fh-1,w,1,'#101214');
+ for(let X=x+3;X<x+w-2;X+=4)RC(X,fy+2,1,fh-4,t.wire);RC(x,fy+fh-4,w,1,t.wire);
+ const lw=t.label.length*6+9,lx=x+(w-lw>>1),ly=fy+4;RC(lx,ly,lw,11,'#101214');RC(lx+1,ly,lw-2,10,t.plate);RC(lx+1,ly,lw-2,1,shade(t.plate,25));T(t.label,lx+5,ly+2,t.ink);
+ RC(lx+2,ly+4,1,1,'#101214');RC(lx+lw-3,ly+4,1,1,'#101214')}
+const overTray=()=>Object.keys(TRAYS).find(k=>{const t=TRAYS[k];return hit(t.x,t.y,t.w,t.h)});
+/* the counter: a brushed-metal ledge with two mail slots. Dragged down here the cheque becomes a small
+   hand-drawn mini cheque; dropped on a slot it gets its clip and slides down into the slit. */
+const SLOTS={ret:{cx:74,label:'GENUINE',plate:'#8f8466',ink:'#23272b',tab:'#e1e0d8'},evi:{cx:220,label:'FRAUDULENT',plate:'#7e4c46',ink:'#e1ddd0',tab:'#9a4a40'}},SLOTY=192;
+const overSlot=()=>my<180?null:mx<147?'ret':mx<294?'evi':null;
+function drawSlots(hot){RC(0,180,295,48,'#24272b');RC(0,180,295,1,'#3c4147');RC(0,181,295,1,'#15171a');for(let y=184;y<228;y+=3)RC(0,y,295,1,'#272a2e');
+ for(const k in SLOTS){const t=SLOTS[k],x=t.cx-52,y=SLOTY,on=hot==k;RC(x,y,104,15,'#101214');RC(x+1,y+1,102,13,on?'#8e9280':'#5d6266');RC(x+1,y+1,102,1,on?'#c2c4b2':'#8d9294');RC(x+1,y+13,102,1,'#3b3f44');
+  RC(x+4,y+5,96,5,'#050607');RC(x+4,y+10,96,1,'#2a2d31');RC(x+2,y+6,1,1,'#2a2d31');RC(x+101,y+6,1,1,'#2a2d31');
+  const lw=t.label.length*6+9,lx=t.cx-(lw>>1),ly=y+19;RC(lx,ly,lw,11,'#101214');RC(lx+1,ly,lw-2,10,t.plate);RC(lx+1,ly,lw-2,1,shade(t.plate,25));T(t.label,lx+5,ly+2,t.ink);RC(lx+2,ly+4,1,1,'#101214');RC(lx+lw-3,ly+4,1,1,'#101214')}}
+function renderMini(c){const[cv,x]=blank(64,30),ink='#3d4a5c';RC(0,0,64,30,'#8e8f87',x);RC(1,1,62,28,c.pc,x);border(x,c.bd,64,30,K.rule,2);
+ logoS(c.bank,4,4,c.bank.c,x);RC(13,6,26,1,c.bank.c,x);RC(46,6,14,1,ink,x);RC(4,13,22,1,'#8e8f87',x);RC(28,13,18,1,ink,x);RC(47,11,13,5,shade(c.pc,-22),x);RC(48,12,11,3,shade(c.pc,6),x);
+ RC(4,19,14,1,'#8e8f87',x);RC(40,21,18,1,'#8e8f87',x);[[41,19],[42,18],[43,19],[44,20],[45,18],[46,19],[47,20],[48,19],[49,18],[50,20]].forEach(([a,b])=>RC(a,b,1,1,ink,x));
+ for(let i=0;i<13;i++)RC(4+i*3,25,2,1,'#2f343c',x);return cv}
+function drawMini(c,X,Y){if(!c.mini)c.mini=renderMini(c);RC(X+2,Y+2,64,30,'#101214');g.drawImage(c.mini,X,Y)}
+function dropInto(c,k){c.z=[];c.ph='drop';c.drop={k,t0:performance.now(),x:Math.round(mx)-32,y:Math.round(my)-15};tool=-1;dd=null;if(BOOK.open)setBook(false)}
+function drawDrop(c){const D=c.drop,t=SLOTS[D.k],p=Math.min(1,(performance.now()-D.t0)/750),tx=t.cx-32,ty=SLOTY+5-30;
+ const q1=Math.min(1,p/.28),e1=1-(1-q1)**3,X=Math.round(D.x+(tx-D.x)*e1),Y0=Math.round(D.y+(ty-D.y)*e1),q2=Math.max(0,Math.min(1,(p-.3)/.2)),q3=Math.max(0,(p-.58)/.42),Y=Y0+Math.round(q3*q3*34);
+ if(!c.mini)c.mini=renderMini(c);g.save();g.beginPath();g.rect(0,0,W,SLOTY+6);g.clip();if(q3==0)RC(X+2,Y+2,64,30,'#101214');g.drawImage(c.mini,X,Y);
+ if(q2>0){const sy=Y-Math.round((1-q2)*8);RC(X+7,sy+2,24,8,'#1f2226');RC(X+8,sy+2,22,7,t.tab);RC(X+8,sy+2,22,1,shade(t.tab,20));clip(X+4,sy-2)}
+ g.restore();if(p>=1){c.ph='done';if(D.k=='evi'){st='lab';c.lab={ph:'idle',t0:0,tested:false};c.lab2={ph:'idle',t0:0,done:false};c.lab3={ph:'idle',t0:0,done:false,sh:null,co:null};{const t=.2+Math.random()*.6;c.lab3.tgt=t;c.lab3.focus=t>.5?t-.3-Math.random()*.15:t+.3+Math.random()*.15}}else returnCase()}}
+function returnCase(){const c=day[ix];c.verdict='returned';next()}
+function newDay(){PILE={ret:[],evi:[]};BOOK.open=false;renderBook();{const k=R(3,4),fl=[1,2,3,4,5].map((_,i)=>i<k);for(let i=4;i>0;i--){const j=R(0,i);[fl[i],fl[j]]=[fl[j],fl[i]]}day=fl.map((f,i)=>mk(i+1,f))}ix=0;st='desk';tool=-1;startCase(day[0])}
 function startCase(c){c.ph='arrive';c.t0=performance.now();toast('A returned item from '+c.bank.n+'. Click the envelope.',4500)}
 function circ(cx,cy,r,c){cx=Math.round(cx);cy=Math.round(cy);r=Math.round(r);g.fillStyle=c;let x=r,y=0,e=1-r;
  while(x>=y){for(const[a,b]of[[x,y],[y,x],[-x,y],[-y,x],[x,-y],[y,-x],[-x,-y],[-y,-x]])g.fillRect(cx+a,cy+b,1,1);y++;if(e<0)e+=2*y+1;else{x--;e+=2*(y-x)+1}}}
@@ -320,11 +422,23 @@ function BI(x,y,w,h,i,fn,on){const hv=hit(x,y,w,h);bevel(x,y,w,h,on,hv,K.navy);g
  if(hv){const n=TOOLS[i];RC(x,y-13,n.length*6+5,12,'#121416');RC(x+1,y-12,n.length*6+3,10,K.panel);T(n,x+3,y-11,K.oliveL)}}
 function desk(){RC(0,0,W,H,K.desk);for(let y=20;y<228;y+=8){RC(0,y,W,1,K.deskB);RC(0,y+4,W,1,K.deskA)}RC(0,0,W,20,K.bar);RC(0,20,W,1,K.panelEdge);
  RC(0,228,W,42,K.bar);RC(0,228,W,1,K.panelEdge);
- if(st=='title')T('BUREAU OF CHEQUE FRAUD',8,7,K.oliveL);else{T(longDate(today),8,7,K.oliveL);T('NASSAU COUNTY, N.Y.',472-19*6,7,K.dim)}}
+ if(st=='title'||st=='load')T('BUREAU OF CHEQUE FRAUD',8,7,K.oliveL);else{T(longDate(st=='end'&&doneDate?doneDate:today),8,7,K.oliveL);T('NASSAU COUNTY, N.Y.',472-19*6,7,K.dim)}}
 function panel(x,y,w,h){RC(x,y,w,h,K.panelEdge);RC(x+1,y+1,w-2,h-2,K.panel)}
 
 /* ---------- the manila folder ---------- */
 const FOL='#8f8d72',FOLD='#6f6d57',FOLL='#a4a287',FOLIN='#817f66';
+/* the account record's dock in the bottom bar: a small card icon and the holder's name */
+const RS={x:298,y:234,w:176,h:30};
+let RCARD=null;function cardIcon(c){const[cv,x]=blank(22,16);RC(0,0,22,16,'#8e8f87',x);RC(1,1,20,14,'#e1e0d8',x);RC(2,2,5,4,c.bank.c,x);RC(8,3,11,1,c.bank.c,x);
+ for(let i=0;i<3;i++)RC(2,7+i*2,6+(i%2)*3,1,'#8e8f87',x);[[10,12],[11,11],[12,12],[13,13],[14,11],[15,12],[16,13],[17,12],[18,11]].forEach(([a,b])=>RC(a,b,1,1,K.ink,x));return cv}
+function guideBtn(gx){const gy=234,hv=hit(gx,gy,66,30);bevel(gx,gy,66,30,BOOK.open,hv,K.navy);g.drawImage(GUIDEI,gx+5,gy+7);T('GUIDE',gx+25,gy+11,BOOK.open?'#1e2022':'#dcdcd3');T('B',gx+3,gy+3,BOOK.open?'#1e2022':'#9aa3b5');btns.push([gx,gy,66,30,()=>setBook(!BOOK.open)])}
+function recSlot(c){const{x,y,w,h}=RS,ready=c.ph=='ready',drag=press&&press.mv&&press.d==c.rec&&hit(x,y-6,w,h+6),hv=ready&&!c.recOut&&hit(x,y,w,h);
+ RC(x,y,w,h,'#101214');RC(x+1,y+1,w-2,h-2,hv||drag?'#2c323b':'#1c1f24');RC(x+1,y+h-2,w-2,1,'#2a2f36');if(drag){RC(x,y,w,1,K.oliveL);RC(x,y+h-1,w,1,K.oliveL);RC(x,y,1,h,K.oliveL);RC(x+w-1,y,1,h,K.oliveL)}
+ if(!ready)return;const ix0=x+8,iy0=y+7;
+ if(!c.recOut){if(!c.icon)c.icon=cardIcon(c);RC(ix0+1,iy0+1,22,16,'#08090a');const f=Math.min(1,(performance.now()-(c.dockT||0))/200);g.drawImage(c.icon,ix0,iy0-Math.round((1-f)*6));T(c.payer,x+38,y+11,K.txt)}
+ else{for(let i=0;i<22;i+=3){RC(ix0+i,iy0,2,1,'#3a3f45');RC(ix0+i,iy0+15,2,1,'#3a3f45')}for(let i=0;i<16;i+=3){RC(ix0,iy0+i,1,2,'#3a3f45');RC(ix0+21,iy0+i,1,2,'#3a3f45')}T(c.payer,x+38,y+11,'#5d6168')}}
+function pullRec(c){const r=c.rec;c.recOut=true;r.x=(294-r.w)>>1;r.y=28+((150-r.h)>>1);c.z.push(r);press={d:r,ox:mx-r.x,oy:my-r.y,sx:mx,sy:my,mv:false,x0:r.x,y0:r.y}}
+function dockRec(c){const i=c.z.indexOf(c.rec);if(i>=0)c.z.splice(i,1);c.recOut=false;c.dockT=performance.now()}
 function drawDoc(d,lift){RC(d.x+(lift?3:2),d.y+(lift?3:2),d.w,d.h,'#1b1d20');g.drawImage(d.img,d.x,d.y);const c=day[ix];
  if(d.k=='notes'&&c&&c.anim){const q=(performance.now()-c.anim.t)/320;if(q<1){const y=d.y+CL_Y+c.anim.i*CL_H;RC(d.x+72+Math.round(96*q),y-1,96-Math.round(96*q),CL_H-2,'#d3d6cd')}}}
 const topDoc=c=>{for(let i=c.z.length-1;i>=0;i--){const d=c.z[i];if(hit(d.x,d.y,d.w,d.h))return d}return null};
@@ -341,6 +455,16 @@ const SPR={
  pine:['..b..','..a..','.aba.','.aaa.','aabaa','..t..'],
  hill:['....s....','...sss...','..shhdd..','.hhhhddd.','hhhhhdddd'],
  factory:['.cc..........','.cc..........','.cc.r..r..r..','.ccrR.rR.rR..','wwwwwwwwwwwww','wywwwywwwywww','wwwwwwwwwwwww','wwwdddwwwwwww']};
+const SITESPR=[
+ ['..ccc....ccc...','.bcccb..bcccb..','.bbbbb..bbbbb..','..k.k....k.k...','mmmmmmmmmmmmmmm','k.k.k.k.k.k.k.k','mmmmmmmmmmmmmmm','...............','mmmmmmmmmmmmmmm','k.k.k.k.k.k.k.k','mmmmmmmmmmmmmmm'],
+ ['......s........','.....sSs.......','....sssSs......','...ssssSSs.....','..sssssssSs....','.pppppppppppppp','.k..k..k..k..k.'],
+ ['..........rrrr.','..........wwww.','...L.L....wdyw.','..LlLlL...wdww.','.LlLlLlL..wwww.','LlLlLlLlL.wwww.'],
+ ['..cc.....cc....','..RR.....RR....','..cc.....cc....','..cc.....cc....','..cc.....cc....','..cc.....cc....','rrrrrrrrrrrrrrr','wwwwwwwwwwwwwww','wywywwwwwwwywyw','wwwwwwwdddwwwww'],
+ ['.GG..GG..GG....','GggGGggGGggG...','GggGGggGGggG..m','GggGGggGGggG.m.','GggGGggGGggGm..','GggGGggGGggwwww','GggGGggGGggwyww','kkkkkkkkkkkwwdw'],
+ ['......TT.......','....TTttTT.....','..TTttttttTT...','TTttttttttttTT.','bbbbbbbbbbbbbb.','b.bb.bb.bb.bbb.','bbbbbbbbbbbbbb.','bbbbbbdddbbbbb.']];
+const SPC2={k:'#1a1c1f',m:'#8d9088',c:'#101113',b:'#5e5046',s:'#eceae2',S:'#b9b8ae',p:'#6b5a44',l:'#6a4c30',L:'#c9a46c',r:'#3f444c',R:'#a0453a',w:'#5f625e',y:'#c9b36a',d:'#2a2d31',g:'#8f9296',G:'#b5b8ba',t:'#5a3e24',T:'#8e6638'};
+const SITEC=SITESPR.map(rows=>{const cv=document.createElement('canvas');cv.width=rows[0].length;cv.height=rows.length;const x=cv.getContext('2d');rows.forEach((r,y)=>{for(let i=0;i<r.length;i++)if(r[i]!='.')RC(i,y,1,1,SPC2[r[i]],x)});return cv});
+const siteBox=i=>{const[x,y]=SITES[i],cv=SITEC[i];return[x-3,y-3,cv.width+6,cv.height+6]};
 const SPC={r:'#3f444c',R:'#8d9088',w:'#5f625e',y:'#c9b36a',d:'#2a2d31',a:'#222c21',b:'#7b8375',t:'#2a2522',s:'#a3a69c',h:'#4f5747',c:'#2b2927'};
 let CITY=null,CHIMS=[];
 function cityMap(){if(CITY)return CITY;const w=284,h=198,cv=document.createElement('canvas');cv.width=w;cv.height=h;const x=cv.getContext('2d'),rr=rng(1963);
@@ -362,6 +486,8 @@ function cityMap(){if(CITY)return CITY;const w=284,h=198,cv=document.createEleme
  const occ=new Uint8Array(w*h),mark=(X,Y,ww,hh)=>{for(let y=Y;y<Y+hh;y++)for(let x2=X;x2<X+ww;x2++)if(x2>=0&&y>=0&&x2<w&&y<h)occ[y*w+x2]=1};
  /* keep markers and name tags clear */
  for(const[n,ax,ay]of SH){const X=ax-8,Y=ay-24;mark(X-6,Y-6,13,12);mark(X-n.length*3-3,Y+6,n.length*6+6,12)}
+  SITES.forEach(([X,Y],i)=>mark(X-8-3,Y-24-3,SITEC[i].width+7,SITEC[i].height+7));
+ INKW.forEach(([X,Y],i)=>{const n=ib(i),tw=n.length*6+14;mark(X-8-2,Y-24-2,17,11);mark(X-8+6-(tw>>1)-1,Y-24+9,tw+2,12)});
  /* parkways: dark bed with dashed centre, pale bridge deck over water */
  const road=pts=>{const q=[pts[0],...pts,pts[pts.length-1]],P=[];for(let i=1;i<q.length-2;i++){const n=Math.ceil(Math.hypot(q[i+1][0]-q[i][0],q[i+1][1]-q[i][1]))*2;for(let t=0;t<=n;t++)P.push(cr(q[i-1],q[i],q[i+1],q[i+2],t/n).map(Math.round))}
   for(const[X,Y]of P){const b=wat(X,Y);RC(X-1,Y-1,3,3,b?MP.bridge:MP.road,x);mark(X-2,Y-2,5,5);if(b&&(X+Y)%6==0)RC(X,Y+2,1,2,'#0f1215',x)}
@@ -375,7 +501,14 @@ function cityMap(){if(CITY)return CITY;const w=284,h=198,cv=document.createEleme
   rows.forEach((r,y)=>{for(let i=0;i<ww;i++)if(r[i]!='.')RC(X+i,Y+y,1,1,pal[r[i]],x)});mark(X,Y,ww+1,hh+1);return true};
  const tower=()=>{const hgt=8+(rr()*6|0),r=['rrrrr','RRRRR'];for(let i=0;i<hgt;i++)r.push(i%2?'wwwww':[...'wwwww'].map((c,j)=>j%2&&rr()<.45?'y':'w').join(''));r.push('wwdww');return r};
  /* factories on the waterfront, with chimneys that will smoke */
- for(const[bx,by]of[[16,56],[112,64],[254,62],[34,120],[196,104]])for(let k=0;k<40;k++){const X=bx+(rr()*24-12|0),Y=by+(rr()*16-8|0);if(put(SPR.factory,X,Y)){CHIMS.push([X+1,Y,rr()]);break}}
+ for(const[bx,by]of[[112,64],[254,62],[196,104]])for(let k=0;k<40;k++){const X=bx+(rr()*24-12|0),Y=by+(rr()*16-8|0);if(put(SPR.factory,X,Y)){CHIMS.push([X+1,Y,rr()]);break}}
+/* the six trace sites and the six ink works, stamped before the towns and woods fill in */
+ SITES.forEach(([X,Y],i)=>{const cv=SITEC[i];
+  const X0=X-8,Y0=Y-24;SITESPR[i].forEach((r,y)=>{for(let k=0;k<r.length;k++)if(r[k]!='.')RC(X0+k+1,Y0+y+1,1,1,'#16191c',x)});x.drawImage(cv,X0,Y0)});
+ INKW.forEach(([X,Y],i)=>{const X0=X-8,Y0=Y-24;SPR.factory.forEach((r,y)=>{for(let k=0;k<r.length;k++)if(r[k]!='.'){RC(X0+k+1,Y0+y+1,1,1,'#1e221d',x)}});
+  SPR.factory.forEach((r,y)=>{for(let k=0;k<r.length;k++)if(r[k]!='.')RC(X0+k,Y0+y,1,1,r[k]=='w'?'#4f5660':r[k]=='y'?'#9fb4c8':SPC[r[k]],x)});CHIMS.push([X0+1,Y0,rr()]);
+  const n=ib(i),tw=n.length*6+14,tx=X0+6-(tw>>1),ty=Y0+10;RC(tx,ty,tw,10,'#0f1215',x);RC(tx+1,ty+1,tw-2,8,'#1b2026',x);
+  PADS[n].forEach((pc,k)=>RC(tx+2+k*4,ty+3,3,4,PADCOL[pc],x));T(n,tx+11,ty+1,'#aab4bf',1,x)});
  /* towns: lit towers downtown, snowy-roofed houses around */
  const TW=SH.map(([,a,b])=>[a-8,b-24]);
  for(const[cx,cy]of TW){for(let k=0;k<30;k++){const a=rr()*6.28,d=4+rr()*10,t=tower();put(t,cx+Math.cos(a)*d*1.3-2|0,cy+Math.sin(a)*d-t.length|0)}
@@ -399,28 +532,199 @@ function smog(){const t=performance.now();g.save();g.beginPath();g.rect(8,24,284
  for(let i=0;i<5;i++){const p=((t/26000+i*.23)%1),X=8+p*340-30,Y=24+30+i*34+Math.sin(t/7000+i)*6;blob(X,Y,22+i%3*6,'rgba(120,126,124,.05)')}
  for(const[cx,cy,o]of CHIMS)for(let i=0;i<6;i++){const p=(t/2600+i/6+o)%1,X=8+cx+1+p*14+Math.sin(p*6+o*9)*1.5,Y=24+cy-2-p*20;blob(X,Y,Math.round(1+p*3),'rgba(150,154,152,'+(.55*(1-p)).toFixed(3)+')')}
  g.restore()}
-function mapBG(){g.drawImage(cityMap(),8,24);smog();RC(8,24,284,1,K.panelEdge);RC(8,221,284,1,K.panelEdge);RC(7,24,1,198,K.panelEdge);RC(292,24,1,198,K.panelEdge);
+function mapBG(C){g.drawImage(cityMap(),8,24);smog();searchRing(C,performance.now());RC(8,24,284,1,K.panelEdge);RC(8,221,284,1,K.panelEdge);RC(7,24,1,198,K.panelEdge);RC(292,24,1,198,K.panelEdge);
+ for(let i=0;i<6;i++){const[x,y,w,h]=siteBox(i),on=sel.includes(6+i),hv=st=='map'&&hit(x,y,w,h),col=on?'#d0806e':hv?'#e3e2d8':'#8a8d80';
+  if(on){g.save();g.globalAlpha=.25;RC(x,y,w,h,'#b0685a');g.restore()}
+  for(const[cx,cy,sx,sy]of[[x,y,1,1],[x+w-1,y,-1,1],[x,y+h-1,1,-1],[x+w-1,y+h-1,-1,-1]]){RC(sx>0?cx:cx-3,cy,4,1,col);RC(cx,sy>0?cy:cy-3,1,4,col)}}
  for(let i=0;i<6;i++){const[n,x,y]=SH[i],on=sel.includes(i);RC(x-4,y-4,9,9,'#0f1215');RC(x-3,y-3,7,7,on?'#b0685a':'#d8d7ce');RC(x-1,y-1,3,3,on?'#d8d7ce':'#0f1215');
   RC(x-n.length*3-2,y+7,n.length*6+3,10,'#0f1215');RC(x-n.length*3-1,y+8,n.length*6+1,8,'#262b30');T(n,x-n.length*3,y+8,'#d8d7ce')}}
-function selCirc(){const p=sel.map(i=>SH[i]);if(!p.length)return null;const cx=p.reduce((a,b)=>a+b[1],0)/p.length,cy=p.reduce((a,b)=>a+b[2],0)/p.length;let r=18;if(p.length>1)r=Math.max(14,Math.hypot(p[0][1]-p[1][1],p[0][2]-p[1][2])/2);return{cx,cy,r}}
-function trail(c){const t=[];if(c.f.mag||c.f.hue)t.push(c.is);if(c.f.fib||c.f.edge||(c.f.tint||c.f.bord)||c.f.wm)t.push(c.ps);return t}
+/* ---------- crime lab: ink test strips ----------
+   The cheque lies on the bench. Pull a strip from the tin, press it on the handwriting, and its two pads
+   take on the ink's colours. The tin's label is the colour chart: which pad colours belong to which ink maker. */
+const PADCOL={blue:'#4a6a9a',teal:'#3f7a78',violet:'#6d5290',ochre:'#a58c3e',rust:'#9a5040',olive:'#6f7c40',grey:'#5f6268'};
+const PADS={Quill:['blue','ochre'],Raven:['grey','blue'],Marlow:['violet','teal'],Pelican:['teal','rust'],Onyx:['rust','violet'],Rexall:['olive','ochre']};
+const INKS6=Object.keys(PADS),LCX=10,LCY=34,SLOT1={x:8,y:234,w:36,h:30},SLOT2={x:48,y:234,w:36,h:30},SLOT3={x:96,y:234,w:36,h:30},SLOT4={x:136,y:234,w:36,h:30},CHART={x:344,y:34,w:128,h:170};
+const chartRow=i=>({x:CHART.x+4,y:CHART.y+26+i*23,w:CHART.w-8,h:20});
+/* handwriting areas on the cheque (cheque-local), where a strip can pick up ink */
+const INKZ=[[150,6,120,18],[70,68,128,20],[204,66,66,20],[38,98,104,18],[160,82,110,34]];
+function drawStrip(X,Y,brand,f){RC(X+1,Y+1,10,44,'#101214');RC(X,Y,10,44,'#8e8f87');RC(X+1,Y+1,8,42,'#eceade');
+ [0,1].forEach(k=>{const py=Y+26+k*9,col=brand?PADCOL[PADS[brand][k]]:null;RC(X+1,py,8,8,'#d6d4c8');
+  if(col)for(let yy=0;yy<8;yy++)for(let xx=0;xx<8;xx++)if(BY[(xx&3)+(yy&3)*4]/16<f)RC(X+1+xx,py+yy,1,1,col)})}
+function drawLab(c){const L=c.lab,now=performance.now();
+ RC(0,21,W,207,'#1f2328');for(let X=0;X<W;X+=24)RC(X,21,1,207,'#23272d');RC(0,21,W,11,'#15171a');T('CRIME LAB',8,23,K.oliveL);T('INK, PAPER, TRACE',472-18*6,23,K.dim);
+ RC(LCX+2,LCY+2,276,150,'#101214');g.drawImage(c.chq.img,LCX,LCY);drawGrime(c);
+ if(L.spot){const[sx,sy]=L.spot;for(let a=0;a<6.28;a+=.2){const X=Math.round(sx+Math.cos(a)*7),Y=Math.round(sy+Math.sin(a)*5);if((X+Y)&1)RC(X,Y,1,1,'rgba(90,100,110,.35)')}}
+ const P2=c.lab2;if(P2.hole){const[hx,hy]=P2.hole;for(let Y=-3;Y<=3;Y++)for(let X=-3;X<=3;X++){const d=X*X+Y*Y;if(d<=9)RC(hx+X,hy+Y,1,1,d>6?'#6d6e68':'#1f2328')}}
+ if(P2.ph=='aim'){const X=Math.round(mx),Y=Math.round(my);for(let a=0;a<6.3;a+=.3)RC(Math.round(X+Math.cos(a)*4),Math.round(Y+Math.sin(a)*4),1,1,K.oliveL);g.drawImage(PUNCHI,X+6,Y-18)}
+ else if(P2.ph=='fly'){const q=Math.min(1,(now-P2.t0)/450),e=q*q,[hx,hy]=P2.hole,X=Math.round(hx+(SLOT4.x+18-hx)*e),Y=Math.round(hy+(SLOT4.y+15-hy)*e);millSwatch(g,X-4-Math.round(q*8),Y-3-Math.round(q*5),8+Math.round(q*16),6+Math.round(q*10),c.ps);if(q>=1){P2.ph='done';P2.done=true}}
+ /* the strip: in hand, reacting on the ink, then flying down into its slot */
+ if(L.ph=='drag'){const hz=inkZone();INKZ.forEach(([x,y,w,h],i)=>{const X=LCX+x-3,Y=LCY+y-3,Wd=w+6,Hd=h+6,on=i==hz;
+   if(on){g.save();g.globalAlpha=.18;RC(X,Y,Wd,Hd,K.oliveL);g.restore()}
+   for(let k=0;k<Wd;k++)if(on||k%3<2){RC(X+k,Y,1,1,K.oliveL);RC(X+k,Y+Hd-1,1,1,K.oliveL)}for(let k=0;k<Hd;k++)if(on||k%3<2){RC(X,Y+k,1,1,K.oliveL);RC(X+Wd-1,Y+k,1,1,K.oliveL)}});
+  drawStrip(Math.round(mx)-5,Math.round(my)-36,null,0)}
+ else if(L.ph=='react'){const f=Math.min(1,(now-L.t0)/900);drawStrip(L.strip[0],L.strip[1],c.inkBrand,f*1.07);if(f>=1){L.ph='fly';L.t0=now}}
+ else if(L.ph=='fly'){const q=Math.min(1,(now-L.t0)/380),e=q*q;drawStrip(Math.round(L.strip[0]+(SLOT2.x+13-L.strip[0])*e),Math.round(L.strip[1]+(SLOT2.y-6-L.strip[1])*e),c.inkBrand,1);if(q>=1){L.ph='done';L.tested=true}}
+ /* bottom bar: the packet of strips and the slot the used strip lands in */
+ {const P=SLOT1,hv=!L.tested&&L.ph=='idle'&&hit(P.x,P.y,P.w,P.h);bevel(P.x,P.y,P.w,P.h,L.ph=='drag',hv,L.tested?'#262a31':K.navy);
+  g.save();if(L.tested||L.ph!='idle')g.globalAlpha=.3;g.drawImage(PACKETI,P.x+10,P.y+7);g.restore();
+  if(!L.tested&&L.ph=='idle'&&(now/500|0)%2){RC(P.x,P.y-2,P.w,1,K.oliveL)}
+  const S=SLOT2;RC(S.x,S.y,S.w,S.h,'#101214');RC(S.x+1,S.y+1,S.w-2,S.h-2,'#1c1f24');
+  if(L.tested){RC(S.x+5,S.y+11,27,9,'#101214');RC(S.x+5,S.y+10,26,8,'#8e8f87');RC(S.x+6,S.y+11,24,6,'#eceade');PADS[c.inkBrand].forEach((pc,k)=>RC(S.x+17+k*7,S.y+11,6,6,PADCOL[pc]))}
+  else for(let i=0;i<26;i+=3){RC(S.x+5+i,S.y+10,2,1,'#3a3f45');RC(S.x+5+i,S.y+18,2,1,'#3a3f45')}
+  const Q=SLOT3,hq=!P2.done&&P2.ph=='idle'&&hit(Q.x,Q.y,Q.w,Q.h);bevel(Q.x,Q.y,Q.w,Q.h,P2.ph=='aim',hq,P2.done?'#262a31':K.navy);
+  g.save();if(P2.done||P2.ph!='idle')g.globalAlpha=.3;g.drawImage(PUNCHI,Q.x+10,Q.y+7);g.restore();if(!P2.done&&P2.ph=='idle'&&L.tested&&(now/500|0)%2)RC(Q.x,Q.y-2,Q.w,1,K.oliveL);
+  const S4=SLOT4;RC(S4.x,S4.y,S4.w,S4.h,'#101214');RC(S4.x+1,S4.y+1,S4.w-2,S4.h-2,'#1c1f24');
+  if(P2.done)millSwatch(g,S4.x+6,S4.y+7,24,16,c.ps);else for(let i=0;i<24;i+=3){RC(S4.x+6+i,S4.y+7,2,1,'#3a3f45');RC(S4.x+6+i,S4.y+22,2,1,'#3a3f45')}}
+ drawTrace(c);
+ BT(298,234,176,30,'ENTER: TO THE MAP',()=>{ldd=null;st='map';sel=[]},0,'#4a4f38')}
+function labClick(c){const L=c.lab,P=c.lab2,L3=c.lab3;
+ if(ldd){const j=lddItem();if(j>=0&&performance.now()-ldd.t0>150){L3[ldd.k]=ldd.items[j];L3.anim=performance.now()}ldd=null;return}
+ if(L3.ph=='drag'){traceDrop(c,true);return}
+ if(L3.done){if(hit(WHEEL.x-4,WHEEL.y-4,WHEEL.w+8,WHEEL.h+8)){L3.knob={y:my,f:L3.focus};return}
+  for(const[k,items,ry]of[['sh',SHAPES,CARD.y+5],['co',TCOLS,CARD.y+19]])if(hit(CARD.x+2,ry-2,CARD.w-4,13)){openLDD(k,items,CARD.x+48,ry+11);return}}
+ if(!L3.done&&L3.ph=='idle'&&L.ph!='drag'&&P.ph!='aim'&&hit(SLOT5.x,SLOT5.y,SLOT5.w,SLOT5.h)){L3.ph='drag';return}
+ if(L.ph=='drag'){stripDrop(c,true);return}if(P.ph=='aim'){punchDrop(c,true);return}
+ if(!L.tested&&L.ph=='idle'&&P.ph!='aim'&&hit(SLOT1.x,SLOT1.y,SLOT1.w,SLOT1.h)){L.ph='drag';L.strip=null;L.grab=performance.now();return}
+ if(!P.done&&P.ph=='idle'&&L.ph!='drag'&&hit(SLOT3.x,SLOT3.y,SLOT3.w,SLOT3.h)){P.ph='aim';P.grab=performance.now()}}
+function labUp(c){const L=c.lab,P=c.lab2,L3=c.lab3;L3.knob=null;
+ if(L3.ph=='drag'&&!hit(SLOT5.x,SLOT5.y,SLOT5.w,SLOT5.h))traceDrop(c,false);
+ if(L.ph=='drag'&&!hit(SLOT1.x,SLOT1.y,SLOT1.w,SLOT1.h))stripDrop(c,false);
+ if(P.ph=='aim'&&!hit(SLOT3.x,SLOT3.y,SLOT3.w,SLOT3.h))punchDrop(c,false)}
+function inkZone(){const px=mx-LCX,py=my-LCY,P=8;return INKZ.findIndex(([x,y,w,h])=>px>=x-P&&px<x+w+P&&py>=y-P&&py<y+h+P)}
+function stripDrop(c,click){const L=c.lab,px=mx-LCX,py=my-LCY;
+ if(inkZone()>=0){L.ph='react';L.t0=performance.now();L.strip=[Math.round(mx)-5,Math.round(my)-36];L.spot=[Math.round(mx),Math.round(my)]}
+ else if(!click||!hit(SLOT1.x,SLOT1.y,SLOT1.w,SLOT1.h))L.ph='idle'}
+function punchDrop(c,click){const P=c.lab2,px=mx-LCX,py=my-LCY;
+ if(px>=6&&py>=6&&px<270&&py<144){P.ph='fly';P.t0=performance.now();P.hole=[Math.round(mx),Math.round(my)]}
+ else if(!click||!hit(SLOT3.x,SLOT3.y,SLOT3.w,SLOT3.h))P.ph='idle'}
+/* ---------- crime lab: trace debris ----------
+   A grimy smudge sits on every cheque. Lift a grain with the tweezers, bring it into focus under the microscope
+   with the thumbwheel, then write down its shape and colour. What it is tells you where the forger has been. */
+const SLOT5={x:184,y:234,w:36,h:30},SLOT6={x:224,y:234,w:36,h:30},EYE={cx:350,cy:88,r:44},WHEEL={x:414,y:44,w:14,h:88},CARD={x:302,y:148,w:168,h:72};
+const PCOL={Black:['#26282c','#5a5d62','#0c0d0f'],White:['#f4f3ec','#ffffff','#8a877a'],Brown:['#8a5e36','#b58a58','#4a2e18'],Grey:['#7e8186','#b0b3b7','#4a4d52']};
+const TWEEZI=(()=>{const cv=document.createElement('canvas');cv.width=cv.height=16;const x=cv.getContext('2d');
+ const line=(x0,y0,x1,y1,col)=>{const n=Math.max(Math.abs(x1-x0),Math.abs(y1-y0));for(let i=0;i<=n;i++)RC(Math.round(x0+(x1-x0)*i/n),Math.round(y0+(y1-y0)*i/n),1,1,col,x)};
+ for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){line(12+dx,1+dy,1+dx,13+dy,'#15171a');line(14+dx,3+dy,2+dx,14+dy,'#15171a');RC(12+dx,0+dy,4,4,'#15171a',x)}
+ line(12,1,1,13,'#c4cbd0');line(14,3,2,14,'#7d858c');RC(12,0,4,4,'#9aa2a8',x);RC(13,1,2,2,'#4a5058',x);return cv})();
+const tvMask=(()=>{const r=EYE.r,cv=document.createElement('canvas');cv.width=cv.height=r*2;const m=cv.getContext('2d');m.fillStyle='#fff';for(let y=0;y<r*2;y++){const d=y-r+.5,w=Math.floor(Math.sqrt(r*r-d*d));m.fillRect(r-w,y,w*2,1)}return cv})();
+const EYEC=document.createElement('canvas');EYEC.width=EYEC.height=EYE.r*2;const ec=EYEC.getContext('2d');
+const BEZEL=(()=>{const r=EYE.r,R2=r+5,cv=document.createElement('canvas');cv.width=cv.height=R2*2+2;const x=cv.getContext('2d');
+ for(let Y=0;Y<R2*2+2;Y++)for(let X=0;X<R2*2+2;X++){const dx=X-R2-.5,dy=Y-R2-.5,d=Math.hypot(dx,dy);if(d<r-.5||d>R2+.5)continue;const t=d-r,lit=(dx+dy)<0;
+  RC(X,Y,1,1,t<1?'#0c0e10':t>4.5?'#101214':t<2.5?(lit?'#7c838b':'#3a3f45'):(lit?'#5a6068':'#2a2e33'),x)}return cv})();
+function inPoly(px,py,V){let o=false;for(let i=0,j=V.length-1;i<V.length;j=i++){const[xi,yi]=V[i],[xj,yj]=V[j];if((yi>py)!=(yj>py)&&px<(xj-xi)*(py-yi)/(yj-yi)+xi)o=!o}return o}
+function tvPaint(x,S,col,lit){const[b,h,d]=col;for(const k of S){const X=k&255,Y=k>>8,e=!S.has(k+1)||!S.has(k-1)||!S.has(k+256)||!S.has(k-256);RC(X,Y,1,1,e?d:lit&&!S.has(k-514)?h:b,x)}}
+function tvShape(x,sh,col,cx,cy,rr){const S=new Set(),add=(X,Y)=>{X=Math.round(X);Y=Math.round(Y);if(X>=0&&Y>=0&&X<88&&Y<88)S.add(Y*256+X)};
+ if(sh=='Chunks'||sh=='Flakes'){const n=sh=='Chunks'?6:9,R0=sh=='Chunks'?3.6+rr()*2.4:5.5+rr()*2,a0=rr()*6.28,V=[];
+  for(let i=0;i<n;i++){const a=a0+i*6.283/n+(rr()-.5)*.5,r=R0*(sh=='Chunks'?.7+rr()*.4:.35+rr()*.75);V.push([cx+Math.cos(a)*r,cy+Math.sin(a)*r])}
+  for(let Y=cy-10;Y<=cy+10;Y++)for(let X=cx-10;X<=cx+10;X++)if(inPoly(X+.5,Y+.5,V))add(X,Y);
+  if(sh=='Flakes'){tvPaint(x,S,col,false);const[a,b]=V[0];for(let t=.1;t<.9;t+=.1){const X=Math.round(a+(cx-a)*t),Y=Math.round(b+(cy-b)*t);if(S.has(Y*256+X))RC(X,Y,1,1,col[1],x)}return}}
+ else if(sh=='Cubes'){const s=4+(rr()*3|0);for(let Y=0;Y<s;Y++)for(let X=0;X<s;X++)add(cx-(s>>1)+X,cy-(s>>1)+Y)}
+ else if(sh=='Beads'){const r=3+rr()*1.1;for(let Y=-4;Y<=4;Y++)for(let X=-4;X<=4;X++)if(X*X+Y*Y<=r*r+.6)add(cx+X,cy+Y)}
+ else{const a=rr()*3.14,L=11+rr()*6,ca=Math.cos(a),sa=Math.sin(a);
+  for(let t=-L/2;t<=L/2;t+=.5){RC(Math.round(cx+ca*t),Math.round(cy+sa*t),1,1,col[0],x);if(Math.abs(t)<L/3)RC(Math.round(cx+ca*t-sa),Math.round(cy+sa*t+ca),1,1,col[2],x);
+   if(Math.round(t*2)%7==0&&Math.abs(t)>1)RC(Math.round(cx+ca*(t+1)+sa*1.5),Math.round(cy+sa*(t+1)-ca*1.5),1,1,col[0],x)}return}
+ tvPaint(x,S,col,true)}
+function traceView(c){if(c.tv)return c.tv;const N=88,cv=document.createElement('canvas');cv.width=cv.height=N;const x=cv.getContext('2d'),rr=rng(c.acct+c.db),t=TRACE[c.db];
+ for(let Y=0;Y<N;Y++)for(let X=0;X<N;X++){const d=Math.hypot(X-44,Y-44)/44;RC(X,Y,1,1,BY[(X&3)+(Y&3)*4]/16<(d-.5)*1.8?'#b9b49c':'#d6d2bc',x)}
+ for(let f=0;f<3;f++){let X=rr()*88,Y=rr()*88,a=rr()*6.28;for(let i=0;i<110;i++){a+=Math.sin(i*.15+f*2)*.1;X+=Math.cos(a)*.7;Y+=Math.sin(a)*.7;RC(X|0,Y|0,1,1,'#aab0b3',x)}}
+ const P=[];for(let k=0;k<300&&P.length<11;k++){const a=rr()*6.28,d=rr()*31,X=44+Math.cos(a)*d|0,Y=44+Math.sin(a)*d|0;if(P.every(([u,v])=>Math.hypot(u-X,v-Y)>14))P.push([X,Y])}
+ for(const[X,Y]of P)tvShape(x,t.sh,PCOL[t.co],X,Y,rr);return c.tv=cv}
+function tvBlur(c,r){c.tvb=c.tvb||[];if(c.tvb[r])return c.tvb[r];const src=traceView(c),N=88,cv=document.createElement('canvas');cv.width=cv.height=N;const x=cv.getContext('2d');
+ const d=src.getContext('2d').getImageData(0,0,N,N).data,a=new Float32Array(N*N*3),b=new Float32Array(N*N*3);for(let i=0;i<N*N;i++)for(let k=0;k<3;k++)a[i*3+k]=d[i*4+k];
+ const pass=(s,t,h)=>{for(let Y=0;Y<N;Y++)for(let X=0;X<N;X++){let r0=0,g0=0,b0=0,n=0;for(let k=-r;k<=r;k++){const xx=h?X+k:X,yy=h?Y:Y+k;if(xx<0||yy<0||xx>=N||yy>=N)continue;const j=(yy*N+xx)*3;r0+=s[j];g0+=s[j+1];b0+=s[j+2];n++}const i=(Y*N+X)*3;t[i]=r0/n;t[i+1]=g0/n;t[i+2]=b0/n}};
+ pass(a,b,1);pass(b,a,0);pass(a,b,1);pass(b,a,0);
+ const o=x.createImageData(N,N);for(let i=0;i<N*N;i++){for(let k=0;k<3;k++)o.data[i*4+k]=a[i*3+k];o.data[i*4+3]=255}x.putImageData(o,0,0);return c.tvb[r]=cv}
+const traceOf=L3=>L3&&L3.sh&&L3.co?TRACE.findIndex(t=>t.sh==L3.sh&&t.co==L3.co):-2;
+function grimeZone(c){const[gx,gy]=c.grime;return[LCX+gx-12,LCY+gy-10,24,20]}
+function drawGrime(c){const[gx,gy]=c.grime,X0=LCX+gx,Y0=LCY+gy,rr=rng(c.acct),col=PCOL[TRACE[c.db].co],taken=c.lab3.done||c.lab3.ph=='fly';
+ for(let y=-6;y<=6;y++)for(let x=-11;x<=11;x++){const d=(x/11)**2+(y/6)**2;if(d<1&&BY[((x+16)&3)+((y+16)&3)*4]/16<(1-d)*1.1)RC(X0+x,Y0+y,1,1,'rgba(70,60,48,.42)')}
+ for(let i=0;i<14;i++){const x=rr()*16-8|0,y=rr()*9-4|0;if(!taken||i%3==0)RC(X0+x,Y0+y,i%2+1,1,col[i%3==1?2:0])}}
+function traceDrop(c,click){const L3=c.lab3,[x,y,w,h]=grimeZone(c);
+ if(hit(x-6,y-6,w+12,h+12)){L3.ph='fly';L3.t0=performance.now();L3.from=[Math.round(mx),Math.round(my)]}
+ else if(!click||!hit(SLOT5.x,SLOT5.y,SLOT5.w,SLOT5.h))L3.ph='idle'}
+let ldd=null;
+function openLDD(k,items,x,y){const w=Math.max(...items.map(v=>v.length))*6+16,h=items.length*11+4;ldd={k,items,x,y:Math.min(y,226-h),w,h,t0:performance.now()}}
+function lddItem(){if(!ldd)return-1;for(let j=0;j<ldd.items.length;j++)if(hit(ldd.x+1,ldd.y+2+j*11,ldd.w-2,11))return j;return-1}
+function drawTrace(c){const L3=c.lab3,now=performance.now(),{cx,cy,r}=EYE,P=c.lab2,L=c.lab;
+ if(L3.ph=='drag'){const[x,y,w,h]=grimeZone(c),on=hit(x-6,y-6,w+12,h+12);if(on){g.save();g.globalAlpha=.18;RC(x,y,w,h,K.oliveL);g.restore()}
+  for(let k=0;k<w;k++)if(on||k%3<2){RC(x+k,y,1,1,K.oliveL);RC(x+k,y+h-1,1,1,K.oliveL)}for(let k=0;k<h;k++)if(on||k%3<2){RC(x,y+k,1,1,K.oliveL);RC(x+w-1,y+k,1,1,K.oliveL)}}
+ /* microscope: a stand behind the eyepiece, the lit view, the bezel, and the focus thumbwheel */
+ RC(cx-10,cy+r+4,20,10,'#2a2e33');RC(cx-26,cy+r+12,52,4,'#34383e');RC(cx-26,cy+r+12,52,1,'#4a5058');
+ if(L3.done){const d=Math.abs(L3.focus-L3.tgt),lv=d<.03?0:Math.min(5,1+Math.floor((d-.03)*14));ec.globalCompositeOperation='source-over';ec.clearRect(0,0,r*2,r*2);ec.drawImage(lv?tvBlur(c,lv):traceView(c),0,0);
+  ec.globalCompositeOperation='destination-in';ec.drawImage(tvMask,0,0);ec.globalCompositeOperation='source-over';g.drawImage(EYEC,cx-r,cy-r)}
+ else{ec.globalCompositeOperation='source-over';ec.clearRect(0,0,r*2,r*2);ec.fillStyle='#14171a';ec.fillRect(0,0,r*2,r*2);for(let a=3.6;a<4.6;a+=.02)for(let k=0;k<2;k++)ec.fillRect(Math.round(r+Math.cos(a)*(r-9-k)),Math.round(r+Math.sin(a)*(r-9-k)),1,1);
+  ec.fillStyle='#2a3036';for(let a=3.6;a<4.6;a+=.02)ec.fillRect(Math.round(r+Math.cos(a)*(r-9)),Math.round(r+Math.sin(a)*(r-9)),1,1);ec.globalCompositeOperation='destination-in';ec.drawImage(tvMask,0,0);ec.globalCompositeOperation='source-over';g.drawImage(EYEC,cx-r,cy-r)}
+ g.drawImage(BEZEL,cx-r-5,cy-r-5);
+ {const{x,y,w,h}=WHEEL,hv=L3.done&&(L3.knob||hit(x-4,y-4,w+8,h+8));RC(x-3,y-3,w+6,h+6,'#101214');RC(x-2,y-2,w+4,h+4,hv?'#4a4f38':'#2a2e33');
+  const off=L3.focus*260;for(let Y=0;Y<h;Y++){const t=Math.cos((Y/(h-1)-.5)*2.6),ridge=((Y+off)%5+5)%5<2,v=Math.round(40+t*(ridge?70:35));RC(x,y+Y,w,1,'rgb('+v+','+(v+4)+','+(v+10)+')')}
+  RC(x+w,y,1,h,'#0c0e10');for(const s of[-1,1]){const ay=s<0?y-9:y+h+6;for(let i=0;i<3;i++)RC(x+w/2-i,ay+(s<0?i:2-i),i*2+1,1,hv?K.oliveL:'#4a4f55')}}
+ /* the sample card: shape and colour, and what that makes it */
+ {const{x,y,w,h}=CARD;RC(x+2,y+2,w,h,'#101214');RC(x,y,w,h,K.rule);RC(x+1,y+1,w-2,h-2,'#dddcd3');const on=L3.done;
+  [['sh','Shape',y+5],['co','Colour',y+19]].forEach(([k,l,ry])=>{T(l,x+6,ry,on?K.label:'#a4a59c');const hv=on&&!ldd&&hit(x+2,ry-2,w-4,13);
+   RC(x+48,ry-2,w-54,11,hv?'#c9cbb0':'#ecebe4');RC(x+48,ry+9,w-54,1,'#a9aaa0');if(L3[k])T(L3[k],x+52,ry,K.ink);
+   if(on)for(let i=0;i<3;i++)RC(x+w-14+i,ry+2+i,5-i*2,1,'#6d6f68')});
+  RC(x+6,y+34,w-12,1,'#b6b7ad');const t=traceOf(L3);
+  if(t>=0){const q=Math.min(1,(now-(L3.anim||0))/300);g.save();g.globalAlpha=q;const cv=SITEC[t];g.drawImage(cv,0,0,cv.width,cv.height,x+8,y+40,cv.width*2,cv.height*2);T(TRACE[t].n,x+48,y+46,K.ink,1);g.restore()}
+  else if(t==-1)T('No match',x+48,y+46,K.stamp);else T('?',x+48,y+46,'#a4a59c')}
+ /* the grain flying from the cheque into the eyepiece */
+ if(L3.ph=='fly'){const q=Math.min(1,(now-L3.t0)/500),e=q*q*(3-2*q),[fx,fy]=L3.from,X=Math.round(fx+(cx-fx)*e),Y=Math.round(fy+(cy-fy)*e-Math.sin(q*3.14)*20);
+  RC(X-6,Y-2,12,5,'#101214');RC(X-6,Y-3,12,5,'#b9c6c9');RC(X-5,Y-2,10,3,'#dfe8ea');RC(X-1,Y-1,2,1,PCOL[TRACE[c.db].co][0]);if(q>=1){L3.ph='done';L3.done=true}}
+ /* bottom bar: tweezers and the slot the result lands in */
+ {const S=SLOT5,idle=!L3.done&&L3.ph=='idle',hv=idle&&hit(S.x,S.y,S.w,S.h);bevel(S.x,S.y,S.w,S.h,L3.ph=='drag',hv,L3.done?'#262a31':K.navy);
+  g.save();if(!idle)g.globalAlpha=.3;g.drawImage(TWEEZI,S.x+10,S.y+7);g.restore();if(idle&&P.done&&P.ph=='idle'&&(now/500|0)%2)RC(S.x,S.y-2,S.w,1,K.oliveL);
+  const S6=SLOT6,t=traceOf(L3);RC(S6.x,S6.y,S6.w,S6.h,'#101214');RC(S6.x+1,S6.y+1,S6.w-2,S6.h-2,'#1c1f24');
+  if(t>=0){const cv=SITEC[t];g.drawImage(cv,0,0,cv.width,cv.height,S6.x+3,S6.y+Math.round((30-cv.height*2)/2),cv.width*2,cv.height*2)}
+  else for(let i=0;i<24;i+=3){RC(S6.x+6+i,S6.y+7,2,1,'#3a3f45');RC(S6.x+6+i,S6.y+22,2,1,'#3a3f45')}}
+ if(ldd){const p=Math.min(1,(now-ldd.t0)/200),e=1-(1-p)**3,hh=Math.max(3,Math.round(ldd.h*e)),{x,y,w}=ldd;
+  RC(x+2,y+2,w,hh,'#1b1d20');RC(x,y,w,hh,K.rule);RC(x+1,y+1,w-2,hh-2,'#e3e2da');g.save();g.beginPath();g.rect(x+1,y+1,w-2,hh-2);g.clip();
+  const hv=p>=1?lddItem():-1;ldd.items.forEach((v,j)=>{const iy=y+2+j*11;if(j==hv)RC(x+1,iy,w-2,11,'#c9cbb0');if(v==L3[ldd.k])RC(x+4,iy+4,2,2,K.ink);T(v,x+9,iy+2,K.ink)});g.restore()}
+ if(L3.ph=='drag')g.drawImage(TWEEZI,Math.round(mx)-1,Math.round(my)-14)}
+/* each paper mill's fibre fingerprint, drawn inside a disc: the fleck colour is the tell */
+const MILLFX=[['#9a3a30','fleck','#e6d3cd'],['#3d5f96','dot','#d2dbe6'],['#55595f','thread','#dcdcd6'],['#202225','speck','#ebe5c9'],['#5e7030','fleck','#d6dfc8'],['#8f8a78','grid','#efeee7']];
+const MILLPAT=['diag','anti','wave','zig','dots','cross'],md=(v,m)=>((v%m)+m)%m;
+function millSwatch(x,X0,Y0,w,h,i){const k=MILLPAT[i];RC(X0-1,Y0-1,w+2,h+2,'#6d6e68',x);
+ for(let dy=0;dy<h;dy++)for(let dx=0;dx<w;dx++){const on=k=='diag'?md(dx+dy,4)==0:k=='anti'?md(dx-dy,4)==0:k=='wave'?md(dy-Math.round(Math.sin(dx*.6)*1.3),4)==0:k=='zig'?md(dy-Math.abs(md(dx,4)-2),4)==0:k=='dots'?md(dy,3)==1&&md(dx,2)==0:md(dx+dy,4)==0||md(dx-dy,4)==0;
+  RC(X0+dx,Y0+dy,1,1,on?'#4a4f57':'#e8e6dc',x)}}
+function millDisc(x,cx,cy,r,i){const k=MILLPAT[i];
+ for(let Y=cy-r;Y<=cy+r;Y++)for(let X=cx-r;X<=cx+r;X++){const dx=X-cx,dy=Y-cy;if(dx*dx+dy*dy>r*r)continue;
+  const on=k=='diag'?md(dx+dy,4)==0:k=='anti'?md(dx-dy,4)==0:k=='wave'?md(dy-Math.round(Math.sin(dx*.6)*1.3),4)==0:k=='zig'?md(dy-Math.abs(md(dx,4)-2),4)==0:k=='dots'?md(dy,3)==0&&md(dx,2)==0:md(dx+dy,4)==0||md(dx-dy,4)==0;
+  RC(X,Y,1,1,on?'#4a4f57':'#e8e6dc',x)}
+ for(let a=0;a<6.3;a+=.08)RC(Math.round(cx+Math.cos(a)*(r+1)),Math.round(cy+Math.sin(a)*(r+1)),1,1,'#6d6e68',x)}
+function searchRing(C,t){if(!C)return;const{cx,cy,r}=C;g.save();g.beginPath();g.rect(8,24,284,182);g.clip();
+ for(let Y=Math.floor(cy-r);Y<=cy+r;Y++)for(let X=Math.floor(cx-r);X<=cx+r;X++){const d=(X-cx)**2+(Y-cy)**2;if(d<=r*r&&BY[(X&3)+(Y&3)*4]<3)RC(X,Y,1,1,'rgba(196,142,118,.55)')}
+ const ph=t/90;for(let a=0;a<6.3;a+=.5/r){const on=((a*r+ph)|0)%6<4;RC(Math.round(cx+Math.cos(a)*r),Math.round(cy+Math.sin(a)*r),1,1,on?'#e0b8a4':'#6e3c34');RC(Math.round(cx+Math.cos(a)*(r+2)),Math.round(cy+Math.sin(a)*(r+2)),1,1,'rgba(16,18,20,.6)')}
+ for(let i=-3;i<=3;i++){if(i){RC(Math.round(cx)+i,Math.round(cy),1,1,'#e0b8a4');RC(Math.round(cx),Math.round(cy)+i,1,1,'#e0b8a4')}}g.restore()}
+const ptOf=k=>k<6?[SH[k][1],SH[k][2]]:[SITES[k-6][0]+(SITEC[k-6].width>>1),SITES[k-6][1]+(SITEC[k-6].height>>1)];
+function mec(p){if(!p.length)return null;if(p.length==1)return{cx:p[0][0],cy:p[0][1],r:18};let best=null;const ok=C=>p.every(([x,y])=>Math.hypot(x-C.cx,y-C.cy)<=C.r+.01),tr=C=>{if(ok(C)&&(!best||C.r<best.r))best=C};
+ for(let i=0;i<p.length;i++)for(let j=i+1;j<p.length;j++){tr({cx:(p[i][0]+p[j][0])/2,cy:(p[i][1]+p[j][1])/2,r:Math.hypot(p[i][0]-p[j][0],p[i][1]-p[j][1])/2});
+  for(let k=j+1;k<p.length;k++){const[ax,ay]=p[i],[bx,by]=p[j],[qx,qy]=p[k],d=2*(ax*(by-qy)+bx*(qy-ay)+qx*(ay-by));if(Math.abs(d)<1e-6)continue;const A=ax*ax+ay*ay,B=bx*bx+by*by,Q=qx*qx+qy*qy,ux=(A*(by-qy)+B*(qy-ay)+Q*(ay-by))/d,uy=(A*(qx-bx)+B*(ax-qx)+Q*(bx-ax))/d;tr({cx:ux,cy:uy,r:Math.hypot(ax-ux,ay-uy)})}}
+ return{cx:best.cx,cy:best.cy,r:Math.max(14,best.r+4)}}
+function selCirc(){return mec(sel.map(ptOf))}
+function selCircOld(){const p=sel.map(i=>SH[i]);if(!p.length)return null;const cx=p.reduce((a,b)=>a+b[1],0)/p.length,cy=p.reduce((a,b)=>a+b[2],0)/p.length;let r=18;if(p.length>1)r=Math.max(14,Math.hypot(p[0][1]-p[1][1],p[0][2]-p[1][2])/2);return{cx,cy,r}}
+function trail(c){return c.fr?[c.is,c.ps,6+c.db]:[]}
 function marked(c){return c.rows.filter(r=>c.marks[r.k])}
 function fileCase(){dd=null;const c=day[ix];if(c.ph!='ready'){toast('Open the envelope first.',2500);return}if(marked(c).length){st='map';sel=[]}else judge(false)}
-function evalList(c){let p=0;const ok=[],wf=[],miss=[],ff=[];
- for(const r of c.rows){const v=c.marks[r.k]||null,n=r.l.toLowerCase();
-  if(r.bad&&v==r.right){p+=4;ok.push(n)}else if(r.bad&&v){p+=1;wf.push(n+' ('+r.right.toLowerCase()+')')}else if(r.bad){p-=2;miss.push(n)}else if(v){p-=2;ff.push(n)}}
- const L=[];if(ok.length)L.push('Caught: '+ok.join(', ')+'.');if(wf.length)L.push('Right flaw, wrong fix: '+wf.join(', ')+'.');if(miss.length)L.push('Missed: '+miss.join(', ')+'.');if(ff.length)L.push('False flags: '+ff.join(', ')+'.');return{p,L}}
-function judge(v){const c=day[ix],tr=trail(c);let L=[],p=0,r=null;
- if(v){if(!c.fr){p=-10;L.push('WRONG. The cheque was genuine.','Bank error: '+c.why)}
-  else{p=5;const ok=tr.length==sel.length&&tr.every(i=>sel.includes(i)),pt=tr.some(i=>sel.includes(i));
-   L.push('Fraud confirmed.');
-   if(ok){p+=10;L.push(tr.length?'Supply trail logged correctly.':'No supply trail: forger used real paper and ink.')}else if(pt){p+=4;L.push('Trail only partly right. True trail: '+tr.map(i=>SH[i][0]).join(' + ')+'.')}else L.push('Trail wrong. True trail: '+(tr.map(i=>SH[i][0]).join(' + ')||'none')+'.');
-   if(tr.length){const q=tr.map(i=>SH[i]),cx=q.reduce((a,b)=>a+b[1],0)/q.length,cy=q.reduce((a,b)=>a+b[2],0)/q.length,rr=q.length>1?Math.max(14,Math.hypot(q[0][1]-q[1][1],q[0][2]-q[1][2])/2):18,a=Math.random()*6.28,d=Math.random()*rr*.6;
-    r={hx:cx+Math.cos(a)*d,hy:cy+Math.sin(a)*d,c:selCirc()};if(r.c&&Math.hypot(r.hx-r.c.cx,r.hy-r.c.cy)>r.c.r)L.push('Suspect lives OUTSIDE your radius.');else if(r.c)L.push('Suspect lives inside your radius: ~'+Math.round(r.c.r/5)+' mi.')}}}
- else{if(c.fr){p=-10;L.push('WRONG. Fraud slipped through.')}else{p=10;L.push('Correct. Bank error: '+c.why)}}
- const ev=evalList(c);p+=ev.p;L.push(...ev.L);
- sc+=p;res={L,p,r};st='res'}
-function next(){dd=null;if(BOOK.open)setBook(false);ix++;tool=-1;sel=[];st=ix>=5?'end':'desk';if(st=='desk')startCase(day[ix])}
+function mark(X,Y,ok){if(ok)[[0,3],[1,4],[2,5],[3,4],[4,3],[5,2],[6,1]].forEach(([a,b])=>{RC(X+a,Y+b,1,2,'#8fb56a')});else for(let i=0;i<6;i++){RC(X+i,Y+i,2,1,'#c45a4c');RC(X+5-i,Y+i,2,1,'#c45a4c')}}
+function ribbon(X,Y){RC(X+3,Y+11,3,7,'#8a6a2a');RC(X+7,Y+11,3,7,'#8a6a2a');RC(X+3,Y+17,1,1,'#101214');RC(X+9,Y+17,1,1,'#101214');
+ for(let yy=-6;yy<=6;yy++)for(let xx=-6;xx<=6;xx++){const d=xx*xx+yy*yy;if(d<=36)RC(X+6+xx,Y+6+yy,1,1,d>25?'#8a6a2a':d>12?'#d8b95e':'#f0d98a')}RC(X+5,Y+4,3,1,'#fff3c4')}
+const capW=w=>w[0].toUpperCase()+w.slice(1).toLowerCase();
+function evalList(c){const items=[];let hit=0,bad=0,ff=0;
+ for(const r of c.rows){const v=c.marks[r.k]||null,n=capW(r.l);if(r.bad)bad++;
+  if(r.bad&&v==r.right){hit++;items.push({ok:true,t:n})}else if(r.bad&&v){hit+=.5;items.push({ok:false,t:n+' (should be '+r.right+')'})}else if(r.bad)items.push({ok:false,t:n+' missed'});else if(v){ff++;items.push({ok:false,t:n+' was fine'})}}
+ return{items,hit,bad,ff}}
+function judge(v){const c=day[ix],tr=trail(c),ev=evalList(c);const items=[];let r=null,pct=0;
+ if(!c.fr){items.push({ok:false,t:'Genuine cheque. It was a bank error.'});pct=0}
+ else{items.push({ok:true,t:'Fraud confirmed'});
+  const shops=[c.is,c.ps],all=shops.every(i=>sel.includes(i))&&!sel.some(i=>i<6&&!shops.includes(i)),part=shops.filter(i=>sel.includes(i)).length;
+  items.push({ok:all,t:(all?'Shops: ':'Shops were ')+shops.map(i=>SH[i][0]).join(', ')});
+  const site=6+c.db,tok=sel.includes(site)&&!sel.some(i=>i>=6&&i!=site);items.push({ok:tok,t:(tok?'Trace: ':'Trace was ')+SITEN[c.db]});
+  const Q0=mec(tr.map(ptOf)),a=Math.random()*6.28,d=Math.random()*Q0.r*.5,hx=Q0.cx+Math.cos(a)*d,hy=Q0.cy+Math.sin(a)*d,C=selCirc();
+  r={c:C};const inside=C&&Math.hypot(hx-C.cx,hy-C.cy)<=C.r&&C.r<=Q0.r*1.6;items.push({ok:!!inside,t:C?(inside?'Radius '+Math.max(1,Math.round(C.r/5))+' mi':C.r>Q0.r*1.6?'Radius too wide':'Suspect outside radius'):'No radius drawn'});
+  items.push(...ev.items);
+  const flaw=ev.bad?Math.max(0,(ev.hit-ev.ff*.5)/ev.bad):1;pct=Math.round(20+25*(part/2)*(all?1:.8)+15*(tok?1:0)+10*(inside?1:0)+30*flaw);if(all&&tok&&inside&&flaw>=1)pct=100;pct=Math.min(100,pct)}
+ res={items,r,pct,t0:performance.now()};st='res'}
+function next(){dd=null;if(BOOK.open)setBook(false);ix++;tool=-1;sel=[];st=ix>=5?'end':'desk';if(st=='desk')startCase(day[ix]);else{doneDate=new Date(today);endDay()}}
+let doneDate=null;
 /* loupe: copies the pixels under the cursor and redraws them 3x inside a round lens */
 const LZ=3,LR=36,LN=Math.ceil(2*LR/LZ),LC=document.createElement('canvas');LC.width=LC.height=LR*2;const lg=LC.getContext('2d');
 function lens(){const cx=Math.round(mx),cy=Math.round(my),src=g.getImageData(cx-(LN>>1),cy-(LN>>1),LN,LN).data,out=lg.createImageData(LR*2,LR*2),o=out.data;
@@ -440,71 +744,94 @@ const QR=40,BY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5],LDM=document.createElemen
 function disc(X,Y,r,col){g.fillStyle=col;for(let y=-r;y<=r;y++){const w=Math.floor(Math.sqrt(r*r-y*y+r*.8));if(Y+y>21&&Y+y<228)g.fillRect(X-w,Y+y,w*2+1,1)}}
 function torch(X,Y){const bx=X+26,by=Y+26;for(let i=0;i<20;i++){const x=bx+i,y=by+i;RC(x,y,6,1,'#15171a');RC(x,y+5,6,1,'#15171a');RC(x,y,1,6,'#15171a');RC(x+1,y+1,4,4,i<2?'#f3dc8c':i<5?'#8f9aae':'#4a525e');if(i>=5)RC(x+1,y+1,1,1,'#5d6780')}}
 let lastCur='';
-function drawToast(){if(performance.now()>toastEnd)return;const L=wrap(toastT,272),h=L.length*10+6,y=224-h;RC(8,y,284,h,'#121416');RC(9,y+1,282,h-2,K.panel);RC(9,y+1,2,h-2,K.olive);L.forEach((l,i)=>T(l,16,y+4+i*10,K.txt))}
+function drawToast(){}
 function frame(){const cur=(st=='desk'&&tool>=0&&my>21&&my<228)?'none':'crosshair';if(cur!=lastCur){C.style.cursor=cur;lastCur=cur}btns=[];desk();const c=day[ix];
- if(st=='title'){T('BOUNCED',156,56,K.paper,4);RC(156,94,166,1,K.olive);T('New York suburbs, 1962.',171,102,K.dim);
-  WR('Five cheques bounced after being credited. Inspect each one. Was it a fraud job or a bank mistake? If fraud, log the shops that sold the paper and ink.',110,125,260,K.txt);
-  BT(190,190,100,22,'OPEN DESK',newDay)}
+ if(st=='title'){T('BOUNCED',156,62,K.paper,4);RC(156,100,166,1,K.olive);
+  BT(180,138,120,24,'START GAME',startNew);const sv=readSave();if(sv)BT(180,170,120,24,'CONTINUE',()=>{st='load'});else{RC(180,170,120,24,'#1b1e22');RC(180,170,120,1,'#2a2e33');T('CONTINUE',180+(120-47)/2,178,'#4a4f55')}}
+ if(st=='load'){const sv=readSave();T('CONTINUE',8,30,K.oliveL);
+  if(sv){const d=new Date(sv.date),x=110,y=70;RC(x,y,260,70,'#101214');RC(x+1,y+1,258,68,'#dddcd3');RC(x+1,y+1,258,12,'#2c3446');T('SAVED FILE',x+6,y+3,'#dddcd3');
+   T('DAY '+sv.day,x+8,y+22,K.ink,2);T(longDate(d),x+8,y+44,K.label);RC(x+8,y+56,244,1,K.ruleL);
+   BT(x+160,y+20,90,22,'LOAD',loadSave)}
+  BT(180,190,120,22,'BACK',()=>{st='title'})}
  if(st=='desk'){const uv=tool==1&&my>21&&my<228,dark=(x,y,w,h)=>{uc.fillStyle='rgba(14,9,30,.82)';uc.fillRect(x,y,w,h)};RC(296,22,W-296,206,'#1f2226');RC(296,22,1,206,K.panelEdge);
   const now=performance.now(),EX=5,EY=52;
-  if(c.ph=='ready')drawDoc(c.rec);else for(let i=0;i<170;i+=4){RC(301+i,23,2,1,'#3a3f45');RC(301+i,110,2,1,'#3a3f45')}
-  if(c.ph!='ready'&&c.ph!='open')for(let i=0;i<88;i+=4){RC(301,23+i,1,2,'#3a3f45');RC(470,23+i,1,2,'#3a3f45')}
   drawPad(c);
+  const mini=press&&press.mv&&press.d==c.chq&&my>=180,hot=mini?overSlot():null;drawSlots(hot);
   if(c.ph=='arrive'){const p=Math.min(1,(now-c.t0)/650),e=1-(1-p)**3;drawDoc({img:c.env,x:EX,y:Math.round(-130+(EY+130)*e),w:284,h:124});if(p>=1)c.ph='wait'}
   else if(c.ph=='wait'){drawDoc({img:c.env,x:EX,y:EY,w:284,h:124});if(hit(EX,EY,284,124)){RC(EX,EY,284,1,K.oliveL);RC(EX,EY+123,284,1,K.oliveL);RC(EX,EY,1,124,K.oliveL);RC(EX+283,EY,1,124,K.oliveL)}}
   else if(c.ph=='open'){const p=Math.min(1,(now-c.t0)/1000),q1=Math.min(1,p/.45),q2=Math.max(0,(p-.45)/.55),q3=Math.min(1,Math.max(0,(p-.2)/.6)),e3=1-(1-q3)**3;
-   drawDoc({img:c.chq.img,x:10,y:Math.round(EY+10+(28-(EY+10))*(1-(1-q1)**2)),w:276,h:150});
-   drawDoc({img:c.env,x:EX,y:Math.round(EY+(290-EY)*q2*q2),w:284,h:124});
-   drawDoc({img:c.rec.img,x:Math.round(60+(301-60)*e3),y:Math.round(EY+34+(23-(EY+34))*e3),w:170,h:88});
-   if(p>=1){c.ph='ready';c.z.unshift(c.chq)}}
+   const qe=Math.min(1,p/.18),qc=Math.min(1,Math.max(0,(p-.05)/.5)),qr=Math.min(1,Math.max(0,(p-.1)/.6)),er=qr*qr;
+   drawDoc({img:c.rec.img,x:Math.round(EX+56+(301-EX-56)*er),y:Math.round(EY+30+(240-EY-30)*er),w:170,h:96});
+   drawDoc({img:c.chq.img,x:10,y:Math.round(EY+30+(28-EY-30)*(1-(1-qc)**3)),w:276,h:150});
+   if(qe<1)drawDoc({img:c.env,x:EX,y:Math.round(EY+(300-EY)*qe*qe),w:284,h:124});
+   if(p>=1){c.ph='ready';c.z=[c.chq];c.recOut=false;c.dockT=now;c.pad={open:true,t:now}}}
   if(uv){uc.globalCompositeOperation='source-over';uc.clearRect(0,0,W,H);uc.drawImage(C,0,0);dark(0,21,W,207)}
-  for(const d of c.z){const l=press&&press.d==d&&press.mv;drawDoc(d,l);if(uv){const o=l?3:2;uc.fillStyle='#1b1d20';uc.fillRect(d.x+o,d.y+o,d.w,d.h);uc.drawImage(d.img,d.x,d.y);dark(d.x,d.y,d.w+o,d.h+o);if(d==c.chq)uc.drawImage(c.uv,d.x,d.y)}}
+  for(const d of c.z){if(mini&&d==c.chq)continue;const l=press&&press.d==d&&press.mv;drawDoc(d,l);if(uv){const o=l?3:2;uc.fillStyle='#1b1d20';uc.fillRect(d.x+o,d.y+o,d.w,d.h);uc.drawImage(d.img,d.x,d.y);dark(d.x,d.y,d.w+o,d.h+o);if(d==c.chq)uc.drawImage(c.uv,d.x,d.y)}}
   if(tool==0&&my>21&&my<228){const X=Math.round(mx),Y=Math.round(my);disc(X,Y,QR,'rgba(255,244,214,.09)');disc(X,Y,28,'rgba(255,244,214,.1)');disc(X,Y,16,'rgba(255,244,214,.12)');
    uc.globalCompositeOperation='source-over';uc.clearRect(0,0,W,H);for(const d of c.z){if(d==c.chq)uc.drawImage(c.mg,d.x,d.y);else uc.clearRect(d.x,d.y,d.w,d.h)}
    uc.globalCompositeOperation='destination-in';uc.drawImage(LDM,X-QR,Y-QR);uc.globalCompositeOperation='source-over';uc.clearRect(0,228,W,H-228);uc.clearRect(0,0,W,21);g.drawImage(UVC,0,0);torch(X,Y)}
   if(uv){const X=Math.round(mx),Y=Math.round(my);uc.globalCompositeOperation='destination-in';uc.drawImage(UVM,X-UR,Y-UR);uc.globalCompositeOperation='source-over';uc.clearRect(0,228,W,H-228);uc.clearRect(0,0,W,21);g.drawImage(UVC,0,0);uvPen(X,Y)}
+  if(c.ph=='drop')drawDrop(c);
+  if(mini)drawMini(c,Math.round(mx)-32,Math.round(my)-15);
   const td=topDoc(c);
   drawDD();drawToast();RC(0,228,W,42,K.bar);RC(0,228,W,1,K.panelEdge);
   TOOLS.forEach((t,i)=>BI(8+i*40,234,36,30,i,()=>{tool=tool==i?-1:i},tool==i));
+  recSlot(c);
   {const gx=132,gy=234,hv=hit(gx,gy,66,30);bevel(gx,gy,66,30,BOOK.open,hv,K.navy);g.drawImage(GUIDEI,gx+5,gy+7);T('GUIDE',gx+25,gy+11,BOOK.open?'#1e2022':'#dcdcd3');T('B',gx+3,gy+3,BOOK.open?'#1e2022':'#9aa3b5');btns.push([gx,gy,66,30,()=>setBook(!BOOK.open)])}
-  BT(298,234,176,30,'ENTER: FILE CASE',fileCase,0,'#4a4f38');
   if(tool==2&&my>21&&my<228&&c.ph!='ready')lens();else if(tool==2&&my>21&&my<228){const X=Math.round(mx),Y=Math.round(my),i=c.z.indexOf(c.chq);g.save();g.beginPath();g.rect(X-13,Y-13,26,26);g.clip();g.drawImage(c.chq.img,c.chq.x,c.chq.y);g.drawImage(c.micro,c.chq.x,c.chq.y);
    for(const d of c.z.slice(i+1))drawDoc(d,false);g.restore();lens()}}
- if(st=='map'||st=='res'){mapBG();
-  if(st=='map'){const s=selCirc();if(s){circ(s.cx,s.cy,s.r,'#b98676');circ(s.cx,s.cy,s.r+1,'#6e3c34')}RC(8,206,284,16,'#1d2024');T('Mark shops tied to ink/paper flaws, or none.',14,210,K.txt);
+ if(st=='lab')drawLab(c);
+ if(st=='map'||st=='res'){mapBG(st=='map'?selCirc():res.r&&res.r.c);
+  if(st=='map'){RC(8,206,284,16,'#1d2024');T('Mark the ink, the paper and the trace.',14,210,K.txt);
    BT(298,234,176,30,'ENTER: FILE REPORT',()=>judge(true))}
-  else{const r=res.r;if(r){if(r.c){circ(r.c.cx,r.c.cy,r.c.r,'#b98676');circ(r.c.cx,r.c.cy,r.c.r+1,'#6e3c34')}RC(r.hx-3,r.hy-3,7,7,'#15171a');RC(r.hx-2,r.hy-2,5,5,K.bad)}
-   panel(298,24,176,198);let y=30;T('REPORT',304,y,K.oliveL);y+=14;res.L.forEach(l=>y=WR(l,304,y+2,164,K.txt));
+  else{
+   panel(298,24,176,198);let y=30;T('REPORT',304,y,K.oliveL);y+=14;
+   for(const it of res.items){mark(306,y+1,it.ok);y=WR(it.t,318,y,152,it.ok?K.txt:'#c9a79c',10)+2}
+   const q=Math.min(1,(performance.now()-res.t0)/1400),pc=Math.round(res.pct*(1-(1-q)**3));RC(304,190,164,1,K.panelEdge);
+   T(pc+'%',306,197,pc>=100?'#d8b95e':K.paper,2);if(q>=1&&res.pct>=100)ribbon(306+((pc+'%').length)*12+6,194);
    BT(298,234,176,30,'SPACE: NEXT CHEQUE',next)}
-  if(st=='map'){panel(298,24,176,198);T('SHOP CATALOG',304,29,K.oliveL);let y=42;SH.forEach((s,i)=>{T(s[0],304,y,K.paper);T('  '+PB[i]+' / '+ib(i),304,y+9,K.dim);y+=19});
-   let yy=y+4;const n=c.used,f=c.f,R2=[];if((n[0]&&f.mag)||(n[1]&&f.hue))R2.push('Ink: '+ib(c.is));if((f.fib||f.edge||f.tint||f.bord||f.wm)&&(n[1]||n[2]))R2.push('Paper mill: '+PB[c.ps]);if(c.s.typ&&n[2])R2.push('Typewriter: Underwood 3');
-   T('LAB RESULTS',304,yy,K.oliveL);yy+=11;if(!R2.length)R2.push('Nothing traced yet.');for(const l of R2){T(l,304,yy,K.bad);yy+=10}}}
- if(st=='end'){T('END OF DAY',150,62,K.paper,3);T(longDate(today),240-longDate(today).length*3,100,K.oliveL);T('The day\'s cheques are filed.',240-29*3,116,K.txt);BT(180,170,120,22,'NEXT DAY',()=>{nextWorkday();newDay()})}
+  if(st=='map'){panel(298,24,176,198);T('SHOP CATALOG',304,29,K.oliveL);let y=42;SH.forEach((s,i)=>{T(s[0],304,y,K.paper);T('  '+PB[i],304,y+9,'#b3b5a6');PADS[ib(i)].forEach((pc,k)=>{RC(420+k*9,y+8,8,8,'#101214');RC(421+k*9,y+9,6,6,PADCOL[pc])});y+=19});
+   let yy=y+2;const n=c.used,f=c.f,R2=[];RC(304,yy,164,1,K.panelEdge);yy+=5;
+   T('LAB RESULTS',304,yy,K.oliveL);yy+=12;if(c.lab&&c.lab.tested){T('Ink',304,yy+1,K.dim);PADS[c.inkBrand].forEach((pc,k)=>{RC(352+k*9,yy,8,8,'#101214');RC(353+k*9,yy+1,6,6,PADCOL[pc])});T(c.inkBrand,376,yy+1,K.paper);yy+=12}
+   if(c.lab2&&c.lab2.done){T('Paper',304,yy+1,K.dim);millSwatch(g,353,yy,15,8,c.ps);T(PB[c.ps],376,yy+1,K.paper);yy+=12}
+   {const t=traceOf(c.lab3);if(c.lab3&&c.lab3.done&&t!=-2){T('Trace',304,yy+2,K.dim);if(t>=0){g.drawImage(SITEC[t],352,yy);T(TRACE[t].n,376,yy+2,K.paper)}else T('No match',352,yy+2,K.bad);yy+=14}}
+   if(!R2.length&&!(c.lab&&c.lab.tested)&&!(c.lab2&&c.lab2.done)&&traceOf(c.lab3)==-2)R2.push('Nothing traced yet.');for(const l of R2){T(l,304,yy,K.bad);yy+=10}}}
+ if(st=='end'){const dd0=doneDate||today;T('END OF DAY',150,62,K.paper,3);T(longDate(dd0),240-longDate(dd0).length*3,100,K.oliveL);T('The day\'s cheques are filed.',240-29*3,116,K.txt);BT(180,170,120,22,'NEXT DAY',newDay)}
  requestAnimationFrame(frame)}
 
 /* ---------- mouse: click buttons, drag documents, pull papers from the folder ---------- */
 let press=null,pb=null;
 function pos(e){const b=C.getBoundingClientRect();mx=(e.clientX-b.left)*W/b.width;my=(e.clientY-b.top)*H/b.height}
-const clampDoc=d=>{d.x=Math.max(20-d.w,Math.min(d.k=='cheque'?294-d.w:W-20,Math.round(mx-press.ox)));d.y=Math.max(22,Math.min(214,Math.round(my-press.oy)))};
-C.addEventListener('contextmenu',e=>{e.preventDefault();tool=-1});
+const clampDoc=d=>{d.x=Math.max(d.k=='cheque'?2:20-d.w,Math.min(d.k=='cheque'?294-d.w:W-20,Math.round(mx-press.ox)));d.y=Math.max(22,Math.min(214,Math.round(my-press.oy)))};
+C.addEventListener('contextmenu',e=>{e.preventDefault();tool=-1;pos(e);if(st=='desk'){const c=day[ix];if(topDoc(c)==c.rec)dockRec(c)}});
+C.addEventListener('dblclick',e=>{pos(e);if(st=='desk'){const c=day[ix];if(topDoc(c)==c.rec)dockRec(c)}});
 C.addEventListener('mousedown',e=>{if(e.button!==0)return;pos(e);pb=btns.find(b=>hit(b[0],b[1],b[2],b[3]));if(pb)return;
- if(st=='map'){for(let i=0;i<6;i++)if(Math.hypot(mx-SH[i][1],my-SH[i][2])<10){const k=sel.indexOf(i);k<0?sel.push(i):sel.splice(k,1)}return}
+ if(st=='lab'){labClick(day[ix]);return}
+ if((st=='map'||st=='res')&&BOOK.open&&hit(BOOK.x,BOOK.y,BOOK.w,BOOK.h)){press={d:BOOK,ox:mx-BOOK.x,oy:my-BOOK.y,sx:mx,sy:my,mv:false};return}
+ if(st=='map'){const tg=i=>{const k=sel.indexOf(i);k<0?sel.push(i):sel.splice(k,1)};for(let i=0;i<6;i++)if(Math.hypot(mx-SH[i][1],my-SH[i][2])<10){tg(i);return}for(let i=0;i<6;i++){const[x,y,w,h]=siteBox(i);if(hit(x,y,w,h)){tg(6+i);return}}return}
+ if(st=='desk'){const c=day[ix];if(c&&c.ph=='ready'&&!c.recOut&&hit(RS.x,RS.y,RS.w,RS.h)){pullRec(c);return}}
  if(st!='desk'||my>=228)return;if(dd){const j=ddItem();if(j>=0&&performance.now()-dd.t0>200)pickDD(j);else dd=null;return}const c=day[ix];if(BOOK.open&&hit(BOOK.x,BOOK.y,BOOK.w,BOOK.h)){c.z.splice(c.z.indexOf(BOOK),1);c.z.push(BOOK);press={d:BOOK,ox:mx-BOOK.x,oy:my-BOOK.y,sx:mx,sy:my,mv:false};return}if(c.ph=='wait'&&hit(5,52,284,124)){c.ph='open';c.t0=performance.now();return}
- if(hit(301,111,170,117)){const now=performance.now();if(now-c.pad.t<280)return;if(!c.pad.open)c.pad={open:true,t:now};else if(my-114<14)c.pad={open:false,t:now};else{const i=clRow(c,c.cl);if(i>=0)openDD(c,c.cl,i)}return}if(c.ph=='ready'&&hit(c.rec.x,c.rec.y,c.rec.w,c.rec.h))return;const d=topDoc(c);
- if(d){c.z.splice(c.z.indexOf(d),1);c.z.push(d);press={d,ox:mx-d.x,oy:my-d.y,sx:mx,sy:my,mv:false};return}
+ const d=topDoc(c);
+ if(d){c.z.splice(c.z.indexOf(d),1);c.z.push(d);press={d,ox:mx-d.x,oy:my-d.y,sx:mx,sy:my,mv:false,x0:d.x,y0:d.y};return}
+ if(hit(301,24,170,c.cl.h+3)){const now=performance.now();if(now-c.pad.t<280)return;if(!c.pad.open);else{const i=clRow(c,c.cl);if(i>=0)openDD(c,c.cl,i)}return}
 });
-addEventListener('mousemove',e=>{pos(e);if(!press)return;if(Math.abs(mx-press.sx)+Math.abs(my-press.sy)>2)press.mv=true;if(press.mv)clampDoc(press.d)});
+addEventListener('mousemove',e=>{pos(e);if(st=='lab'){const L3=day[ix]&&day[ix].lab3;if(L3&&L3.knob)L3.focus=Math.max(0,Math.min(1,L3.knob.f+(my-L3.knob.y)/250))}if(!press)return;if(Math.abs(mx-press.sx)+Math.abs(my-press.sy)>2)press.mv=true;if(press.mv)clampDoc(press.d)});
 addEventListener('mouseup',e=>{pos(e);if(pb){const b=pb;pb=null;if(hit(b[0],b[1],b[2],b[3]))b[4]();return}
+ if(st=='lab'){labUp(day[ix]);return}
  if(!press)return;const d=press.d,c=day[ix];
- if(!press.mv&&d==BOOK){const lx=mx-d.x,ly=my-d.y;if(lx>=262&&ly<24)setBook(false);else{BOOK.page=Math.max(0,Math.min(5,BOOK.page+(lx<145?-1:1)));renderBook()}}
+ if(!press.mv&&d==BOOK){const lx=mx-d.x,ly=my-d.y;if(lx>=262&&ly<24)setBook(false);else{BOOK.page=BOOK.lab?6:Math.max(0,Math.min(5,BOOK.page+(lx<145?-1:1)));renderBook()}}
  else if(!press.mv&&d.k=='cheque'&&tool>=0)use(tool,c);
+ else if(press.mv&&d==c.rec&&hit(RS.x,RS.y-6,RS.w,RS.h+6))dockRec(c);
+ else if(press.mv&&d==c.chq&&c.ph=='ready'&&my>=180){const k=overSlot();if(k)dropInto(c,k);else{d.x=press.x0;d.y=press.y0}}
  press=null});
 addEventListener('keydown',e=>{const k=e.key.toLowerCase();
- if(st=='desk'){if(k>='1'&&k<='3')tool=tool==+k-1?-1:+k-1;if(k=='escape'||k=='0'){tool=-1;dd=null}if(k=='b')setBook(!BOOK.open);if(k=='enter'){const c=day[ix];if(c.ph=='wait'){c.ph='open';c.t0=performance.now()}else fileCase()}}
- else if(st=='map'&&k=='enter')judge(true);
+ if(st=='desk'){if(k>='1'&&k<='3')tool=tool==+k-1?-1:+k-1;if(k=='escape'||k=='0'){tool=-1;dd=null}if(k=='b')setBook(!BOOK.open);if(k=='enter'){const c=day[ix];if(c.ph=='wait'){c.ph='open';c.t0=performance.now()}}}
+  else if(st=='map'&&k=='enter')judge(true);
+ else if(st=='lab'&&k=='escape')ldd=null;else if(st=='lab'&&k=='enter'){ldd=null;st='map';sel=[]}
  else if(st=='res'&&(k==' '||k=='enter'))next();
- else if(st=='title'&&(k==' '||k=='enter'))newDay();else if(st=='end'&&(k==' '||k=='enter')){nextWorkday();newDay()}});
+ else if(st=='title'&&(k==' '||k=='enter'))startNew();else if(st=='load'&&k=='escape')st='title';else if(st=='end'&&(k==' '||k=='enter'))newDay()});
 /* whole-number pixel scaling so every game pixel is the same size on screen */
 function fit(){const d=devicePixelRatio||1,k=Math.min(innerWidth/W,innerHeight/H),s=k*d>=1?Math.floor(k*d)/d:k;C.style.width=W*s+'px';C.style.height=H*s+'px'}
+C.addEventListener('wheel',e=>{if(st!='lab')return;const L3=day[ix].lab3;if(L3&&L3.done){L3.focus=Math.max(0,Math.min(1,L3.focus+Math.sign(e.deltaY)*.012));e.preventDefault()}},{passive:false});
 addEventListener('resize',fit);fit();renderBook();frame();
 </script></body></html>
