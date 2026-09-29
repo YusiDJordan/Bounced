@@ -1,0 +1,510 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Bounced: Bureau of Cheque Fraud, 1962</title>
+<style>
+:root{box-sizing:border-box;--bg:#15171a;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html,body{margin:0;height:100%;background:var(--bg)}
+body{display:flex;align-items:center;justify-content:center}
+canvas{image-rendering:pixelated;cursor:crosshair;display:block}
+</style></head><body><canvas id="c" width="480" height="270"></canvas>
+<script>
+const C=document.getElementById('c'),g=C.getContext('2d',{willReadFrequently:true});g.imageSmoothingEnabled=false;
+const W=480,H=270,R=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),P=a=>a[R(0,a.length-1)];
+/* cold muted palette */
+const K={desk:'#26292c',deskA:'#2a2d31',deskB:'#222528',bar:'#1a1c1f',panel:'#1d2024',panelEdge:'#30343a',
+ paper:'#d8d7ce',paperD:'#cfcec5',paperL:'#e1e0d8',rule:'#8e8f87',ruleL:'#bdbdb4',ink:'#2b3446',inkOff:'#3d4636',
+ label:'#5d6168',txt:'#c3c4bb',dim:'#7c8079',olive:'#6f7350',oliveL:'#a4a684',navy:'#34405a',navyL:'#48546c',bad:'#a9786c',good:'#96a07a',stamp:'#7e4c46'};
+/* 5x8 bitmap font, ASCII 32-126, 5 column bytes per glyph, LSB = top row */
+const FONT="0000000000 00005F0000 0007000700 147F147F14 242A7F2A12 2313086462 3649562050 0005030000 001C224100 0041221C00 14083E0814 08083E0808 0050300000 0808080808 0060600000 2010080402 3E5149453E 00427F4000 4261514946 2141454B31 1814127F10 2745454539 3C4A494930 0171090503 3649494936 064949291E 0036360000 0056360000 0814224100 1414141414 0041221408 0201510906 324979413E 7E1111117E 7F49494936 3E41414122 7F4141221C 7F49494941 7F09090901 3E4149497A 7F0808087F 00417F4100 2040413F01 7F08142241 7F40404040 7F020C027F 7F0408107F 3E4141413E 7F09090906 3E4151215E 7F09192946 4649494931 01017F0101 3F4040403F 1F2040201F 3F4038403F 6314081463 0708700807 6151494543 007F414100 0204081020 0041417F00 0402010204 4040404040 0001020400 2054545478 7F48444438 3844444420 384444487F 3854545418 087E090102 18A4A4A47C 7F08040478 00447D4000 4080847D00 7F10284400 00417F4000 7C04180478 7C08040478 3844444438 FC24242418 18242418FC 7C08040408 4854545420 043F444020 3C4040207C 1C2040201C 3C4030403C 4428102844 1CA0A0A07C 4464544C44 0008364100 00007F0000 0041360800 1008081008".split(' ');
+const GL={};
+function glyph(ch,col){const k=ch+col;if(GL[k])return GL[k];const c=document.createElement('canvas');c.width=5;c.height=8;const x=c.getContext('2d'),h=FONT[ch.charCodeAt(0)-32];x.fillStyle=col;
+ for(let i=0;i<5;i++){const b=parseInt(h.substr(i*2,2),16);for(let r=0;r<8;r++)if(b>>r&1)x.fillRect(i,r,1,1)}return GL[k]=c}
+function T(t,x,y,c=K.txt,s=1,ctx=g){x=Math.round(x);y=Math.round(y);t=''+t;
+ for(let i=0;i<t.length;i++,x+=6*s){const n=t.charCodeAt(i)-32;if(n>0&&n<95)ctx.drawImage(glyph(t[i],c),x,y,5*s,8*s)}}
+function wrap(t,w){const m=Math.floor(w/6),L=[];let l='';for(const d of t.split(' ')){if(l&&(l+d).length>m){L.push(l);l=''}l+=d+' '}L.push(l);return L}
+function WR(t,x,y,w,c,lh=10,ctx=g){for(const l of wrap(t,w)){T(l,x,y,c,1,ctx);y+=lh}return y}
+function RC(x,y,w,h,c,ctx=g){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function hash(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0}
+
+/* pixel-art handwritten signature: letter-shaped control points joined by a smooth pen stroke, plotted 1px at a time */
+function cr(a,b,c,d,t){const t2=t*t,t3=t2*t,f=i=>.5*(2*b[i]+(-a[i]+c[i])*t+(2*a[i]-5*b[i]+4*c[i]-d[i])*t2+(-a[i]+3*b[i]-3*c[i]+d[i])*t3);return[f(0),f(1)]}
+function sig(name,seed,forged,ink,W=100,ky=.8){
+ const r=rng(hash(name)),j=rng(seed),cv=document.createElement('canvas');cv.width=W;cv.height=30;const x=cv.getContext('2d');x.fillStyle=ink;
+ const S=[],dots=[];let cur=[],px=4;const B=19;
+ [...name].forEach(ch=>{
+  if(ch==' '){if(cur.length)S.push(cur);cur=[];px+=3;return}
+  if(ch=='.'){dots.push([px,B]);px+=3;return}
+  if(ch=="'")return;
+  const cap=/[A-Z]/.test(ch),tall=/[bdfhklt]/.test(ch),desc=/[gjpqyz]/.test(ch);
+  if(cap){const hh=13+r()*3;cur.push([px+4,B-1],[px+1,B-5],[px+2,B-hh+2],[px+5,B-hh],[px+8,B-hh+3],[px+6,B-6],[px+3,B-5],[px+7,B-1],[px+9,B-2]);px+=10}
+  else if(tall){const hh=11+r()*2;cur.push([px,B-3],[px+3,B-hh],[px+4,B-hh+1],[px+2,B-hh+3],[px+2,B-1],[px+4,B-1]);px+=5}
+  else if(desc){cur.push([px,B-4],[px+3,B-5],[px+3,B+4],[px+1,B+6],[px,B+4],[px+3,B+1],[px+5,B-1]);px+=5}
+  else if(r()<.5){cur.push([px,B-1],[px+1,B-5],[px+3,B-5],[px+4,B-1],[px+5,B-1]);px+=5}
+  else{cur.push([px,B-4],[px+1,B-1],[px+3,B-2],[px+4,B-5],[px+4,B-1],[px+5,B-1]);px+=5}
+ });
+ cur.push([px+3,B-2]);S.push(cur);
+ const fl=r();S.push(fl<.5?[[px+4,B+1],[px*.55,B+6],[6,B+4],[10,B+3]]:[[px+2,B-4],[px+8,B+2],[px*.5,B+5],[4,B+6]]);
+ const sl=forged?.1+j()*.15:.42,jt=forged?1.1:.25,k=Math.min(.95,(W-12)/(px+14))*(forged?1.07:1),dy=forged?1:0;
+ const tf=p=>[4+(p[0]-4)*k+(B-p[1])*sl*ky+(j()-.5)*jt*2,B+(p[1]-B)*ky+dy+(j()-.5)*jt*2];
+ for(const s of S){const q=s.map(tf);q.unshift(q[0]);q.push(q[q.length-1]);
+  for(let i=1;i<q.length-2;i++){const n=Math.ceil(Math.hypot(q[i+1][0]-q[i][0],q[i+1][1]-q[i][1])*2.5)+1;let ly=null;
+   for(let s2=0;s2<=n;s2++){if(forged&&j()<.015)continue;let[X,Y]=cr(q[i-1],q[i],q[i+1],q[i+2],s2/n);if(forged)Y+=Math.sin((X+Y)*2.1)*.45;
+    X=Math.round(X);Y=Math.round(Y);x.fillRect(X,Y,1,1);if(ly!==null&&Y>ly&&!forged)x.fillRect(X+1,Y,1,1);ly=Y}}}
+ for(const d of dots){const[X,Y]=tf(d);x.fillRect(Math.round(X),Math.round(Y),2,1)}
+ return cv}
+
+
+/* E-13B style MICR glyphs, 5x8 pixels. T = transit, U = on-us, A = amount, D = dash */
+const MICR={
+'0':'.###.|#...#|#...#|#...#|##.##|##.##|##.##|.###.',
+'1':'.##..|..#..|..#..|..#..|..##.|..##.|..##.|.###.',
+'2':'####.|...#.|...#.|.###.|##...|##...|##...|#####',
+'3':'###..|..#..|..#..|.###.|...##|...##|...##|####.',
+'4':'#....|#....|#..#.|#..#.|#####|...##|...##|...##',
+'5':'####.|#....|#....|####.|...##|...##|...##|####.',
+'6':'##...|#....|#....|####.|##..#|##..#|##..#|#####',
+'7':'#####|....#|...##|..##.|..##.|..##.|..##.|..##.',
+'8':'.##..|#..#.|#..#.|.##..|##.##|##.##|##.##|.###.',
+'9':'####.|#..#.|#..#.|####.|...##|...##|...##|...##',
+'T':'.....|##.##|##.##|##...|##...|##.##|##.##|.....',
+'U':'.....|...##|...##|#.#..|#.#..|#.#..|#.#..|.....',
+'D':'.....|.....|.....|##.##|##.##|.....|.....|.....'};
+function micr(t,x0,y0,col,ctx){ctx.fillStyle=col;let x=x0;for(const ch of t){if(ch==' '){x+=6;continue}const m=MICR[ch].split('|');
+ m.forEach((row,y)=>{for(let i=0;i<5;i++)if(row[i]=='#')ctx.fillRect(x+i,y0+y,1,1)});x+=6}}
+/* issuing banks, each with its own 13x13 pixel mark */
+const BANKS=[
+{n:'HUDSON SAVINGS BANK',r:'YONKERS, N.Y.',c:'#34405a',rt:'021302564',l:'......#......|....#####....|..#########..|#############|.............|.##.##.##.##.|.##.##.##.##.|.##.##.##.##.|.##.##.##.##.|.##.##.##.##.|.............|#############|#############'},
+{n:'OAK HOLLOW NATL. BANK',r:'WHITE PLAINS, N.Y.',c:'#4c5236',rt:'021907330',l:'....#####....|..#########..|.###########.|#############|#############|.###########.|..####.####..|....#.#.#....|.....###.....|......#......|......#......|.....###.....|...#######...'},
+{n:'SOUND SHORE TRUST CO.',r:'NEW ROCHELLE, N.Y.',c:'#2f4550',rt:'021411072',l:'.....###.....|.....#.#.....|.....###.....|......#......|...#######...|......#......|......#......|......#......|#.....#.....#|##....#....##|.##...#...##.|..###.#.###..|....#####....'},
+{n:'NASSAU KEY BANK',r:'MINEOLA, N.Y.',c:'#3b3f45',rt:'021405519',l:'.............|.............|.............|..###........|.#####.......|##...##......|##...#########|##...##..#.##|.#####...#.##|..###........|.............|.............|.............'},
+{n:'EMPIRE FEDERAL SAVINGS',r:'GARDEN CITY, N.Y.',c:'#453d3b',rt:'021600218',l:'......#......|......#......|.....###.....|.....###.....|#############|.###########.|..#########..|...#######...|...###.###...|..###...###..|..##.....##..|.##.......##.|.#.........#.'}];
+BANKS.push({n:'ISLAND MERCANTILE BANK',r:'LEVITTOWN, N.Y.',c:'#3d4a4a',rt:'021714406',l:'......#......|.....###.....|....#####....|.....#.#.....|.....###.....|.....#.#.....|....#####....|....#...#....|....#####....|...#.....#...|...#######...|..#########..|.###########.'});
+[['HUDSON SAVINGS','#dcdbd2','WHITE','line','columns'],['OAK HOLLOW NATL','#d5d8c2','SAGE','dots','oak'],['SOUND SHORE','#c8d0db','BLUE','double','anchor'],
+ ['NASSAU KEY','#ddd4c4','BUFF','line','key'],['EMPIRE FEDERAL','#d6cdd4','LILAC','dots','star'],['ISLAND MERC.','#c9d6d0','MINT','line','lighthouse']]
+ .forEach(([sn,p,pn,b,m],i)=>Object.assign(BANKS[i],{sn,p,pn,b,m}));
+['...#...|.#####.|#######|.#.#.#.|.#.#.#.|.#.#.#.|#######','.#####.|#######|#######|.#####.|...#...|...#...|..###..','...#...|..###..|...#...|#..#..#|#..#..#|.#.#.#.|..###..',
+ '.......|.......|###....|#.#####|###.#.#|.......|.......','...#...|...#...|#######|.#####.|..###..|.##.##.|.#...#.','...#...|..###..|..#.#..|..###..|..#.#..|.#####.|#######'].forEach((m,i)=>BANKS[i].sm=m);
+function logoS(b,x0,y0,col,ctx){ctx.fillStyle=col;b.sm.split('|').forEach((row,y)=>{for(let i=0;i<7;i++)if(row[i]=='#')ctx.fillRect(x0+i,y0+y,1,1)})}
+['Magnetic','Magnetic','Pigment','Magnetic','Pigment','Magnetic'].forEach((v,i)=>BANKS[i].ink=v);
+['Cotton','Linen','Cotton','Plain','Cotton','Cotton'].forEach((v,i)=>BANKS[i].paper=v);
+const INKS=['Magnetic','Pigment','Solid','Dye'];
+const BORDERNAME={line:'SINGLE LINE',dots:'DOTTED',double:'DOUBLE LINE'};
+function shade(h,d){const n=parseInt(h.slice(1),16),f=v=>Math.max(0,Math.min(255,v+d)).toString(16).padStart(2,'0');return'#'+f(n>>16)+f(n>>8&255)+f(n&255)}
+function border(x,st,w,h,col,i=4){const r=j=>{RC(j,j,w-2*j,1,col,x);RC(j,h-j-1,w-2*j,1,col,x);RC(j,j,1,h-2*j,col,x);RC(w-j-1,j,1,h-2*j,col,x)};
+ if(st=='line')r(i);else if(st=='double'){r(i-1);r(i+1)}else{for(let X=i;X<w-i;X+=3){RC(X,i,2,1,col,x);RC(X,h-i-1,2,1,col,x)}for(let Y=i;Y<h-i;Y+=3){RC(i,Y,1,2,col,x);RC(w-i-1,Y,1,2,col,x)}}}
+/* UV glow colors */
+const UVW='#c3b4f4',UVH='#4f4280',UVF='#86c9d1',UVB='#8b9ce0',UVI='#d4ec9c';
+function logo(b,x0,y0,sz,col,ctx){ctx.fillStyle=col;b.l.split('|').forEach((row,y)=>{for(let i=0;i<13;i++)if(row[i]=='#')ctx.fillRect(x0+i*sz,y0+y*sz,sz,sz)})}
+const SH=[["White Plains",200,48],["Yonkers",95,72],["New Rochelle",250,102],["Mineola",55,165],["Garden City",135,135],["Levittown",230,190]];
+const PB=["Eagle A","Harlow","Bluebird","Kestrel","Oakmont","Sterling"],IB=["Quill","Raven","Marlow","Pelican","Onyx","Rexall"];
+const ib=s=>IB[(s*5+1)%6];
+const MON=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],MONL=['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'],WD=['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+let today=new Date(1963,0,14);
+const longDate=d=>WD[d.getDay()]+', '+MONL[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+function chequeDate(){const d=new Date(today);d.setDate(d.getDate()-R(3,12));return MON[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()}
+function nextWorkday(){do{today.setDate(today.getDate()+1)}while(today.getDay()==0||today.getDay()==6)}
+const FN={tint:'wrong tint',bord:'wrong border',wm:'bad UV watermark',mag:'wrong ink',fib:'wrong paper',sig:'forged signature',code:'bad code'};
+const TOOLS=['LIGHT','UV PEN','LOUPE'],TB=['MAGNT','LAMP','LOUPE','SNIFF','DUST','LEDGR'];
+const PAYEE=["J. Halloran","Dell's Auto Parts","M. Pruitt","Sunrise Dairy","R. Castellano","Fenwick Hardware","L. Okafor","Grace Tilley"];
+const PAYER=["Walter Bosch","E. Lindqvist","Frank Moretti","Alma Ridley","H. Vandermeer","Carl Nussbaum"];
+let st='title',day=[],ix=0,sc=0,tool=-1,mx=0,my=0,btns=[],sel=[],res=null;
+
+const PTYPE=['Linen','Plain','Linen','Plain','Plain','Linen'];
+const MEMOS={"Dell's Auto Parts":['Brake pads','Auto parts','Tire repair'],'Sunrise Dairy':['Milk delivery','Dairy account'],'Fenwick Hardware':['Hardware','Paint and nails','Lumber']};
+function mk(n){
+ const fr=Math.random()<.6,f={};
+ if(fr){const a=Object.keys(FN);let k=R(1,3);while(k--)f[a.splice(R(0,a.length-1),1)[0]]=1}
+ const ps=R(0,5);let is=R(0,5);if(is==ps)is=(is+1)%6;
+ const q=(p,v)=>Math.random()<p?v:null;
+ const c={n,fr,f,ps,is,bank:P(BANKS),acct:R(1000000,9999999),no:R(1000,4999),payee:P(PAYEE),payer:P(PAYER),amt:R(12,480)+'.00',street:R(2,98)+' '+P(['ELM ST','OAK AVE','MAPLE DR','CEDAR LN','PARK PL','HILL RD','BROAD ST']),date:chequeDate(),
+ area:P(['routing no.','account no.','check digit']),why:P(['Teller posted it twice.','Deposit credited a day early.','Clerk keyed the wrong account.']),
+ s:{tob:q(.35,P(["Lucky Strike","Chesterfield","Pall Mall","Camel"])),gas:q(.3,P(["regular","ethyl","diesel"])),lip:q(.3,P(["cherry red, greasy","coral pink, waxy","plum, matte"])),
+ perf:q(.3,P(["Chanel No. 5","Shalimar","Emeraude"])),col:q(.3,P(["Old Spice","Aqua Velva","English Leather"])),typ:q(.35,1),fp:q(.4,P(["usable ridges: CATCH","smudged: NO CATCH"]))},notes:{},used:{},marks:{}};
+ c.town=c.bank.r.split(',')[0];do{c.street=R(2,98)+' '+P(['ELM ST','OAK AVE','MAPLE DR','CEDAR LN','PARK PL','HILL RD','BROAD ST'])}while((c.street+', '+c.town).length>23);
+ c.memo=MEMOS[c.payee]?P(MEMOS[c.payee]):P(['Rent, March','Loan repayment','Piano lessons','Painting work','Birthday gift','Lawn service','Invoice '+R(100,999)]);
+ const B=c.bank,oth=BANKS.filter(b=>b!=B);c.pc=B.p;c.bd=B.b;c.wmB=B;
+ if(fr&&!f.tint&&Math.random()<.3)f.tint=1;
+ if(f.tint)c.pc=P(oth.filter(b=>b.p!=B.p)).p;if(f.bord)c.bd=P(['line','dots','double'].filter(v=>v!=B.b));
+ c.ink=f.mag?P(INKS.filter(v=>v!=B.ink)):B.ink;
+ c.paper=B.paper;if(f.fib){c.paper=PTYPE[c.ps];if(c.paper==B.paper)c.paper=P(['Cotton','Plain','Linen'].filter(v=>v!=B.paper))}
+ if(fr&&!f.wm&&Math.random()<.35)f.wm=1;
+ if(f.wm)c.wmB=Math.random()<.5?null:P(oth);
+ const alt=(v,i)=>v.slice(0,i)+((+v[i]+R(1,9))%10)+v.slice(i+1);c.mrt=c.bank.rt;c.mac=String(c.acct);
+ if(f.code){if(c.area=='routing no.')c.mrt=alt(c.mrt,R(0,7));else if(c.area=='account no.')c.mac=alt(c.mac,R(0,6));else c.mrt=alt(c.mrt,8)}
+ c.card=sig(c.payer,hash(c.payer)+7,false,K.ink);
+ const doc=(k,img)=>({k,img,w:img.width,h:img.height,x:0,y:0,out:false});
+ c.rows=checkRows(c);
+ c.rec=doc('rec',renderRecord(c));c.rec.x=301;c.rec.y=23;c.cl=doc('notes',renderNotes(c));c.cl.x=301;c.cl.y=114;c.docs=[c.rec,c.cl];
+ c.chq=doc('cheque',renderCheque(c));c.chq.out=true;c.chq.x=10;c.chq.y=28;c.z=[];c.env=renderEnvelope(c);c.ph='arrive';c.t0=0;c.pad={open:false,t:-1e9};c.open=false;return c;
+}
+/* the cheque is drawn once per case; loupe-visible detail (fibers, edge, ink tint) comes from the actual flaws */
+/* handwriting: the pixel font sheared into a slant, with a wobbly baseline, uneven spacing and joined lowercase letters */
+function HW(t,x0,y0,col,ctx,seed){const r=rng(seed);ctx.fillStyle=col;let x=x0;
+ for(let k=0;k<t.length;k++){const ch=t[k],n=ch.charCodeAt(0)-32;if(n<=0||n>=95){x+=5;continue}
+  const h=FONT[n],jy=r()<.3?(r()<.5?-1:1):0;
+  for(let i=0;i<5;i++){const b=parseInt(h.substr(i*2,2),16);for(let q=0;q<8;q++)if(b>>q&1)ctx.fillRect(x+i+(q<2?2:q<5?1:0),y0+q+jy,1,1)}
+  if(/[a-z]/.test(ch)&&/[a-z]/.test(t[k+1]||''))ctx.fillRect(x+5,y0+6+jy,1,1);
+  x+=6+(r()<.2?1:0)}}
+function paperMicro(x,type,w,h,pc,rr,d=1){
+ if(type=='Cotton'){for(let i=0;i<w*h*.0157*d;i++){let X=rr()*w,Y=rr()*h,a=rr()*6.3;const n=4+rr()*5|0,col=rr()<.5?'#9ea8b7':'#8794a8';for(let j=0;j<n;j++){RC(X|0,Y|0,1,1,col,x);a+=(rr()-.5)*1.4;X+=Math.cos(a);Y+=Math.sin(a)}}}
+ else if(type=='Plain'){for(let i=0;i<w*h*.034*d;i++)RC(rr()*w|0,rr()*h|0,1,1,rr()<.5?'#a39a82':'#8e866f',x);for(let i=0;i<w*h*.0073*d;i++){const X=rr()*w|0,Y=rr()*h|0,hz=rr()<.5;for(let j=0;j<3;j++)RC(X+(hz?j:0),Y+(hz?0:j),1,1,'#b3aa92',x)}}
+ else{const lc=shade(pc,-22);for(let Y=1;Y<h;Y+=3)for(let X=0;X<w;X++)if(rr()<.55)RC(X,Y,1,1,lc,x);for(let X=1;X<w;X+=3)for(let Y=0;Y<h;Y++)if(rr()<.45)RC(X,Y,1,1,lc,x)}}
+/* what an ink looks like under the inspection light: magnetic glints red, pigment shows dark grain,
+   solid has a pale waxy sheen, dye bleeds a soft blue halo */
+function inkFx(src,dst,w,h,ink,rr){const d=src.getImageData(0,0,w,h).data,on=(X,Y)=>X>=0&&Y>=0&&X<w&&Y<h&&d[(Y*w+X)*4+3]>0;
+ for(let Y=0;Y<h;Y++)for(let X=0;X<w;X++){if(!on(X,Y))continue;
+  if(ink=='Magnetic')RC(X,Y,1,1,'#c42a3c',dst);
+  else if(ink=='Pigment'){RC(X,Y,1,1,rr()<.3?'#8e9190':'#101214',dst);if(!on(X+1,Y+1)&&rr()<.5)RC(X+1,Y+1,1,1,'#5a5d60',dst)}
+  else if(ink=='Solid'){if(!on(X+1,Y+1))RC(X+1,Y+1,1,1,'#7d7c74',dst);RC(X,Y,1,1,'#fbfaf3',dst)}
+  else{for(const[a,b]of[[1,0],[-1,0],[0,1],[0,-1]])if(!on(X+a,Y+b)&&rr()<.6)RC(X+a,Y+b,1,1,'#a9b5d2',dst);RC(X,Y,1,1,'#6f82b6',dst)}}}
+/* the envelope a returned item arrives in: bank return address, postage meter, window addressed to the bureau */
+function renderEnvelope(c){const w=284,h=124,B=c.bank,[cv,x]=blank(w,h),rr=rng(c.no+9),pc=shade(B.p,-10);
+ RC(0,0,w,h,K.rule,x);RC(1,1,w-2,h-2,pc,x);for(let i=0;i<w*h*.04;i++)RC(1+rr()*(w-2)|0,1+rr()*(h-2)|0,1,1,rr()<.5?shade(pc,-7):shade(pc,6),x);
+ logoS(B,12,12,B.c,x);T(B.n,23,12,B.c,1,x);T(B.r,23,22,K.label,1,x);
+ const mk='#8e4d47',mx0=w-64;RC(mx0,8,54,36,mk,x);RC(mx0+1,9,52,34,pc,x);RC(mx0+3,11,48,30,mk,x);RC(mx0+4,12,46,28,pc,x);T('U.S.',mx0+14,15,mk,1,x);T('POSTAGE',mx0+5,25,mk,1,x);T('04',mx0+19,33,mk,1,x);
+ for(let k=0;k<3;k++)for(let X=mx0-58;X<mx0-4;X++)RC(X,Math.round(18+k*7+Math.sin(X*.35)*2),1,1,mk,x);
+ const wx=92,wy=52;RC(wx,wy,156,36,shade(pc,-22),x);RC(wx+1,wy+1,154,34,shade(pc,9),x);
+ T('BUREAU OF CHEQUE FRAUD',wx+8,wy+6,K.ink,1,x);T('COUNTY BUILDING',wx+8,wy+16,K.ink,1,x);T('MINEOLA, N.Y.',wx+8,wy+26,K.ink,1,x);
+ const sx=12,sy=96;RC(sx,sy,92,18,K.stamp,x);RC(sx+2,sy+2,88,14,pc,x);RC(sx+3,sy+3,86,12,K.stamp,x);RC(sx+4,sy+4,84,10,pc,x);T('RETURNED ITEM',sx+7,sy+5,K.stamp,1,x);
+ for(let i=0;i<50;i++)RC(sx+rr()*92|0,sy+rr()*18|0,1,1,pc,x);
+ return cv}
+/* the closed notepad cover */
+let PADC=null;function padCover(){if(PADC)return PADC;const[cv,x]=blank(170,114),rr=rng(7);RC(0,0,170,114,'#15171a',x);RC(1,1,168,112,'#2c3446',x);
+ for(let i=0;i<500;i++)RC(1+rr()*168|0,1+rr()*112|0,1,1,rr()<.5?'#323b4e':'#262e3e',x);RC(1,1,168,7,'#222938',x);
+ RC(35,40,100,34,K.rule,x);RC(36,41,98,32,'#dddcd3',x);T('CHECKLIST',58,47,K.ink,1,x);RC(40,57,90,1,K.ruleL,x);T('CASE NOTES',55,61,K.label,1,x);return PADC=cv}
+function drawPad(c){const now=performance.now(),X=301,Y=114,H=114,p=Math.min(1,(now-c.pad.t)/280),e=1-(1-p)**3;
+ const cov=c.pad.open?Math.round(H*(1-e)):Math.round(H*e);
+ RC(X+2,Y+2,170,H,'#1b1d20');if(c.pad.open||cov<H)g.drawImage(c.cl.img,X,Y);
+ if(cov>0){g.drawImage(padCover(),0,0,170,cov,X,Y,170,cov);if(cov<H)RC(X,Y+cov-2,170,2,'#48546c')}
+ if(!c.pad.open&&p>=1&&hit(X,Y,170,H)){RC(X,Y,170,1,K.oliveL);RC(X,Y+H-1,170,1,K.oliveL);RC(X,Y,1,H,K.oliveL);RC(X+169,Y,1,H,K.oliveL)}
+ for(let i=0;i<16;i++){const rx=X+9+i*10;RC(rx,Y-3,2,1,'#8b9098');RC(rx-1,Y-2,1,5,'#8b9098');RC(rx+2,Y-2,1,2,'#5d6168');RC(rx,Y+1,2,2,'#15171a')}}
+function renderCheque(c){const w=276,h=150,cv=document.createElement('canvas');cv.width=w;cv.height=h;const x=cv.getContext('2d'),f=c.f,rr=rng(c.no),ink=f.hue?K.inkOff:K.ink,pc=c.pc,pd=shade(pc,-9),pl=shade(pc,7);
+ const u=document.createElement('canvas');u.width=w;u.height=h;const ux=u.getContext('2d');c.uv=u;
+ RC(0,0,w,h,pc,x);
+ for(let i=0;i<w*h*.05;i++)RC(rr()*w|0,rr()*h|0,1,1,rr()<.6?pd:pl,x);
+ const mc=document.createElement('canvas');mc.width=w;mc.height=h;const mx2=mc.getContext('2d');c.micro=mc;
+ if(c.paper=='Cotton')for(let i=0;i<35;i++){const X=rr()*w|0,Y=rr()*h|0,d=rr()<.5?1:-1;for(const[a,b]of[[0,0],[1,d],[2,d]])RC(X+a,Y+b,1,1,UVF,ux)}
+ else for(let i=0;i<700;i++)RC(rr()*w|0,rr()*h|0,1,1,rr()<.5?UVB:'#5f6fae',ux);
+ paperMicro(mx2,c.paper,w,h,c.pc,rr);
+ if(c.wmB){logo(c.wmB,w/2-25,h/2-31,4,UVH,ux);logo(c.wmB,w/2-26,h/2-32,4,UVW,ux)}
+ for(let k=0;k<4;k++)for(let X=0;X<w;X++){const Y=Math.round(62+Math.sin(X*.07+k*1.6)*7+Math.sin(X*.021+k)*4);RC(X,Y,1,1,shade(pc,-14),x)}
+ RC(0,0,w,1,K.rule,x);RC(0,h-1,w,1,K.rule,x);RC(w-1,0,1,h,K.rule,x);
+ border(x,c.bd,w,h,K.rule,5);
+ RC(0,0,1,h,K.rule,x);
+ /* printed parts: col overrides every colour (used for the magnetic glint layer) */
+ const town=c.bank.r.split(',')[0];
+ /* 12px margin on every side; right-hand items are right-aligned to w-12 */
+ const M=12,RX=w-M,ra=t=>RX-(t.length*6-1);
+ const printed=(cx,col)=>{const L=col||K.label;
+  logoS(c.bank,M,M,col||c.bank.c,cx);T(c.bank.n,M+11,M,col||c.bank.c,1,cx);T(c.payer.toUpperCase(),M,36,col||K.ink,1,cx);T(c.street+', '+c.town,M,46,L,1,cx);T('No. '+c.no,ra('No. '+c.no),130,L,1,cx);RC(ra('No. '+c.no)-1,139,('No. '+c.no).length*6+1,1,col||K.rule,cx);
+  T('DATE',RX-98,M,L,1,cx);
+  T('PAY TO THE',M,70,L,1,cx);T('ORDER OF',M,80,L,1,cx);T('$',RX-60,73,col||K.ink,1,cx);
+  T('MEMO',M,104,L,1,cx);T('SIGNATURE',RX-77,116,col||shade(pc,-50),1,cx);micr(mstr,M,130,col||'#2f343c',cx)};
+ const amt=(cx,col)=>HW(c.amt,RX-52,73,col,cx,c.no+3);
+ const hand=(cx,col)=>{HW(c.date,ra(c.date)-3,M,col,cx,c.no);HW(c.payee,76,75,col,cx,c.no+1);HW(c.memo,M+32,104,col,cx,c.no+2);cx.drawImage(sig(c.payer,f.sig?c.no*13:c.no,!!f.sig,col),RX-100,85)};
+ const mstr='T'+c.mrt+'T '+c.mac.replace(/(\d{3})(\d{4})/,'$1D$2')+'U '+String(c.no).padStart(4,'0');
+ RC(RX-70,21,70,1,K.rule,x);RC(74,84,118,1,K.rule,x);RC(RX-64,69,64,15,K.rule,x);RC(RX-63,70,62,13,pl,x);RC(M+30,113,96,1,K.rule,x);RC(RX-100,113,100,1,K.rule,x);
+ printed(x,null);amt(x,ink);hand(x,ink);if(f.hue){hand(ux,UVI);amt(ux,UVI)}
+ /* faint diagonal VOIDED stamp across the whole cheque */
+ {const sw=176,sh=52,[st,sc]=blank(sw,sh);const k=K.stamp;RC(0,0,sw,2,k,sc);RC(0,sh-2,sw,2,k,sc);RC(0,0,2,sh,k,sc);RC(sw-2,0,2,sh,k,sc);RC(5,5,sw-10,1,k,sc);RC(5,sh-6,sw-10,1,k,sc);RC(5,5,1,sh-10,k,sc);RC(sw-6,5,1,sh-10,k,sc);
+  T('VOIDED',17,10,k,4,sc);for(let i=0;i<260;i++)sc.clearRect(rr()*sw|0,rr()*sh|0,1+(rr()*2|0),1);
+  x.save();x.imageSmoothingEnabled=false;x.globalAlpha=.24;x.translate(w/2,h/2);x.rotate(-.3);x.drawImage(st,-sw/2|0,-sh/2|0);x.restore()}
+ /* magnetic glint layer: everything printed or written on the cheque, shown under the inspection light */
+ const mg=document.createElement('canvas');mg.width=w;mg.height=h;const gx=mg.getContext('2d');c.mg=mg;
+ const[tc,tx]=blank(w,h);printed(tx,'#000');inkFx(tx,gx,w,h,c.ink,rr);
+ return cv}
+/* ---------- documents kept in the case folder ---------- */
+const DOCNAME={sig:'SIGNATURE CARD',ledger:'ACCOUNT RECORD',notes:'CHECKLIST',cheque:'CHEQUE'};
+function card(w,h,col=K.paper){const cv=document.createElement('canvas');cv.width=w;cv.height=h;const x=cv.getContext('2d');RC(0,0,w,h,K.rule,x);RC(1,1,w-2,h-2,col,x);
+ const rr=rng(w*h);for(let i=0;i<w*h*.03;i++)RC(1+rr()*(w-2)|0,1+rr()*(h-2)|0,1,1,K.paperD,x);return[cv,x]}
+const fmtAcct=a=>String(a).replace(/(\d{3})(\d{4})/,'$1-$2');
+function renderRecord(c){const[cv,x]=card(170,88);logo(c.bank,4,2,1,c.bank.c,x);T(c.bank.n,21,5,c.bank.c,1,x);RC(3,17,164,1,K.ruleL,x);
+ [['HOLDER',c.payer],['ADDRESS',c.street],['ROUTING',c.bank.rt],['ACCOUNT',fmtAcct(c.acct)]].forEach(([a,b],i)=>{T(a,5,21+i*9,K.label,1,x);T(b,54,21+i*9,K.ink,1,x)});
+ T('SIGNATURE',5,70,K.label,1,x);x.drawImage(c.card,62,55);RC(62,84,100,1,K.rule,x);return cv}
+/* checklist rows: what was observed, and the options the detective can pick for what it should be */
+const BN={line:'Single line',dots:'Dotted',double:'Double line'};
+/* each row lists every possible value; the observed one is preselected, picking another marks a flaw */
+const uniq=a=>[...new Set(a)];
+function checkRows(c){const f=c.f,B=c.bank,tn=b=>cap(b.pn.toLowerCase()),tint=BANKS.find(b=>b.p==c.pc)||B;
+ return[{k:'ink',l:'INK',t:0,obs:c.ink,vals:INKS,bad:c.ink!=B.ink,right:B.ink},
+ {k:'wm',l:'WATERMARK',t:1,obs:c.wmB?cap(c.wmB.m):'None',vals:[...BANKS.map(b=>cap(b.m)),'None'],bad:c.wmB!=B,right:cap(B.m)},
+ {k:'pap',l:'PAPER',t:2,obs:c.paper,vals:['Cotton','Plain','Linen'],bad:c.paper!=B.paper,right:B.paper},
+ {k:'tint',l:'TINT',t:-1,obs:tn(tint),vals:BANKS.map(tn),bad:c.pc!=B.p,right:tn(B)},
+ {k:'bord',l:'BORDER',t:-1,obs:BN[c.bd],vals:['Single line','Dotted','Double line'],bad:c.bd!=B.b,right:BN[B.b]},
+ {k:'sig',l:'SIGNATURE',t:-1,obs:'Genuine',vals:['Genuine','Forged'],bad:!!f.sig,right:'Forged'},
+ {k:'rt',l:'ROUTING',t:-1,obs:c.mrt,vals:uniq([c.mrt,B.rt]),bad:c.mrt!=B.rt,right:B.rt},
+ {k:'ac',l:'ACCOUNT',t:-1,obs:fmtAcct(c.mac),vals:uniq([fmtAcct(c.mac),fmtAcct(c.acct)]),bad:c.mac!=String(c.acct),right:fmtAcct(c.acct)}]}
+const CL_Y=17,CL_H=12;
+const revealed=(c,r)=>r.t<0||c.used[r.t];
+function renderNotes(c){const[cv,x]=card(170,CL_Y+CL_H*c.rows.length+1,'#d3d6cd');T('CHECKLIST',5,5,K.ink,1,x);RC(3,14,164,1,K.rule,x);
+ c.rows.forEach((r,i)=>{const y=CL_Y+i*CL_H,m=c.marks[r.k],rv=revealed(c,r);if(i)RC(3,y-2,164,1,'#bec6c9',x);
+  T(r.l,5,y,K.label,1,x);if(!rv){T('?',74,y,'#9a9c94',1,x);return}
+  if(m)T(m,74,y,K.stamp,1,x);else T(r.obs,74,y,K.ink,1,x)});return cv}
+function clRow(c,d){const ly=my-d.y;const i=Math.floor((ly-CL_Y+3)/CL_H);return i>=0&&i<c.rows.length&&ly>=CL_Y-3?i:-1}
+let dd=null;
+function openDD(c,d,i){const r=c.rows[i];if(!revealed(c,r))return;const items=r.vals,w=Math.max(...items.map(v=>v.length))*6+16,h=items.length*11+4;
+ const ry=d.y+CL_Y+i*CL_H;let y=ry+9,up=false;if(y+h>226){y=ry-h-2;up=true}dd={c,d,i,t0:performance.now(),items,x:Math.max(2,Math.min(d.x+70,W-w-2)),y,w,h,up}}
+function ddItem(){if(!dd)return-1;for(let j=0;j<dd.items.length;j++)if(hit(dd.x+1,dd.y+2+j*11,dd.w-2,11))return j;return-1}
+function drawDD(){if(!dd)return;const p=Math.min(1,(performance.now()-dd.t0)/200),e=1-(1-p)**3,hh=Math.max(3,Math.round(dd.h*e)),{x,y,w,h}=dd,top=dd.up?y+h-hh:y;
+ RC(x+2,top+2,w,hh,'#1b1d20');RC(x,top,w,hh,K.rule);RC(x+1,top+1,w-2,hh-2,'#e3e2da');
+ g.save();g.beginPath();g.rect(x+1,top+1,w-2,hh-2);g.clip();const r=dd.c.rows[dd.i],cur=dd.items.indexOf(dd.c.marks[r.k]||r.obs),hv=p>=1?ddItem():-1;
+ dd.items.forEach((v,j)=>{const iy=y+2+j*11;if(j==hv)RC(x+1,iy,w-2,11,'#c9cbb0');if(j==cur)RC(x+4,iy+4,2,2,v==r.obs?K.ink:K.stamp);T(v,x+9,iy+2,v==r.obs?K.ink:K.stamp)});g.restore()}
+function pickDD(j){const c=dd.c,r=c.rows[dd.i],v=dd.items[j];if(v==r.obs)delete c.marks[r.k];else c.marks[r.k]=v;c.anim={i:dd.i,t:performance.now()};c.cl.img=renderNotes(c);dd=null}
+
+/* ---------- cheque guidelines book ---------- */
+const BOOK={k:'book',open:false,page:0,x:8,y:182,cx:8,cy:182,w:66,h:42,img:null};
+function blank(w,h){const cv=document.createElement('canvas');cv.width=w;cv.height=h;return[cv,cv.getContext('2d')]}
+function bookPage(x,i,x0){const L=K.label,I=K.ink;
+ if(i==0){T('GENUINE CHEQUES',x0+6,11,I,1,x);RC(x0+6,21,126,1,K.rule,x);let y=26;
+  for(const t of["Bank's own ink.","Bank's own paper.",'Bank tint + border.','UV: only mark glows.','Signature matches.','MICR matches record.'])y=WR('- '+t,x0+6,y,132,I,10,x)+5;return}
+ if(i==8){T('PAPER TYPES',x0+6,11,I,1,x);T('UNDER THE LOUPE',x0+6,21,L,1,x);RC(x0+6,30,126,1,K.rule,x);
+  [['Cotton','Curly fibres.','Rag paper.'],['Plain','Brown specks.','Wood pulp.'],['Linen','Woven grid.','Linen weave.']].forEach(([n,a,b],j)=>{const y=36+j*41,[sw,sx]=blank(12,12),rr=rng(77+j),pc='#dcdbd2';
+   RC(0,0,12,12,pc,sx);for(let q=0;q<14;q++)RC(rr()*12|0,rr()*12|0,1,1,'#cfcec5',sx);paperMicro(sx,n,12,12,pc,rr,4);
+   RC(x0+6,y,38,38,K.rule,x);x.drawImage(sw,x0+7,y+1,36,36);T(n.toUpperCase(),x0+50,y+5,I,1,x);T(a,x0+50,y+16,L,1,x);T(b,x0+50,y+26,I,1,x)});return}
+ if(i==9){T('UNDER UV',x0+6,11,I,1,x);T('WITH THE UV PEN',x0+6,21,L,1,x);RC(x0+6,30,126,1,K.rule,x);const rr=rng(9);
+  [['Cotton','Stays dark.','Fibres glow.'],['Plain, linen','Glows blue.','Brighteners.'],['Bank mark','Glows bright.','Must match.']].forEach(([n,a,b],j)=>{const y=36+j*41;RC(x0+6,y,38,38,K.rule,x);RC(x0+7,y+1,36,36,'#241d38',x);
+   if(j==0)for(let q=0;q<5;q++){const X=x0+9+rr()*30|0,Y=y+3+rr()*30|0;RC(X,Y,2,1,UVF,x);RC(X+2,Y+1,1,1,UVF,x)}
+   if(j==1)for(let q=0;q<150;q++)RC(x0+7+rr()*36|0,y+1+rr()*36|0,1,1,rr()<.5?UVB:'#5f6fae',x);
+   if(j==2){logo(BANKS[5],x0+19,y+12,1,UVH,x);logo(BANKS[5],x0+18,y+11,1,UVW,x)}
+   T(n.toUpperCase(),x0+50,y+5,I,1,x);T(a,x0+50,y+16,L,1,x);T(b,x0+50,y+26,I,1,x)});return}
+ if(i==10){T('INK TYPES',x0+6,11,I,1,x);T('UNDER THE LIGHT',x0+6,21,L,1,x);RC(x0+6,30,126,1,K.rule,x);
+  [['Magnetic','Red glint.'],['Pigment','Dark grain.'],['Solid','Waxy sheen.'],['Dye','Blue bleed.']].forEach(([n,a],j)=>{const y=35+j*30,[sw,sx]=blank(38,24),[tc,tx]=blank(38,24);
+   RC(0,0,38,24,'#e6e3d6',sx);T('Ab',8,4,'#000',2,tx);inkFx(tx,sx,38,24,n,rng(j+5));
+   RC(x0+6,y,40,26,K.rule,x);x.drawImage(sw,x0+7,y+1);T(n.toUpperCase(),x0+52,y+5,I,1,x);T(a,x0+52,y+15,L,1,x)});return}
+ if(i==11){T('QUICK TABLE',x0+6,11,I,1,x);T('TINT PAPER   INK',x0+18,24,L,1,x);RC(x0+6,33,126,1,K.rule,x);
+  BANKS.forEach((b,j)=>{const y=38+j*19;logoS(b,x0+6,y+1,b.c,x);const[sw,sx]=blank(16,10);RC(0,0,16,10,b.p,sx);border(sx,b.b,16,10,K.rule,1);x.drawImage(sw,x0+18,y);
+   T(b.paper,x0+42,y+1,I,1,x);T(b.ink,x0+84,y+1,I,1,x)});return}
+ if(i==1){T('ISSUING BANKS',x0+6,11,I,1,x);RC(x0+6,21,126,1,K.rule,x);BANKS.forEach((b,j)=>{const y=27+j*21;logo(b,x0+6,y,1,b.c,x);T(b.sn,x0+24,y+3,I,1,x);T(j+3,x0+128,y+3,L,1,x)});return}
+ const b=BANKS[i-2];logo(b,x0+6,10,2,b.c,x);WR(b.n,x0+38,12,98,b.c,9,x);T(b.r,x0+6,40,L,1,x);RC(x0+6,51,126,1,K.rule,x);
+ T('PAPER',x0+6,56,L,1,x);T('UV MARK',x0+72,56,L,1,x);
+ const[sw,sx]=blank(60,32);RC(0,0,60,32,b.p,sx);RC(0,0,60,1,K.rule,sx);RC(0,31,60,1,K.rule,sx);RC(0,0,1,32,K.rule,sx);RC(59,0,1,32,K.rule,sx);border(sx,b.b,60,32,K.rule,4);x.drawImage(sw,x0+6,66);
+ RC(x0+72,66,61,32,'#241d38',x);logo(b,x0+97,76,1,UVH,x);logo(b,x0+96,75,1,UVW,x);
+ T('TINT',x0+6,104,L,1,x);T(b.pn,x0+54,104,I,1,x);T('BORDER',x0+6,114,L,1,x);T(BORDERNAME[b.b],x0+54,114,I,1,x);T('ROUTING',x0+6,124,L,1,x);T(b.rt,x0+54,124,I,1,x);T('INK',x0+6,134,L,1,x);T(b.ink.toUpperCase(),x0+54,134,I,1,x);T('PAPER',x0+6,144,L,1,x);T(b.paper.toUpperCase(),x0+54,144,I,1,x)}
+function renderBook(){let cv,x;
+ if(!BOOK.open){[cv,x]=blank(66,42);RC(0,0,66,42,'#15171a',x);RC(1,1,64,40,'#2c3446',x);RC(1,1,64,4,'#222938',x);RC(8,9,52,1,'#5d6780',x);RC(8,36,52,1,'#5d6780',x);
+  T('CHEQUE',16,13,K.oliveL,1,x);T('GUIDE',19,24,K.oliveL,1,x)}
+ else{[cv,x]=blank(290,172);x.imageSmoothingEnabled=false;RC(0,0,290,172,'#15171a',x);RC(1,1,288,170,'#2c3446',x);const pg='#dddcd3';RC(5,5,139,162,pg,x);RC(146,5,139,162,pg,x);RC(142,5,2,162,'#c9c8bf',x);RC(146,5,2,162,'#c9c8bf',x);RC(144,3,2,166,'#1f2533',x);
+  const sp=BOOK.page;bookPage(x,sp*2,5);bookPage(x,sp*2+1,146);
+  T(sp*2+1,72,156,K.label,1,x);T(sp*2+2,212,156,K.label,1,x);if(sp>0)T('<',10,156,K.navy,1,x);if(sp<5)T('>',274,156,K.navy,1,x);
+  RC(264,0,16,20,K.stamp,x);RC(264,20,8,3,K.stamp,x);RC(272,20,8,3,K.stamp,x);RC(264,22,2,1,'#15171a',x);T('X',269,7,K.paper,1,x)}
+ BOOK.img=cv;BOOK.w=cv.width;BOOK.h=cv.height;BOOK.x=Math.max(2,Math.min(W-BOOK.w-2,BOOK.x));BOOK.y=Math.max(22,Math.min(226-BOOK.h,BOOK.y))}
+function setBook(o){const c=day[ix];BOOK.open=o;if(o){BOOK.x=188;BOOK.y=24}renderBook();if(c){const i=c.z.indexOf(BOOK);if(i>=0)c.z.splice(i,1);if(o)c.z.push(BOOK)}}
+/* ---------- tool icons, 16x16 ---------- */
+const IC={y:'#f3dc8c',v:'#a08cd8',a:'#15171a',b:'#8f9aae',c:'#d8d7ce',r:'#a9786c',n:'#48546c',l:'#b8c2cc',m:'#6f7176',h:'#6b5e52',o:'#a4a684'};
+function gen(f){const r=[];for(let y=0;y<16;y++){let s='';for(let x=0;x<16;x++)s+=f(x,y);r.push(s)}return r}
+const ICON_ROWS=[
+['................','................','................','................','................','.y....aa........','..y..acaaaaaaaa.','.....acbbbbbbbba','yyy..acbbbbnbbba','.....acbbbbbbbba','..y..acaaaaaaaa.','.y....aa........','................','................','................','................'],
+['................','.vv.............','vvvv............','vvvaa...........','.vabba..........','..abbba.........','...abbba........','....abmba.......','.....abmba......','......abmba.....','.......abmba....','........abnna...','.........annna..','..........anna..','...........aa...','................'],
+gen((x,y)=>{const d=Math.hypot(x-6,y-6),t=x-y;if(d<=3.6)return x+y<10?'c':'l';if(d<=4.7)return'm';if(d<=5.6)return'a';if(x>=10&&y>=10&&x<=14&&y<=14&&Math.abs(t)<=1)return t?'a':'h';return'.'}),
+['................','................','........aa......','........aca.....','........acca....','.oo.oo...acca...','.........accca..','..........accca.','.oo.oo....accca.','.........acccca.','........accccca.','.oo.oo.accaacca.','.......acaa.aa..','........aa......','................','................'],
+['................','...........aa...','..........arra..','.........arra...','........arra....','.......arra.....','......aaaa......','.....acccca.....','....acccccca....','....accccca.....','.....accca......','......aaa..o....','..o.......o..o..','....o..o.....o..','.o....o...o.....','................'],
+['................','................','..aaaaaaaaaaa...','..aooooooooooa..','..aoocccccoooa..','..aooooooooooa..','..aoocccccoooa..','..aooooooooooa..','..aooooooooooa..','..aooooooooooa..','..aooooooooooa..','..aaaaaaaaaaaa..','..acccccccccca..','..aaaaaaaaaaaa..','................','................']];
+const GUIDEI=(()=>{const cv=document.createElement('canvas');cv.width=cv.height=16;const x=cv.getContext('2d');['................','..aaaaaaaaaaa...','..annnnnnnnnna..','..anccccccccna..','..annnnnnnnnna..','..annccccccnna..','..annnnnnnnnna..','..annnnnnnnnna..','..annnnnnnnnna..','..annnnnnnnnna..','..aaaaaaaaaaaa..','..acccccccccca..','..aaaaaaaaaaaa..','................','................','................'].forEach((r,y)=>{for(let i=0;i<16;i++)if(r[i]!='.'){x.fillStyle={a:'#15171a',n:'#48546c',c:'#d8d7ce'}[r[i]];x.fillRect(i,y+1,1,1)}});return cv})();
+const ICONS=ICON_ROWS.map(rows=>{const cv=document.createElement('canvas');cv.width=cv.height=16;const x=cv.getContext('2d');rows.forEach((r,y)=>{for(let i=0;i<16;i++)if(r[i]!='.'){x.fillStyle=IC[r[i]];x.fillRect(i,y,1,1)}});return cv});
+
+const cap=v=>v[0].toUpperCase()+v.slice(1);
+function use(t,c){const f=c.f,s=c.s;let L=[];
+ if(t==0)L=['Ink: '+c.ink+'.'];
+ if(t==1){L=[c.wmB==c.bank?'Watermark: '+cap(c.bank.m)+'.':c.wmB?'Watermark: '+cap(c.wmB.m)+', wrong bank.':'Watermark: None.'];
+  }
+ if(t==2)L=['Paper: '+c.paper+'.'];
+ c.notes[t]=L;c.used[t]=1;c.cl.img=renderNotes(c);toast(L.join(' '))}
+let toastT='',toastEnd=0;function toast(t,ms=4500){toastT=t;toastEnd=performance.now()+ms}
+function newDay(){BOOK.open=false;renderBook();day=[1,2,3,4,5].map(mk);ix=0;st='desk';tool=-1;startCase(day[0])}
+function startCase(c){c.ph='arrive';c.t0=performance.now();toast('A returned item from '+c.bank.n+'. Click the envelope.',4500)}
+function circ(cx,cy,r,c){cx=Math.round(cx);cy=Math.round(cy);r=Math.round(r);g.fillStyle=c;let x=r,y=0,e=1-r;
+ while(x>=y){for(const[a,b]of[[x,y],[y,x],[-x,y],[-y,x],[x,-y],[y,-x],[-x,-y],[-y,-x]])g.fillRect(cx+a,cy+b,1,1);y++;if(e<0)e+=2*y+1;else{x--;e+=2*(y-x)+1}}}
+const hit=(x,y,w,h)=>mx>=x&&mx<x+w&&my>=y&&my<y+h;
+function bevel(x,y,w,h,on,hv,col){RC(x,y,w,h,'#121416');RC(x+1,y+1,w-2,h-2,on?K.oliveL:hv?K.navyL:col);RC(x+1,y+1,w-2,1,on?'#c2c3a6':'#5d6780');RC(x+1,y+h-2,w-2,1,on?'#7c7f5c':'#262d3d')}
+function BT(x,y,w,h,l,fn,on=0,col=K.navy){bevel(x,y,w,h,on,hit(x,y,w,h),col);T(l,x+Math.round((w-l.length*6+1)/2),y+Math.round((h-7)/2),on?'#1e2022':'#dcdcd3');btns.push([x,y,w,h,fn])}
+function BI(x,y,w,h,i,fn,on){const hv=hit(x,y,w,h);bevel(x,y,w,h,on,hv,K.navy);g.drawImage(ICONS[i],x+(w-16>>1),y+(h-16>>1));T(i+1,x+3,y+3,on?'#1e2022':'#9aa3b5');btns.push([x,y,w,h,fn]);
+ if(hv){const n=TOOLS[i];RC(x,y-13,n.length*6+5,12,'#121416');RC(x+1,y-12,n.length*6+3,10,K.panel);T(n,x+3,y-11,K.oliveL)}}
+function desk(){RC(0,0,W,H,K.desk);for(let y=20;y<228;y+=8){RC(0,y,W,1,K.deskB);RC(0,y+4,W,1,K.deskA)}RC(0,0,W,20,K.bar);RC(0,20,W,1,K.panelEdge);
+ RC(0,228,W,42,K.bar);RC(0,228,W,1,K.panelEdge);
+ if(st=='title')T('BUREAU OF CHEQUE FRAUD',8,7,K.oliveL);else{T(longDate(today),8,7,K.oliveL);T('NASSAU COUNTY, N.Y.',472-19*6,7,K.dim)}}
+function panel(x,y,w,h){RC(x,y,w,h,K.panelEdge);RC(x+1,y+1,w-2,h-2,K.panel)}
+
+/* ---------- the manila folder ---------- */
+const FOL='#8f8d72',FOLD='#6f6d57',FOLL='#a4a287',FOLIN='#817f66';
+function drawDoc(d,lift){RC(d.x+(lift?3:2),d.y+(lift?3:2),d.w,d.h,'#1b1d20');g.drawImage(d.img,d.x,d.y);const c=day[ix];
+ if(d.k=='notes'&&c&&c.anim){const q=(performance.now()-c.anim.t)/320;if(q<1){const y=d.y+CL_Y+c.anim.i*CL_H;RC(d.x+72+Math.round(96*q),y-1,96-Math.round(96*q),CL_H-2,'#d3d6cd')}}}
+const topDoc=c=>{for(let i=c.z.length-1;i>=0;i--){const d=c.z[i];if(hit(d.x,d.y,d.w,d.h))return d}return null};
+
+/* stylized noir night map: chunky landmasses on a dark sea with a dashed coast line, a ribbon title,
+   and hand-made pixel icons (houses, lit towers, factories with smoking chimneys, snowy hills, trees).
+   The static sheet is drawn once; chimney smoke and drifting smog are animated on top every frame. */
+const MP={sea:'#161b21',wave:'#27303b',coast:'#5a635d',land:'#394035',landA:'#363d32',landB:'#3d4539',lip:'#4b5445',cliff:'#232822',
+ road:'#22262a',dash:'#6e7067',bridge:'#4b5057'};
+const SPR={
+ house:['..rrr..','.rRRRr.','rRRRRRr','.wwwww.','.wywdw.'],
+ house2:['rrrrrr','RRRRRR','wwwwww','wywwyw','wwwdww'],
+ tree:['..b..','.aba.','aabaa','.aaa.','..t..'],
+ pine:['..b..','..a..','.aba.','.aaa.','aabaa','..t..'],
+ hill:['....s....','...sss...','..shhdd..','.hhhhddd.','hhhhhdddd'],
+ factory:['.cc..........','.cc..........','.cc.r..r..r..','.ccrR.rR.rR..','wwwwwwwwwwwww','wywwwywwwywww','wwwwwwwwwwwww','wwwdddwwwwwww']};
+const SPC={r:'#3f444c',R:'#8d9088',w:'#5f625e',y:'#c9b36a',d:'#2a2d31',a:'#222c21',b:'#7b8375',t:'#2a2522',s:'#a3a69c',h:'#4f5747',c:'#2b2927'};
+let CITY=null,CHIMS=[];
+function cityMap(){if(CITY)return CITY;const w=284,h=198,cv=document.createElement('canvas');cv.width=w;cv.height=h;const x=cv.getContext('2d'),rr=rng(1963);
+ const sy=X=>78+X*.07+5*Math.sin(X*.035)+2*Math.sin(X*.13),sw=X=>6+X*.02+1.5*Math.sin(X*.2),oc=X=>184+4*Math.sin(X*.04)+X*.02;
+ const water0=(X,Y)=>{if(Math.abs(Y-sy(X))<sw(X))return true;if(Y<sy(X)&&X<12+3*Math.sin(Y*.1)+2*Math.sin(Y*.37))return true;
+  if(Y>oc(X))return true;if(((X-168)/10)**2+((Y-10)/5)**2<1)return true;return false};
+ /* chunky 2px coastline */
+ const WM=new Uint8Array(w*h);for(let Y=0;Y<h;Y++)for(let X=0;X<w;X++)WM[Y*w+X]=water0(X&~1,Y&~1)?1:0;
+ const wat=(X,Y)=>X<0||Y<0||X>=w||Y>=h||WM[Y*w+X],land=(X,Y)=>!wat(X,Y);
+ const D=new Int16Array(w*h).fill(-1),Q=[];
+ for(let Y=0;Y<h;Y++)for(let X=0;X<w;X++)if(WM[Y*w+X]&&(land(X+1,Y)||land(X-1,Y)||land(X,Y+1)||land(X,Y-1))){D[Y*w+X]=1;Q.push(Y*w+X)}
+ for(let qi=0;qi<Q.length;qi++){const i=Q[qi],X=i%w,Y=i/w|0;for(const[a,b]of[[1,0],[-1,0],[0,1],[0,-1]]){const nx=X+a,ny=Y+b;if(nx<0||ny<0||nx>=w||ny>=h)continue;const j=ny*w+nx;if(WM[j]&&D[j]<0){D[j]=D[i]+1;Q.push(j)}}}
+ RC(0,0,w,h,MP.sea,x);
+ for(let i=0;i<70;i++){const X=rr()*w|0,Y=rr()*h|0;if(D[Y*w+X]>6){RC(X,Y,1,1,MP.wave,x);RC(X+1,Y-1,1,1,MP.wave,x);RC(X+2,Y,1,1,MP.wave,x)}}
+ for(let Y=0;Y<h;Y++)for(let X=0;X<w;X++){const i=Y*w+X;
+  if(WM[i]){if(D[i]==3&&((X+Y)>>1)%3)RC(X,Y,1,1,MP.coast,x);continue}
+  let c=rr()<.25?MP.landA:rr()<.2?MP.landB:MP.land;
+  if(wat(X,Y+1)||wat(X,Y+2))c=MP.cliff;else if(wat(X,Y-1))c=MP.lip;RC(X,Y,1,1,c,x)}
+ const occ=new Uint8Array(w*h),mark=(X,Y,ww,hh)=>{for(let y=Y;y<Y+hh;y++)for(let x2=X;x2<X+ww;x2++)if(x2>=0&&y>=0&&x2<w&&y<h)occ[y*w+x2]=1};
+ /* keep markers and name tags clear */
+ for(const[n,ax,ay]of SH){const X=ax-8,Y=ay-24;mark(X-6,Y-6,13,12);mark(X-n.length*3-3,Y+6,n.length*6+6,12)}
+ /* parkways: dark bed with dashed centre, pale bridge deck over water */
+ const road=pts=>{const q=[pts[0],...pts,pts[pts.length-1]],P=[];for(let i=1;i<q.length-2;i++){const n=Math.ceil(Math.hypot(q[i+1][0]-q[i][0],q[i+1][1]-q[i][1]))*2;for(let t=0;t<=n;t++)P.push(cr(q[i-1],q[i],q[i+1],q[i+2],t/n).map(Math.round))}
+  for(const[X,Y]of P){const b=wat(X,Y);RC(X-1,Y-1,3,3,b?MP.bridge:MP.road,x);mark(X-2,Y-2,5,5);if(b&&(X+Y)%6==0)RC(X,Y+2,1,2,'#0f1215',x)}
+  P.forEach(([X,Y],k)=>{if(k%6<3&&!wat(X,Y))RC(X,Y,1,1,MP.dash,x);if(k%28==0&&!wat(X+2,Y-2)){RC(X+2,Y-2,1,1,'#e3cf86',x);RC(X+2,Y-1,1,1,'#2a2d31',x)}})};
+ [[[0,54],[87,48],[160,58],[242,78],[284,82]],[[242,78],[214,50],[192,24],[200,0]],[[87,48],[92,22],[100,0]],
+  [[40,60],[52,74],[60,92],[70,112]],[[70,112],[127,111],[180,120],[284,128]],[[0,172],[100,166],[222,162],[284,168]],[[127,111],[138,140],[150,165],[158,182]],[[47,141],[70,112]]].forEach(road);
+ /* sprite stamping with a hard 1px drop shadow */
+ const fits=(X,Y,ww,hh)=>{for(let y=Y-1;y<=Y+hh;y++)for(let x2=X-1;x2<=X+ww;x2++){if(wat(x2,y)||occ[y*w+x2])return false}return true};
+ const put=(rows,X,Y,shadow=true,pal=SPC)=>{const hh=rows.length,ww=rows[0].length;if(!fits(X,Y,ww,hh+1))return false;
+  if(shadow)rows.forEach((r,y)=>{for(let i=0;i<ww;i++)if(r[i]!='.')RC(X+i+1,Y+y+1,1,1,'#1e221d',x)});
+  rows.forEach((r,y)=>{for(let i=0;i<ww;i++)if(r[i]!='.')RC(X+i,Y+y,1,1,pal[r[i]],x)});mark(X,Y,ww+1,hh+1);return true};
+ const tower=()=>{const hgt=8+(rr()*6|0),r=['rrrrr','RRRRR'];for(let i=0;i<hgt;i++)r.push(i%2?'wwwww':[...'wwwww'].map((c,j)=>j%2&&rr()<.45?'y':'w').join(''));r.push('wwdww');return r};
+ /* factories on the waterfront, with chimneys that will smoke */
+ for(const[bx,by]of[[16,56],[112,64],[254,62],[34,120],[196,104]])for(let k=0;k<40;k++){const X=bx+(rr()*24-12|0),Y=by+(rr()*16-8|0);if(put(SPR.factory,X,Y)){CHIMS.push([X+1,Y,rr()]);break}}
+ /* towns: lit towers downtown, snowy-roofed houses around */
+ const TW=SH.map(([,a,b])=>[a-8,b-24]);
+ for(const[cx,cy]of TW){for(let k=0;k<30;k++){const a=rr()*6.28,d=4+rr()*10,t=tower();put(t,cx+Math.cos(a)*d*1.3-2|0,cy+Math.sin(a)*d-t.length|0)}
+  for(let k=0;k<160;k++){const a=rr()*6.28,d=10+rr()*22;put(rr()<.6?SPR.house:SPR.house2,cx+Math.cos(a)*d*1.35-3|0,cy+Math.sin(a)*d-2|0)}}
+ /* snowy hills up north, then woods everywhere that is left */
+ for(let k=0;k<60;k++)put(SPR.hill,rr()*(w-10)|0,rr()*34|0,false);
+ for(let k=0;k<2600;k++)put(rr()<.5?SPR.tree:SPR.pine,rr()*(w-5)|0,rr()*(h-6)|0,false);
+ /* ribbon title */
+ {const X=46,Y=4,L=132;RC(X-8,Y+4,10,10,'#7f826d',x);RC(X-10,Y+4,2,2,MP.sea,x);RC(X-10,Y+12,2,2,MP.sea,x);RC(X-9,Y+6,1,6,'#7f826d',x);
+  RC(X+L-2,Y+4,10,10,'#7f826d',x);RC(X+L+6,Y+4,2,2,MP.sea,x);RC(X+L+6,Y+12,2,2,MP.sea,x);
+  RC(X,Y,L,12,'#a4a690',x);RC(X,Y,L,1,'#c2c4b2',x);RC(X,Y+11,L,1,'#7f826d',x);RC(X-1,Y+1,1,10,'#a4a690',x);RC(X+L,Y+1,1,10,'#a4a690',x);
+  T('NASSAU & WESTCHESTER',X+(L-119)/2|0,Y+2,'#23272b',1,x)}
+ /* curved water label */
+ {let X=94;for(const ch of 'LONG ISLAND SOUND'){const Y=Math.round(sy(X+3)-4);if(ch!=' ')T(ch,X,Y,'#4d5866',1,x);X+=6}}
+ /* dithered vignette, darker toward the edges */
+ for(let Y=0;Y<h;Y++)for(let X=0;X<w;X++){const e=Math.min(X,Y,w-1-X,h-1-Y);if(e<14&&!(X>=35&&X<=188&&Y>=3&&Y<=18)&&BY[(X&3)+(Y&3)*4]/16<(1-e/14)*.75)RC(X,Y,1,1,'#101316',x)}
+ return CITY=cv}
+/* animated layer: chimney smoke rising and leaning east, and slow drifting smog */
+function smog(){const t=performance.now();g.save();g.beginPath();g.rect(8,24,284,182);g.clip();
+ const blob=(cx,cy,r,col)=>{g.fillStyle=col;for(let y=-r;y<=r;y++){const w=Math.floor(Math.sqrt(r*r-y*y+r*.6));g.fillRect(Math.round(cx)-w,Math.round(cy)+y,w*2+1,1)}};
+ for(let i=0;i<5;i++){const p=((t/26000+i*.23)%1),X=8+p*340-30,Y=24+30+i*34+Math.sin(t/7000+i)*6;blob(X,Y,22+i%3*6,'rgba(120,126,124,.05)')}
+ for(const[cx,cy,o]of CHIMS)for(let i=0;i<6;i++){const p=(t/2600+i/6+o)%1,X=8+cx+1+p*14+Math.sin(p*6+o*9)*1.5,Y=24+cy-2-p*20;blob(X,Y,Math.round(1+p*3),'rgba(150,154,152,'+(.55*(1-p)).toFixed(3)+')')}
+ g.restore()}
+function mapBG(){g.drawImage(cityMap(),8,24);smog();RC(8,24,284,1,K.panelEdge);RC(8,221,284,1,K.panelEdge);RC(7,24,1,198,K.panelEdge);RC(292,24,1,198,K.panelEdge);
+ for(let i=0;i<6;i++){const[n,x,y]=SH[i],on=sel.includes(i);RC(x-4,y-4,9,9,'#0f1215');RC(x-3,y-3,7,7,on?'#b0685a':'#d8d7ce');RC(x-1,y-1,3,3,on?'#d8d7ce':'#0f1215');
+  RC(x-n.length*3-2,y+7,n.length*6+3,10,'#0f1215');RC(x-n.length*3-1,y+8,n.length*6+1,8,'#262b30');T(n,x-n.length*3,y+8,'#d8d7ce')}}
+function selCirc(){const p=sel.map(i=>SH[i]);if(!p.length)return null;const cx=p.reduce((a,b)=>a+b[1],0)/p.length,cy=p.reduce((a,b)=>a+b[2],0)/p.length;let r=18;if(p.length>1)r=Math.max(14,Math.hypot(p[0][1]-p[1][1],p[0][2]-p[1][2])/2);return{cx,cy,r}}
+function trail(c){const t=[];if(c.f.mag||c.f.hue)t.push(c.is);if(c.f.fib||c.f.edge||(c.f.tint||c.f.bord)||c.f.wm)t.push(c.ps);return t}
+function marked(c){return c.rows.filter(r=>c.marks[r.k])}
+function fileCase(){dd=null;const c=day[ix];if(c.ph!='ready'){toast('Open the envelope first.',2500);return}if(marked(c).length){st='map';sel=[]}else judge(false)}
+function evalList(c){let p=0;const ok=[],wf=[],miss=[],ff=[];
+ for(const r of c.rows){const v=c.marks[r.k]||null,n=r.l.toLowerCase();
+  if(r.bad&&v==r.right){p+=4;ok.push(n)}else if(r.bad&&v){p+=1;wf.push(n+' ('+r.right.toLowerCase()+')')}else if(r.bad){p-=2;miss.push(n)}else if(v){p-=2;ff.push(n)}}
+ const L=[];if(ok.length)L.push('Caught: '+ok.join(', ')+'.');if(wf.length)L.push('Right flaw, wrong fix: '+wf.join(', ')+'.');if(miss.length)L.push('Missed: '+miss.join(', ')+'.');if(ff.length)L.push('False flags: '+ff.join(', ')+'.');return{p,L}}
+function judge(v){const c=day[ix],tr=trail(c);let L=[],p=0,r=null;
+ if(v){if(!c.fr){p=-10;L.push('WRONG. The cheque was genuine.','Bank error: '+c.why)}
+  else{p=5;const ok=tr.length==sel.length&&tr.every(i=>sel.includes(i)),pt=tr.some(i=>sel.includes(i));
+   L.push('Fraud confirmed.');
+   if(ok){p+=10;L.push(tr.length?'Supply trail logged correctly.':'No supply trail: forger used real paper and ink.')}else if(pt){p+=4;L.push('Trail only partly right. True trail: '+tr.map(i=>SH[i][0]).join(' + ')+'.')}else L.push('Trail wrong. True trail: '+(tr.map(i=>SH[i][0]).join(' + ')||'none')+'.');
+   if(tr.length){const q=tr.map(i=>SH[i]),cx=q.reduce((a,b)=>a+b[1],0)/q.length,cy=q.reduce((a,b)=>a+b[2],0)/q.length,rr=q.length>1?Math.max(14,Math.hypot(q[0][1]-q[1][1],q[0][2]-q[1][2])/2):18,a=Math.random()*6.28,d=Math.random()*rr*.6;
+    r={hx:cx+Math.cos(a)*d,hy:cy+Math.sin(a)*d,c:selCirc()};if(r.c&&Math.hypot(r.hx-r.c.cx,r.hy-r.c.cy)>r.c.r)L.push('Suspect lives OUTSIDE your radius.');else if(r.c)L.push('Suspect lives inside your radius: ~'+Math.round(r.c.r/5)+' mi.')}}}
+ else{if(c.fr){p=-10;L.push('WRONG. Fraud slipped through.')}else{p=10;L.push('Correct. Bank error: '+c.why)}}
+ const ev=evalList(c);p+=ev.p;L.push(...ev.L);
+ sc+=p;res={L,p,r};st='res'}
+function next(){dd=null;if(BOOK.open)setBook(false);ix++;tool=-1;sel=[];st=ix>=5?'end':'desk';if(st=='desk')startCase(day[ix])}
+/* loupe: copies the pixels under the cursor and redraws them 3x inside a round lens */
+const LZ=3,LR=36,LN=Math.ceil(2*LR/LZ),LC=document.createElement('canvas');LC.width=LC.height=LR*2;const lg=LC.getContext('2d');
+function lens(){const cx=Math.round(mx),cy=Math.round(my),src=g.getImageData(cx-(LN>>1),cy-(LN>>1),LN,LN).data,out=lg.createImageData(LR*2,LR*2),o=out.data;
+ for(let y=0;y<LR*2;y++)for(let x=0;x<LR*2;x++){const dx=x-LR+.5,dy=y-LR+.5,d=dx*dx+dy*dy;if(d>LR*LR)continue;const i=(y*LR*2+x)*4;
+  if(d>(LR-3)*(LR-3)){const hi=dx+dy<0;o[i]=hi?134:84;o[i+1]=hi?138:88;o[i+2]=hi?145:95;o[i+3]=255}else{const s=((y/LZ|0)*LN+(x/LZ|0))*4;o[i]=src[s];o[i+1]=src[s+1];o[i+2]=src[s+2];o[i+3]=255}}
+ lg.putImageData(out,0,0);for(let i=0;i<16;i++){RC(cx+25+i,cy+25+i,4,4,'#3e4247');RC(cx+25+i,cy+25+i,1,1,'#5c6168')}g.drawImage(LC,cx-LR,cy-LR)}
+/* UV pen: offscreen UV layer, a pixel-circle mask and the pen drawn at the cursor */
+const UR=30,UVC=document.createElement('canvas');UVC.width=W;UVC.height=H;const uc=UVC.getContext('2d');
+const UVM=document.createElement('canvas');UVM.width=UVM.height=UR*2+1;{const m=UVM.getContext('2d');m.fillStyle='#fff';for(let y=-UR;y<=UR;y++){const w=Math.floor(Math.sqrt(UR*UR-y*y+UR*.8));m.fillRect(UR-w,UR+y,w*2+1,1)}}
+function uvPen(X,Y){g.fillStyle='#8f7ee0';let x=UR,y=0,e=1-UR;while(x>=y){for(const[a,b]of[[x,y],[y,x],[-x,y],[-y,x],[x,-y],[y,-x],[-x,-y],[-y,-x]])if((a+b)&1)g.fillRect(X+a,Y+b,1,1);y++;if(e<0)e+=2*y+1;else{x--;e+=2*(y-x)+1}}
+ const bx=X+UR+2,by=Y+UR+2;RC(bx-1,by-1,3,3,'#c3b4f4');
+ for(let i=0;i<26;i++){const x=bx+i,y=by+i;RC(x,y,4,1,'#15171a');RC(x,y+3,4,1,'#15171a');RC(x+1,y+1,2,2,i<3?'#8b78d8':i<18?'#3b404a':'#2c3446');if(i>=3&&i<18)RC(x+1,y+1,1,1,'#5c6168')}
+ RC(bx+8,by+5,4,2,'#8f9aae')}
+/* inspection light: stepped warm falloff, magnetic ink glints through a dithered mask */
+const QR=40,BY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5],LDM=document.createElement('canvas');LDM.width=LDM.height=QR*2+1;
+{const m=LDM.getContext('2d');m.fillStyle='#fff';for(let y=0;y<=QR*2;y++)for(let x=0;x<=QR*2;x++){const f=1-((x-QR)**2+(y-QR)**2)/(QR*QR);if(f>0&&BY[(x&3)+(y&3)*4]/16<f*1.3)m.fillRect(x,y,1,1)}}
+function disc(X,Y,r,col){g.fillStyle=col;for(let y=-r;y<=r;y++){const w=Math.floor(Math.sqrt(r*r-y*y+r*.8));if(Y+y>21&&Y+y<228)g.fillRect(X-w,Y+y,w*2+1,1)}}
+function torch(X,Y){const bx=X+26,by=Y+26;for(let i=0;i<20;i++){const x=bx+i,y=by+i;RC(x,y,6,1,'#15171a');RC(x,y+5,6,1,'#15171a');RC(x,y,1,6,'#15171a');RC(x+1,y+1,4,4,i<2?'#f3dc8c':i<5?'#8f9aae':'#4a525e');if(i>=5)RC(x+1,y+1,1,1,'#5d6780')}}
+let lastCur='';
+function drawToast(){if(performance.now()>toastEnd)return;const L=wrap(toastT,272),h=L.length*10+6,y=224-h;RC(8,y,284,h,'#121416');RC(9,y+1,282,h-2,K.panel);RC(9,y+1,2,h-2,K.olive);L.forEach((l,i)=>T(l,16,y+4+i*10,K.txt))}
+function frame(){const cur=(st=='desk'&&tool>=0&&my>21&&my<228)?'none':'crosshair';if(cur!=lastCur){C.style.cursor=cur;lastCur=cur}btns=[];desk();const c=day[ix];
+ if(st=='title'){T('BOUNCED',156,56,K.paper,4);RC(156,94,166,1,K.olive);T('New York suburbs, 1962.',171,102,K.dim);
+  WR('Five cheques bounced after being credited. Inspect each one. Was it a fraud job or a bank mistake? If fraud, log the shops that sold the paper and ink.',110,125,260,K.txt);
+  BT(190,190,100,22,'OPEN DESK',newDay)}
+ if(st=='desk'){const uv=tool==1&&my>21&&my<228,dark=(x,y,w,h)=>{uc.fillStyle='rgba(14,9,30,.82)';uc.fillRect(x,y,w,h)};RC(296,22,W-296,206,'#1f2226');RC(296,22,1,206,K.panelEdge);
+  const now=performance.now(),EX=5,EY=52;
+  if(c.ph=='ready')drawDoc(c.rec);else for(let i=0;i<170;i+=4){RC(301+i,23,2,1,'#3a3f45');RC(301+i,110,2,1,'#3a3f45')}
+  if(c.ph!='ready'&&c.ph!='open')for(let i=0;i<88;i+=4){RC(301,23+i,1,2,'#3a3f45');RC(470,23+i,1,2,'#3a3f45')}
+  drawPad(c);
+  if(c.ph=='arrive'){const p=Math.min(1,(now-c.t0)/650),e=1-(1-p)**3;drawDoc({img:c.env,x:EX,y:Math.round(-130+(EY+130)*e),w:284,h:124});if(p>=1)c.ph='wait'}
+  else if(c.ph=='wait'){drawDoc({img:c.env,x:EX,y:EY,w:284,h:124});if(hit(EX,EY,284,124)){RC(EX,EY,284,1,K.oliveL);RC(EX,EY+123,284,1,K.oliveL);RC(EX,EY,1,124,K.oliveL);RC(EX+283,EY,1,124,K.oliveL)}}
+  else if(c.ph=='open'){const p=Math.min(1,(now-c.t0)/1000),q1=Math.min(1,p/.45),q2=Math.max(0,(p-.45)/.55),q3=Math.min(1,Math.max(0,(p-.2)/.6)),e3=1-(1-q3)**3;
+   drawDoc({img:c.chq.img,x:10,y:Math.round(EY+10+(28-(EY+10))*(1-(1-q1)**2)),w:276,h:150});
+   drawDoc({img:c.env,x:EX,y:Math.round(EY+(290-EY)*q2*q2),w:284,h:124});
+   drawDoc({img:c.rec.img,x:Math.round(60+(301-60)*e3),y:Math.round(EY+34+(23-(EY+34))*e3),w:170,h:88});
+   if(p>=1){c.ph='ready';c.z.unshift(c.chq)}}
+  if(uv){uc.globalCompositeOperation='source-over';uc.clearRect(0,0,W,H);uc.drawImage(C,0,0);dark(0,21,W,207)}
+  for(const d of c.z){const l=press&&press.d==d&&press.mv;drawDoc(d,l);if(uv){const o=l?3:2;uc.fillStyle='#1b1d20';uc.fillRect(d.x+o,d.y+o,d.w,d.h);uc.drawImage(d.img,d.x,d.y);dark(d.x,d.y,d.w+o,d.h+o);if(d==c.chq)uc.drawImage(c.uv,d.x,d.y)}}
+  if(tool==0&&my>21&&my<228){const X=Math.round(mx),Y=Math.round(my);disc(X,Y,QR,'rgba(255,244,214,.09)');disc(X,Y,28,'rgba(255,244,214,.1)');disc(X,Y,16,'rgba(255,244,214,.12)');
+   uc.globalCompositeOperation='source-over';uc.clearRect(0,0,W,H);for(const d of c.z){if(d==c.chq)uc.drawImage(c.mg,d.x,d.y);else uc.clearRect(d.x,d.y,d.w,d.h)}
+   uc.globalCompositeOperation='destination-in';uc.drawImage(LDM,X-QR,Y-QR);uc.globalCompositeOperation='source-over';uc.clearRect(0,228,W,H-228);uc.clearRect(0,0,W,21);g.drawImage(UVC,0,0);torch(X,Y)}
+  if(uv){const X=Math.round(mx),Y=Math.round(my);uc.globalCompositeOperation='destination-in';uc.drawImage(UVM,X-UR,Y-UR);uc.globalCompositeOperation='source-over';uc.clearRect(0,228,W,H-228);uc.clearRect(0,0,W,21);g.drawImage(UVC,0,0);uvPen(X,Y)}
+  const td=topDoc(c);
+  drawDD();drawToast();RC(0,228,W,42,K.bar);RC(0,228,W,1,K.panelEdge);
+  TOOLS.forEach((t,i)=>BI(8+i*40,234,36,30,i,()=>{tool=tool==i?-1:i},tool==i));
+  {const gx=132,gy=234,hv=hit(gx,gy,66,30);bevel(gx,gy,66,30,BOOK.open,hv,K.navy);g.drawImage(GUIDEI,gx+5,gy+7);T('GUIDE',gx+25,gy+11,BOOK.open?'#1e2022':'#dcdcd3');T('B',gx+3,gy+3,BOOK.open?'#1e2022':'#9aa3b5');btns.push([gx,gy,66,30,()=>setBook(!BOOK.open)])}
+  BT(298,234,176,30,'ENTER: FILE CASE',fileCase,0,'#4a4f38');
+  if(tool==2&&my>21&&my<228&&c.ph!='ready')lens();else if(tool==2&&my>21&&my<228){const X=Math.round(mx),Y=Math.round(my),i=c.z.indexOf(c.chq);g.save();g.beginPath();g.rect(X-13,Y-13,26,26);g.clip();g.drawImage(c.chq.img,c.chq.x,c.chq.y);g.drawImage(c.micro,c.chq.x,c.chq.y);
+   for(const d of c.z.slice(i+1))drawDoc(d,false);g.restore();lens()}}
+ if(st=='map'||st=='res'){mapBG();
+  if(st=='map'){const s=selCirc();if(s){circ(s.cx,s.cy,s.r,'#b98676');circ(s.cx,s.cy,s.r+1,'#6e3c34')}RC(8,206,284,16,'#1d2024');T('Mark shops tied to ink/paper flaws, or none.',14,210,K.txt);
+   BT(298,234,176,30,'ENTER: FILE REPORT',()=>judge(true))}
+  else{const r=res.r;if(r){if(r.c){circ(r.c.cx,r.c.cy,r.c.r,'#b98676');circ(r.c.cx,r.c.cy,r.c.r+1,'#6e3c34')}RC(r.hx-3,r.hy-3,7,7,'#15171a');RC(r.hx-2,r.hy-2,5,5,K.bad)}
+   panel(298,24,176,198);let y=30;T('REPORT',304,y,K.oliveL);y+=14;res.L.forEach(l=>y=WR(l,304,y+2,164,K.txt));
+   BT(298,234,176,30,'SPACE: NEXT CHEQUE',next)}
+  if(st=='map'){panel(298,24,176,198);T('SHOP CATALOG',304,29,K.oliveL);let y=42;SH.forEach((s,i)=>{T(s[0],304,y,K.paper);T('  '+PB[i]+' / '+ib(i),304,y+9,K.dim);y+=19});
+   let yy=y+4;const n=c.used,f=c.f,R2=[];if((n[0]&&f.mag)||(n[1]&&f.hue))R2.push('Ink: '+ib(c.is));if((f.fib||f.edge||f.tint||f.bord||f.wm)&&(n[1]||n[2]))R2.push('Paper mill: '+PB[c.ps]);if(c.s.typ&&n[2])R2.push('Typewriter: Underwood 3');
+   T('LAB RESULTS',304,yy,K.oliveL);yy+=11;if(!R2.length)R2.push('Nothing traced yet.');for(const l of R2){T(l,304,yy,K.bad);yy+=10}}}
+ if(st=='end'){T('END OF DAY',150,62,K.paper,3);T(longDate(today),240-longDate(today).length*3,100,K.oliveL);T('The day\'s cheques are filed.',240-29*3,116,K.txt);BT(180,170,120,22,'NEXT DAY',()=>{nextWorkday();newDay()})}
+ requestAnimationFrame(frame)}
+
+/* ---------- mouse: click buttons, drag documents, pull papers from the folder ---------- */
+let press=null,pb=null;
+function pos(e){const b=C.getBoundingClientRect();mx=(e.clientX-b.left)*W/b.width;my=(e.clientY-b.top)*H/b.height}
+const clampDoc=d=>{d.x=Math.max(20-d.w,Math.min(d.k=='cheque'?294-d.w:W-20,Math.round(mx-press.ox)));d.y=Math.max(22,Math.min(214,Math.round(my-press.oy)))};
+C.addEventListener('contextmenu',e=>{e.preventDefault();tool=-1});
+C.addEventListener('mousedown',e=>{if(e.button!==0)return;pos(e);pb=btns.find(b=>hit(b[0],b[1],b[2],b[3]));if(pb)return;
+ if(st=='map'){for(let i=0;i<6;i++)if(Math.hypot(mx-SH[i][1],my-SH[i][2])<10){const k=sel.indexOf(i);k<0?sel.push(i):sel.splice(k,1)}return}
+ if(st!='desk'||my>=228)return;if(dd){const j=ddItem();if(j>=0&&performance.now()-dd.t0>200)pickDD(j);else dd=null;return}const c=day[ix];if(BOOK.open&&hit(BOOK.x,BOOK.y,BOOK.w,BOOK.h)){c.z.splice(c.z.indexOf(BOOK),1);c.z.push(BOOK);press={d:BOOK,ox:mx-BOOK.x,oy:my-BOOK.y,sx:mx,sy:my,mv:false};return}if(c.ph=='wait'&&hit(5,52,284,124)){c.ph='open';c.t0=performance.now();return}
+ if(hit(301,111,170,117)){const now=performance.now();if(now-c.pad.t<280)return;if(!c.pad.open)c.pad={open:true,t:now};else if(my-114<14)c.pad={open:false,t:now};else{const i=clRow(c,c.cl);if(i>=0)openDD(c,c.cl,i)}return}if(c.ph=='ready'&&hit(c.rec.x,c.rec.y,c.rec.w,c.rec.h))return;const d=topDoc(c);
+ if(d){c.z.splice(c.z.indexOf(d),1);c.z.push(d);press={d,ox:mx-d.x,oy:my-d.y,sx:mx,sy:my,mv:false};return}
+});
+addEventListener('mousemove',e=>{pos(e);if(!press)return;if(Math.abs(mx-press.sx)+Math.abs(my-press.sy)>2)press.mv=true;if(press.mv)clampDoc(press.d)});
+addEventListener('mouseup',e=>{pos(e);if(pb){const b=pb;pb=null;if(hit(b[0],b[1],b[2],b[3]))b[4]();return}
+ if(!press)return;const d=press.d,c=day[ix];
+ if(!press.mv&&d==BOOK){const lx=mx-d.x,ly=my-d.y;if(lx>=262&&ly<24)setBook(false);else{BOOK.page=Math.max(0,Math.min(5,BOOK.page+(lx<145?-1:1)));renderBook()}}
+ else if(!press.mv&&d.k=='cheque'&&tool>=0)use(tool,c);
+ press=null});
+addEventListener('keydown',e=>{const k=e.key.toLowerCase();
+ if(st=='desk'){if(k>='1'&&k<='3')tool=tool==+k-1?-1:+k-1;if(k=='escape'||k=='0'){tool=-1;dd=null}if(k=='b')setBook(!BOOK.open);if(k=='enter'){const c=day[ix];if(c.ph=='wait'){c.ph='open';c.t0=performance.now()}else fileCase()}}
+ else if(st=='map'&&k=='enter')judge(true);
+ else if(st=='res'&&(k==' '||k=='enter'))next();
+ else if(st=='title'&&(k==' '||k=='enter'))newDay();else if(st=='end'&&(k==' '||k=='enter')){nextWorkday();newDay()}});
+/* whole-number pixel scaling so every game pixel is the same size on screen */
+function fit(){const d=devicePixelRatio||1,k=Math.min(innerWidth/W,innerHeight/H),s=k*d>=1?Math.floor(k*d)/d:k;C.style.width=W*s+'px';C.style.height=H*s+'px'}
+addEventListener('resize',fit);fit();renderBook();frame();
+</script></body></html>
