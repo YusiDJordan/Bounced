@@ -148,7 +148,7 @@ const longDate=d=>WD[d.getDay()].slice(0,3)+', '+MON[d.getMonth()]+' '+d.getDate
 function chequeDate(){const d=new Date(today);d.setDate(d.getDate()-R(3,12));return MON[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()}
 function nextWorkday(){do{today.setDate(today.getDate()+1)}while(today.getDay()==0||today.getDay()==6)}
 const FN={name:'name misspelled',addr:'wrong address',chq:'cheque number altered',tint:'wrong tint',bord:'wrong border',wm:'bad UV watermark',mag:'wrong ink',fib:'wrong paper',sig:'forged signature',code:'bad code'};
-const TOOLS=['LIGHT','UV PEN','LOUPE'],TB=['MAGNT','LAMP','LOUPE','SNIFF','DUST','LEDGR'];
+const TOOLS=['LIGHT','UV PEN','MAGNIFYING GLASS'],TB=['MAGNT','LAMP','LOUPE','SNIFF','DUST','LEDGR'];
 const SUR=['Bosch','Lindqvist','Moretti','Ridley','Vandermeer','Nussbaum','Halloran','Pruitt','Castellano','Okafor','Tilley','Kowalski','Brennan','Feldman','Marsh','Whitcombe','Delacroix','Hayes','Sorensen','Abernathy','Quinlan','Pellegrino','Novak','Fairbanks','Gallagher','Ostrowski','Rinaldi','Duval','Harker','Winslow','Mancuso','Lindgren','Petrakis','Callahan','Szabo','Holloway','Esposito','Brandt','Kessler','Doyle','Albright','Barnett','Cavanaugh','Dietrich','Eckhart','Finnegan','Gardner','Hartley','Iverson','Jablonski','Keating','Lombardi','Mahoney','Nakamura','Pearce','Rourke','Salerno','Thornton','Ulrich','Varga','Webber','Yates','Zimmer','Adler','Bianchi','Conroy','Dunleavy','Engel','Fischer','Garrity','Hendricks','Ingram','Jansen','Kaplan','Levine','Moriarty','Nolan','Olsen','Palumbo','Reardon','Schultz','Tanaka','Ventura','Whitaker','Crowley','Sweeney','Rosen','Mueller','Greco','Donnelly','Haskell','Petersen','Russo','Walsh','Lindahl','Othman','Sari-Kahya','Haible','Hyrland','Hermansen','Fasahati','Donaldson','Nguyen','Muhammad','Ali'];
 const INI='ABCDEFGHJKLMNPRSTW',RECENT=[],person=()=>{let n;do n=P(SUR);while(RECENT.includes(n));RECENT.push(n);if(RECENT.length>30)RECENT.shift();return P([...INI])+'. '+n};
 const BIZ=["Dell's Auto Parts",'Sunrise Dairy','Fenwick Hardware','Kowalski Bakery','Rialto Theatre','Hanley & Sons','Lakeview Pharmacy',"Moran's Tavern",'Gold Star Laundry','Bristol Florist','Acme Radio Repair','Atlas Coal & Oil','Peerless Tailors','Olympia Diner','Westbury Lumber','Harbor Fish Market','Crown Typewriter Co','Paragon Shoes','Merritt Insurance','Dr. R. Feld, D.D.S.'];
@@ -317,7 +317,7 @@ function blank(w,h){const cv=document.createElement('canvas');cv.width=w;cv.heig
 function bookPage(x,i,x0){const L=K.label,I=K.ink;
  if(i==0){T('GENUINE CHEQUES',x0+6,11,I,1,x);RC(x0+6,21,126,1,K.rule,x);let y=26;
   for(const t of["Bank's own ink.","Bank's own paper.",'Bank tint + border.','UV: only mark glows.','Signature matches.','MICR matches record.'])y=WR('- '+t,x0+6,y,132,I,10,x)+5;return}
- if(i==8){T('PAPER TYPES',x0+6,11,I,1,x);T('UNDER THE LOUPE',x0+6,21,L,1,x);RC(x0+6,30,126,1,K.rule,x);
+ if(i==8){T('PAPER TYPES',x0+6,11,I,1,x);T('UNDER MAGNIFICATION',x0+6,21,L,1,x);RC(x0+6,30,126,1,K.rule,x);
   [['Cotton','Curly fibres.','Rag paper.'],['Plain','Brown specks.','Wood pulp.'],['Linen','Woven grid.','Linen weave.']].forEach(([n,a,b],j)=>{const y=36+j*41,[sw,sx]=blank(12,12),rr=rng(77+j),pc='#dcdbd2';
    RC(0,0,12,12,pc,sx);for(let q=0;q<14;q++)RC(rr()*12|0,rr()*12|0,1,1,'#cfcec5',sx);paperMicro(sx,n,12,12,pc,rr,4);
    RC(x0+6,y,38,38,K.rule,x);x.drawImage(sw,x0+7,y+1,36,36);T(n.toUpperCase(),x0+50,y+5,I,1,x);T(a,x0+50,y+16,L,1,x);T(b,x0+50,y+26,I,1,x)});return}
@@ -891,12 +891,14 @@ const TUTS={
    t:()=>tool==0?"Now click anywhere on the cheque with it. The light shows what kind of ink the cheque was printed with.":"Pick the light back up. Click it, or press 1."},
   /* 5 */{next:true,tg:()=>[tRow('ink')],
    t:()=>`There. INK on your checklist says ${tcase().ink} now. Keep that in mind.`},
+  /* 5b */{tg:()=>[tChq(),tTool(0)],keys:['0'],done:()=>tool<0,
+   t:()=>"Put the light down for now. Right-click anywhere and you let go of whatever tool you're holding."},
   /* 6 */{tg:()=>[tTool(1),tChq()],keys:['2'],done:()=>tcase().used[1],
    t:()=>tool==1?"Move it slowly over the middle of the cheque. Every bank hides a watermark there that only shows up under UV.":"Next, the UV pen. Click it, or press 2, then move it over the middle of the cheque."},
   /* 7 */{tg:()=>[tTool(2),tChq()],keys:['3'],done:()=>tcase().used[2],
-   t:()=>tool==2?"Now click on the cheque. Up close you can tell the paper by its fibres.":"Now the loupe. Click it, or press 3, then click on the cheque."},
+   t:()=>tool==2?"Now click on the cheque. Up close you can tell the paper by its fibres.":"Now the magnifying glass. Click it, or press 3, then click on the cheque."},
   /* 8 */{next:true,tg:()=>[tCL()],
-   t:()=>"Every line's filled in. Now we check it against what the bank says it should be. Right-click puts a tool down, by the way."},
+   t:()=>"Every line's filled in. Now we check it against what the bank says it should be."},
   /* 9 */{tg:()=>[[132,234,66,30]],keys:['b'],done:()=>BOOK.open,
    t:()=>"Open the cheque guide. Click GUIDE at the bottom, or press B."},
   /* 10 */{tg:()=>!BOOK.open?[[132,234,66,30]]:BOOK.page==0?[[BOOK.x+148,BOOK.y+24+21*bankJ(),136,20]]:[[BOOK.x,BOOK.y,BOOK.w,BOOK.h]],keys:['b'],done:onBankPage,
@@ -995,7 +997,7 @@ function tutDraw(){const s=tutVisible();if(!TUT)return;TUT.box=null;TUT.skip=nul
  WR(txt.slice(0,shown),b.x+8,b.y+7,b.w-16,'#d6d5cc',10);
  if(s.next&&!typing){const l='CONTINUE',hv=hit(b.x,b.y,b.w,b.h),cx=b.x+b.w-l.length*6-16;T(l,cx,b.y+b.h-12,hv||on?K.oliveL:'#6f7350');for(let i=0;i<3;i++)RC(cx+l.length*6+3+i,b.y+b.h-12+i,1,7-i*2,hv||on?K.oliveL:'#6f7350')}
  TUT.box=[b.x,b.y,b.w,b.h];TUT.skip=[skx,b.y-6,sk.length*6+10,12];TUT.typing=typing;TUT.nx=!!s.next}
-function tutClick(){if(!TUT||!TUT.box)return false;const[sx,sy,sw,sh]=TUT.skip;if(hit(sx,sy,sw,sh)){sfx('inkTest');tutEnd();return true}
+function tutClick(){if(!TUT||!TUT.box)return false;const[sx,sy,sw,sh]=TUT.skip;if(hit(sx,sy,sw,sh)){sfx('inkTest');CONF={title:'SKIP TUTORIAL?',text:"Kessler won't walk you through it.",yes:'SKIP',no:'KEEP GOING',onYes:()=>tutEnd(),onNo:()=>{}};return true}
  const[x,y,w,h]=TUT.box;if(!hit(x,y,w,h))return false;if(TUT.typing)TUT.t0=-1e9;else if(TUT.nx){sfx('inkTest');tutGo(TUT.i+1)}return true}
 /* while Kessler is talking, only what he's pointing at can be clicked (the top bar, with the quit X, always works) */
 function tutBlock(){if(!TUT||!TUT.box||my<21)return false;const s=TUTS[TUT.seq][TUT.i];if(!s)return false;
